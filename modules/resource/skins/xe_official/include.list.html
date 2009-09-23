@@ -1,0 +1,38 @@
+    <ul class="listOrder {$order_type}">
+        <li <!--@if($order_target=='newest')-->class="arrow"<!--@end-->><a href="{getUrl('order_target','newest','order_type',$order_type=='asc'?'desc':'asc')}">{$lang->order_newest}</a></li>
+        <li <!--@if($order_target=='latest')-->class="arrow"<!--@end-->><a href="{getUrl('order_target','latest','order_type',$order_type=='asc'?'desc':'asc')}">{$lang->order_latest}</a></li>
+        <li <!--@if($order_target=='popular')-->class="arrow"<!--@end-->><a href="{getUrl('order_target','popular','order_type',$order_type=='asc'?'desc':'asc')}">{$lang->order_popular}</a></li>
+    </ul>
+
+    {@$_idx=0}
+    <!--@foreach($item_list as $key => $val)-->
+    <table class="packageList<!--@if($_idx==0)--> top{@$_idx++}<!--@end-->">
+    <colgroup>
+    <col width="120" /><col width="*"/>
+    </colgroup>
+    <tr>
+        <td rowspan="4" class="thumbnail"><a href="{getUrl('package_srl', $val->package_srl)}"><img src="{$val->item_screenshot_url}" width="100" height="100" alt="" /></a></td>
+        <td class="title"><h3><a href="{getUrl('package_srl', $val->package_srl)}">{htmlspecialchars($val->title)} ver. {htmlspecialchars($val->item_version)}</a></h3></td>
+    </tr>
+    <tr>
+        <td class="description">{cut_str(htmlspecialchars($val->package_description),200)}</td>
+    </tr>
+    <tr>
+        <td class="info">
+            <ul>
+                <!--@if($val->category_srl)--><li class="category"><a href="{getUrl('category_srl', $val->category_srl)}">{$categories[$val->category_srl]->title}</a></li><!--@end-->
+                <li class="voted">
+                    <!--@for($i=0;$i<5;$i++)--><!--@if($i<$val->package_star)--><img src="./img/starOn.gif" alt="" /><!--@else--><img src="./img/starOff.gif" alt="" /><!--@end--><!--@end-->
+                    /{number_format($val->package_voter)}
+                </li>
+                <li class="downloaded">{number_format($val->package_downloaded)}</li>
+                <li class="author"><a href="#" onclick="return false;" class="member_{$val->member_srl}">{$val->nick_name}</a></li>
+                <li class="date">{zdate($val->item_regdate, "Y-m-d H:i")}</li>
+                <!--@if($grant->manager)-->
+                <li class="delete"><a href="#" onclick="if(confirm('{$lang->confirm_delete}')) doDeleteItem({$val->package_srl},{$val->item_srl}); return false;">[{$lang->cmd_delete}]</a></li>
+                <!--@end-->
+            </ul>
+        </td>
+    </tr>
+    </table>
+    <!--@end-->

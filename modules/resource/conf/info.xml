@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="0.2">
+    <title xml:lang="ko">자료실</title>
+    <description xml:lang="ko">자료실 운영을 위한 모듈</description>
+    <version>0.1</version>
+    <date>2009-09-14</date>
+    <category>service</category>
+
+    <author email_address="skklove@gmail.com" link="http://zero.textyle.kr">
+        <name xml:lang="ko">zero</name>
+    </author>
+</module>

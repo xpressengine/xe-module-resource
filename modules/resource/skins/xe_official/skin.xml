@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skin version="0.2">
+    <title xml:lang="ko">관리 기본 스킨</title>
+    <description xml:lang="ko">Resource 관리 모듈의 기본 스킨입니다.</description>
+    <version>0.1</version>
+    <date>2009-09-14</date>
+    <author email_address="skklove@gmail.com" link="http://zero.textyle.kr">
+        <name xml:lang="ko">zero</name>
+    </author>
+    <license>GPL v2 or later</license>
+    <colorset>
+        <color name="default" >
+            <title xml:lang="ko">기본</title>
+        </color>
+    </colorset>
+
+    <extra_vars>
+        <var name="title" type="text">
+            <title xml:lang="ko">제목</title>
+            <description xml:lang="ko">제목을 적어주세요.</description>
+        </var>
+        <var name="sub_title" type="text">
+            <title xml:lang="ko">부제목</title>
+            <description xml:lang="ko">제목 옆에 나타날 부제목을 적어주세요.</description>
+        </var>
+        <var name="comment" type="textarea">
+            <title xml:lang="ko">상세 설명</title>
+            <description xml:lang="ko">제목 아래 표시될 설명을 입력하실 수 있습니다.</description>
+        </var>
+    </extra_vars>
+</skin>
