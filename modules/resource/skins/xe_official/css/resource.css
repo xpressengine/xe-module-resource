@@ -20,7 +20,7 @@
 .leftBox .categoryBox h3 { padding:0 0 10px 0; margin:10px 0 10px 0; white-space:nowrap; overflow:hidden; color:#48494E; font-size:11px; font-weight:normal; background:transparent url(../img/hrE1.gif) repeat-x scroll left bottom;}
 .leftBox .categoryBox h3 a { color:#48494E; font-size:12px; font-weight:bold; text-decoration:none; }
 .leftBox .categoryBox ul.category { margin:10px 0 0 0; padding:0; list-style:none; }
-.leftBox .categoryBox ul.category li { margin-bottom:10px; }
+.leftBox .categoryBox ul.category li { margin:0 0 10px 10px; }
 .leftBox .categoryBox ul.category li a.selected { font-weight:bold; color:#2893BB; }
 .leftBox .categoryBox ul.category li a { text-decoration:none; color:#7B7575; }
 .leftBox .categoryBox ul.category li span { font-family:verdana; font-size:10px; color:#999; }
