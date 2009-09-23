@@ -4,12 +4,6 @@
         <grant name="request" default="member">
             <title xml:lang="ko">신청</title>
         </grant>
-        <grant name="admission" default="member">
-            <title xml:lang="ko">승인</title>
-        </grant>
-        <grant name="attchement" default="member">
-            <title xml:lang="ko">등록</title>
-        </grant>
         <grant name="write_comment" default="member">
             <title xml:lang="ko">평가</title>
         </grant>
