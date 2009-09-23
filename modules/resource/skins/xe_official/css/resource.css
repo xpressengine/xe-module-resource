@@ -18,17 +18,17 @@
 
 .leftBox .categoryBox { background:url(../img/bg_category.gif) no-repeat left top; padding:10px; width:160px; overflow:hidden; }
 .leftBox .categoryBox h3 { padding:3px; margin:0 0 30px 0; white-space:nowrap; overflow:hidden; color:#aaa; font-size:11px; font-weight:normal;}
-.leftBox .categoryBox h3 a { color:#fff; font-size:14px; font-weight:bold; }
+.leftBox .categoryBox h3 a { color:#fff; font-size:14px; font-weight:bold; text-decoration:none; }
 .leftBox .categoryBox h3 span { color:#eee; }
 .leftBox .categoryBox ul.category { margin:10px 0 0 10px; padding:0; list-style:none; }
 .leftBox .categoryBox ul.category li { margin-bottom:10px; }
 .leftBox .categoryBox ul.category li a.selected { font-weight:bold; color:#DE730A; }
-.leftBox .categoryBox ul.category li a { color:#000; }
+.leftBox .categoryBox ul.category li a { text-decoration:none; color:#000; }
 .leftBox .categoryBox ul.category li span { font-family:verdana; font-size:10px; color:#999; }
 
 .leftBox .categoryBox ul.resourceManage { padding:10px 0 0 10px; margin:10px 0 10px 0; list-style:none; border-top:1px dotted #cdcdcd; border-bottom:1px dotted #cdcdcd; *padding-bottom:10px; }
 .leftBox .categoryBox ul.resourceManage li { background:url(../img/btnManage.gif) no-repeat 2px 2px; padding-left:14px; white-space:nowrap; overflow:hidden; margin-bottom:10px; }
-.leftBox .categoryBox ul.resourceManage li a { color:#747474; }
+.leftBox .categoryBox ul.resourceManage li a { text-decoration:none; color:#747474; }
 .leftBox .categoryBox ul.resourceManage li a.selected { font-weight:bold; }
 
 .leftBox .searchBox { margin:0; width:180px; text-align:center; }
@@ -44,7 +44,7 @@
 .resourceContent .packageInfo table.packageView tr td.thumbnail { vertical-align:top; text-align:left; }
 .resourceContent .packageInfo table.packageView tr th,
 .resourceContent .packageInfo table.packageView tr td { padding:5px 0;color:#777; vertical-align:top; }
-.resourceContent .packageInfo table.packageView tr td a { color:#777; }
+.resourceContent .packageInfo table.packageView tr td a { text-decoration:none; color:#777; }
 .resourceContent .packageInfo table.packageView tr.division th,
 .resourceContent .packageInfo table.packageView tr.division td { border-top:1px dotted #bbb; }
 .resourceContent .packageInfo table.packageView tr td .xe_content .document_popup_menu { display:none; }
@@ -53,14 +53,13 @@
 .resourceContent .packageInfo .textForm { width:80px; border:1px solid #ccc; }
 .resourceContent .packageInfo .starPoint { margin:0 0 10px 0; padding:0; list-style:none; overflow:hidden; *zoom:1; }
 .resourceContent .packageInfo .starPoint li { float:left; margin-right:3px; }
-.resourceContent .packageInfo .starPoint li a { width:11px; height:11px; background:url(../img/starOff.gif) no-repeat left top; color:#fff; font-size:1px; line-height:0; display:block; }
-.resourceContent .packageInfo .starPoint li a { width:11px; height:11px; background:url(../img/starOff.gif) no-repeat left top; color:#fff; font-size:1px; line-height:0; display:block; }
+.resourceContent .packageInfo .starPoint li a { text-decoration:none; width:11px; height:11px; background:url(../img/starOff.gif) no-repeat left top; color:#fff; font-size:1px; line-height:0; display:block; }
 .resourceContent .packageInfo .starPoint li a.on { background-image:url(../img/starOn.gif); }
 .resourceContent .packageInfo .commentArea { width:94%; border:1px solid #ddd; height:60px; padding:5px; font-size:12px; }
 .resourceContent .comments { margin:0 0 20px 0; padding:5px; border-top:1px solid #ddd; list-style:none;}
 .resourceContent .comments li { position:relative; padding:10px; border-bottom:1px dotted #ddd; overflow:hidden; *zoom:1;}
 .resourceContent .comments li .authorBox { width:110px; position:absolute; left:0; top:10px; overflow:hidden; }
-.resourceContent .comments li .authorBox a { color:#444; }
+.resourceContent .comments li .authorBox a { text-decoration:none; color:#444; }
 .resourceContent .comments li .authorBox span.estimate { display:block; margin-top:10px; }
 .resourceContent .comments li .authorBox span.estimate img { margin:0; }
 .resourceContent .comments li .authorBox span.date { font-size:11px; font-family:tahoma; color:#aaa; }
@@ -74,13 +73,13 @@ ul.listOrder { margin:0; padding:0; text-align:right; }
 ul.listOrder.asc li.arrow { background:url(../img/arrUp.gif) no-repeat right 2px; padding-right:10px; }
 ul.listOrder.desc li.arrow { background:url(../img/arrDown.gif) no-repeat right 2px; padding-right:10px; }
 ul.listOrder li { display:inline; margin-left:10px; }
-ul.listOrder li.arrow a { font-weight:bold; }
-ul.listOrder li a { color:#444; }
+ul.listOrder li.arrow a { text-decoration:none; font-weight:bold; }
+ul.listOrder li a { text-decoration:none; color:#444; }
 
 .form {margin:0 auto;text-align:left;}
 .form h3 { margin:0; padding:0; }
 .form .information {margin-top:10px;text-align:left;}
-.form .information a {color:#1F6701;text-decoration:underline;}
+.form .information a {text-decoration:none; color:#1F6701;text-decoration:underline;}
 .form .reference {margin-top:30px;margin-bottom:2px;}
 .form .reference em {font-style:normal;color:#FE632B;}
 .form .reference em img {vertical-align:middle;}
@@ -106,13 +105,14 @@ table.form tr.first_child td {background:none;}
 table.view_type1 {width:100%; border-bottom:1px solid #DDDEE2; table-layout:fixed;  margin-bottom:10px;}
 table.view_type1 caption {display:none;}
 table.view_type1 th {padding:8px 0 5px 20px; border-top:1px solid #DDDEE2; background:#F1F1F3; color:#666; font-weight:bold; text-align:left; vertical-align:top;}
-table.view_type1 td {padding:8px 5px 5px 12px; border-top:1px solid #DDDEE2; line-height:16px; vertical-align:top;}
+table.view_type1 td {padding:5px; border-top:1px solid #DDDEE2; line-height:16px; vertical-align:top;}
+table.view_type1 td a {text-decoration:none; color:#4C4C4C; }
 table.list_type1 {width:100%; border-bottom:2px solid #DCDCDC; border-collapse:collapse;  margin-bottom:10px;}
 table.list_type1 th {padding:7px 0 4px 0; background-color:#F5F7F9; border-top:2px solid #DCDCDC; color:#666666; text-align:center; }
 table.list_type1 td {padding:6px 5px 4px 5px; border-top:1px solid #E5E5E5; color:#4C4C4C; text-align:left;}
-table.list_type1 td a {color:#4C4C4C;}
+table.list_type1 td a {text-decoration:none; color:#4C4C4C;}
 table tr.selected { background-color:#f0f0f0; }
-table tr.selected td.title a {font-weight:bold; }
+table tr.selected td.title a {text-decoration:none; font-weight:bold; }
 table th.center,
 table td.center {text-align:center; }
 table th.right,
@@ -130,17 +130,17 @@ table td { vertical-align:top; }
 table td.thumbnail { text-align:center; }
 table td.title { height:18px; }
 table td.title h3 { padding:0; margin:0; }
-table td.title a {color:#000; }
+table td.title a {text-decoration:none; color:#000; }
 table td.description { padding:5px 0 0 5px; color:#777; height:54px; white-space:normal; overflow:hidden; }
 table td.info { height:18px; }
 table td.info ul { list-style:none; padding:0; margin:0; }
 table td.info ul li { float:left; margin-right:20px; }
-table td.info ul li.category a { color:#888; font-weight:bold; }
+table td.info ul li.category a { text-decoration:none; color:#888; font-weight:bold; }
 table td.info ul li.voted { color:#666; font-family:tahoma; font-size:10px;}
 table td.info ul li.downloaded { background:url(../img/iconFile.gif) no-repeat left 2px; padding-left:16px; color:#666; font-family:tahoma; font-size:10px;}
 table td.info ul li.date { color:#666; font-family:tahoma; font-size:10px;}
-table td.info ul li.author  a { color:#444; }
-table td.info ul li.delete a { color:#aaa; font-weight:bold; }
+table td.info ul li.author  a { text-decoration:none; color:#444; }
+table td.info ul li.delete a { text-decoration:none; color:#aaa; font-weight:bold; }
 
 .text_field {width:300px; height:15px;padding-top:1px;border:1px solid #b6ad9b; font-size:12px;} 
 .text_area {width:300px; height:80px;padding-top:1px;border:1px solid #b6ad9b; font-size:12px;} 

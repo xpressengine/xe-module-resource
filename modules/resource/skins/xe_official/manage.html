@@ -55,18 +55,16 @@
     </tr>
     <tr>
         <th scope="row">{$lang->package_path}</th>
-        <td colspan="3">{$val->path}</td>
-        <th scope="row">{$lang->package_homepage}</th>
-        <td><!--@if($val->homepage)--><a href="{$val->homepage}">{$val->homepage}</a><!--@else-->&nbsp;<!--@end--></td>
+        <td colspan="2">{$val->path}</td>
+        <td colspan="3" class="right"><!--@if($val->homepage)--><a href="{$val->homepage}">{$val->homepage}</a><!--@else-->&nbsp;<!--@end--></td>
     </tr>
     <tr>
         <th scope="row" rowspan="2">{$lang->package_description}</th>
         <td colspan="3" rowspan="2">{nl2br($val->description)}</td>
-        <th scope="row">{$lang->nick_name}</th>
-        <td><a href="#" class="member_{$val->member_srl}" onclick="return false;">{$val->nick_name}</a></td>
+        <td colspan="2" class="right"><a href="#" class="member_{$val->member_srl}" onclick="return false;">{$val->nick_name}</a></td>
     </tr>
     <tr>
-        <th scope="row" colspan="2" class="center">
+        <td scope="row" colspan="2" class="center">
             <form action="./" method="get" onsubmit="return procFilter(this,change_status);">
                 <input type="hidden" name="vid" value="{$vid}" />
                 <input type="hidden" name="mid" value="{$mid}" />
