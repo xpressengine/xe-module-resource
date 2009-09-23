@@ -4,9 +4,8 @@
         <li <!--@if($order_target=='popular')-->class="arrow"<!--@end-->><a href="{getUrl('order_target','popular','order_type',$order_type=='asc'?'desc':'asc')}">{$lang->order_popular}</a></li>
     </ul>
 
-    {@$_idx=0}
     <!--@foreach($item_list as $key => $val)-->
-    <table class="packageList<!--@if($_idx==0)--> top{@$_idx++}<!--@end-->">
+    <table class="packageList">
     <colgroup>
     <col width="120" /><col width="*"/>
     </colgroup>

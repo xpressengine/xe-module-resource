@@ -14,24 +14,23 @@
 .resourceHeader { margin-bottom:20px; }
 
 
-.leftBox { width:180px; float:left; margin-right:30px; }
+.leftBox { width:180px; float:left; margin-right:30px; padding-bottom:30px; }
 
-.leftBox .categoryBox { background:url(../img/bg_category.gif) no-repeat left top; padding:10px; width:160px; overflow:hidden; }
-.leftBox .categoryBox h3 { padding:3px; margin:0 0 30px 0; white-space:nowrap; overflow:hidden; color:#aaa; font-size:11px; font-weight:normal;}
-.leftBox .categoryBox h3 a { color:#fff; font-size:14px; font-weight:bold; text-decoration:none; }
-.leftBox .categoryBox h3 span { color:#eee; }
-.leftBox .categoryBox ul.category { margin:10px 0 0 10px; padding:0; list-style:none; }
+.leftBox .categoryBox { background-color:#F8F8F8; padding:10px; width:160px; overflow:hidden; }
+.leftBox .categoryBox h3 { padding:0 0 10px 0; margin:10px 0 10px 0; white-space:nowrap; overflow:hidden; color:#48494E; font-size:11px; font-weight:normal; background:transparent url(../img/hrE1.gif) repeat-x scroll left bottom;}
+.leftBox .categoryBox h3 a { color:#48494E; font-size:12px; font-weight:bold; text-decoration:none; }
+.leftBox .categoryBox ul.category { margin:10px 0 0 0; padding:0; list-style:none; }
 .leftBox .categoryBox ul.category li { margin-bottom:10px; }
-.leftBox .categoryBox ul.category li a.selected { font-weight:bold; color:#DE730A; }
-.leftBox .categoryBox ul.category li a { text-decoration:none; color:#000; }
+.leftBox .categoryBox ul.category li a.selected { font-weight:bold; color:#2893BB; }
+.leftBox .categoryBox ul.category li a { text-decoration:none; color:#7B7575; }
 .leftBox .categoryBox ul.category li span { font-family:verdana; font-size:10px; color:#999; }
 
-.leftBox .categoryBox ul.resourceManage { padding:10px 0 0 10px; margin:10px 0 10px 0; list-style:none; border-top:1px dotted #cdcdcd; border-bottom:1px dotted #cdcdcd; *padding-bottom:10px; }
+.leftBox .categoryBox ul.resourceManage { margin:0; padding:10px 0 0 0; list-style:none; background:transparent url(../img/hrE1.gif) repeat-x scroll left top; }
 .leftBox .categoryBox ul.resourceManage li { background:url(../img/btnManage.gif) no-repeat 2px 2px; padding-left:14px; white-space:nowrap; overflow:hidden; margin-bottom:10px; }
 .leftBox .categoryBox ul.resourceManage li a { text-decoration:none; color:#747474; }
 .leftBox .categoryBox ul.resourceManage li a.selected { font-weight:bold; }
 
-.leftBox .searchBox { margin:0; width:180px; text-align:center; }
+.leftBox .searchBox { padding:10px 0; text-align:center; background:transparent url(../img/hrE1.gif) repeat-x scroll left top;}
 .leftBox .searchBox input.input { border:1px solid #ddd; width:120px; height:16px;}
 .leftBox .searchBox input.submit { vertical-align:middle; }
 
@@ -69,12 +68,12 @@
 .resourceContent .comments li .nullBox { width:1px; height:80px; float:right; }
 
 
-ul.listOrder { margin:0; padding:0; text-align:right; }
+ul.listOrder { margin:0; padding:0 0 10px 0; text-align:right; background:transparent url(../img/hrE1.gif) repeat-x scroll left bottom;}
 ul.listOrder.asc li.arrow { background:url(../img/arrUp.gif) no-repeat right 2px; padding-right:10px; }
 ul.listOrder.desc li.arrow { background:url(../img/arrDown.gif) no-repeat right 2px; padding-right:10px; }
 ul.listOrder li { display:inline; margin-left:10px; }
-ul.listOrder li.arrow a { text-decoration:none; font-weight:bold; }
-ul.listOrder li a { text-decoration:none; color:#444; }
+ul.listOrder li.arrow a { text-decoration:none; font-weight:bold; color:#2893BB; }
+ul.listOrder li a { text-decoration:none; color:#7B7575; }
 
 .form {margin:0 auto;text-align:left;}
 .form h3 { margin:0; padding:0; }
@@ -124,8 +123,7 @@ table td.status.accepted { color:#084F92; font-weight:bold;}
 table td.status.reservation { color:#925608; }
 table td.date  {color:#aaa; font-size:10px; font-family:tahoma;}
 
-table.packageList {width:100%; height:100px; border-bottom:1px dotted #DDDEE2; padding-bottom:10px; table-layout:fixed;  margin-bottom:10px;}
-table.packageList.top {border-top:1px dotted #DDDEE2; padding-top:10px; margin-top:10px;}
+table.packageList {width:100%; height:100px; background:transparent url(../img/hrE1.gif) repeat-x scroll left bottom; padding:10px 0; table-layout:fixed; }
 table td { vertical-align:top; }
 table td.thumbnail { text-align:center; }
 table td.title { height:18px; }

@@ -1,6 +1,6 @@
 <div class="leftBox">
     <div class="categoryBox">
-        <h3><a href="{getSiteUrl($site_module_info->domain,'','mid',$module_info->mid)}">{$lang->category}</a> <span>({number_format($package_categories[0]->count)})</span></h3>
+        <h3><a href="{getSiteUrl($site_module_info->domain,'','mid',$module_info->mid)}">{$lang->package_category}</a> <span>({number_format($package_categories[0]->count)})</span></h3>
 
         {@ $_pDepth = 0;}
 
@@ -41,15 +41,16 @@
             <li><a href="{getSiteUrl($site_module_info->domain, '', 'mid',$module_info->mid,'act','dispResourceAdminInsert')}">{$lang->cmd_setup}</a></li>
             <!--@end-->
         </ul>
+
+        <div class="searchBox">
+            <form action="./" method="get">
+                <input type="hidden" name="vid" value="{$vid}" />
+                <input type="hidden" name="mid" value="{$mid}" />
+                <input type="hidden" name="category_srl" value="{$category_srl}" />
+                <input type="text" name="search_keyword" value="{htmlspecialchars($search_keyword)}" class="input" />
+                <input type="image" src="./img/btn_search.gif" class="submit" />
+            </form>
+        </div>
     </div>
 
-    <div class="searchBox">
-        <form action="./" method="get">
-            <input type="hidden" name="vid" value="{$vid}" />
-            <input type="hidden" name="mid" value="{$mid}" />
-            <input type="hidden" name="category_srl" value="{$category_srl}" />
-            <input type="text" name="search_keyword" value="{htmlspecialchars($search_keyword)}" class="input" />
-            <input type="image" src="./img/btn_search.gif" class="submit" />
-        </form>
-    </div>
 </div>
