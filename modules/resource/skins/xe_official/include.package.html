@@ -120,7 +120,7 @@
                 <span class="date">{$comment->getRegdate("Y-m-d H:i")}</span>
                 <div class="btnBox">
                     <!--@if($comment->isGranted())-->
-                    <a href="#" onclick="if(confirm('{$lang->confirm_delete}')) doDeleteComment({$package->get('package_srl')}, {$comment->get('comment_srl')});return false;" class="deleteBtn button small"><span>{$lang->cmd_delete}</span></a>
+                    <a href="#" onclick="if(confirm('{$lang->confirm_delete}')) doDeleteComment({$package->get('package_srl')}, {$package->get('item_srl')}, {$comment->get('comment_srl')});return false;" class="deleteBtn button small"><span>{$lang->cmd_delete}</span></a>
                     <!--@end-->
                 </div>
             </div>

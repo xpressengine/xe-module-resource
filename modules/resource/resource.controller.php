@@ -391,30 +391,42 @@
         function procResourceDeleteComment() {
             $oCommentModel = &getModel('comment');
             $oCommentController = &getController('comment');
+            $oResourceModel = &getModel('resource');
 
             if(!$this->grant->write_comment) return new Object(-1, 'msg_not_permitted');
             if(!$this->module_srl) return new Object(-1,'msg_invalid_request');
 
+            $args = Context::gets('package_srl', 'item_srl','comment_srl');
+            $args->module_srl = $this->module_srl;
+
             $comment_srl = Context::get('comment_srl');
             $oComment = $oCommentModel->getComment($comment_srl);
             if(!$oComment->isExists() || !$oComment->isGranted()) return new Object(-1,'msg_invalid_request');
+
+            $item = $oResourceModel->getItem($args->module_srl, $args->package_srl, $args->item_srl);
+            if(!$item->document_srl) return new Object(-1,'msg_invalid_request');
+
+            $package = $oResourceModel->getPackage($args->module_srl, $args->package_srl);
+            if(!$package->package_srl) return new Object(-1,'msg_invalid_request');
 
             $output = $oCommentController->deleteComment($oComment->comment_srl);
             if(!$output->toBool()) return $output;
 
             $star_args->module_srl = $this->module_srl;
             $star_args->package_srl = $args->package_srl;
-            $star_args->voted = $package->voted-$args->star_point;
+            $star_args->voted = $package->voted-$item->voted;
             if($star_args->voted<0) $star_args->voted = 0;
-            if($item->voter<1) $star_args->voter = 0;
+            $star_args->voter = $package->voter-1;
+            if($package->voter<1) $star_args->voter = 0;
             $output = executeQuery('resource.minusPackageStar', $star_args);
 
             $star_args->module_srl = $this->module_srl;
             $star_args->package_srl = $args->package_srl;
             $star_args->item_srl = $args->item_srl;
-            $star_args->voted = $item->voted-$args->star_point;
-            if($item->voter<1) $star_args->voter = 0;
+            $star_args->voted = $item->voted-$item->voted;
             if($star_args->voted<0) $star_args->voted = 0;
+            $star_args->voter = $package->voter-1;
+            if($item->voter<1) $star_args->voter = 0;
             $output = executeQuery('resource.minusItemStar', $star_args);
 
             $this->setRedirectUrl(getSiteUrl($site_module_info->domain, '', 'mid', Context::get('mid'),'act','','package_srl',Context::get('package_srl')));

@@ -71,9 +71,10 @@ function doCalDependency(fo_obj) {
     jQuery('input[name=attach_dependency]').val(dependency_srl.join(','));
 }
 
-function doDeleteComment(package_srl, comment_srl) {
+function doDeleteComment(package_srl, item_srl, comment_srl) {
     var params = new Array();
     params['package_srl'] = package_srl;
+    params['item_srl'] = item_srl;
     params['comment_srl'] = comment_srl;
     if(typeof(xeVid)!='undefined') params['vid'] = xeVid;
     params['mid'] = current_mid;
