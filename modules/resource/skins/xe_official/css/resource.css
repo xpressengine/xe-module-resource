@@ -53,8 +53,8 @@
 .resourceContent .packageInfo .textForm { width:80px; border:1px solid #ccc; }
 .resourceContent .packageInfo .starPoint { margin:0 0 10px 0; padding:0; list-style:none; overflow:hidden; *zoom:1; }
 .resourceContent .packageInfo .starPoint li { float:left; margin-right:3px; }
-.resourceContent .packageInfo .starPoint li a { width:11px; height:11px; background:url(../img/starOff.gif) no-repeat left top; color:transparent; font-size:1px; line-height:0; display:block; }
-.resourceContent .packageInfo .starPoint li a { width:11px; height:11px; background:url(../img/starOff.gif) no-repeat left top; color:transparent; font-size:1px; line-height:0; display:block; }
+.resourceContent .packageInfo .starPoint li a { width:11px; height:11px; background:url(../img/starOff.gif) no-repeat left top; color:#fff; font-size:1px; line-height:0; display:block; }
+.resourceContent .packageInfo .starPoint li a { width:11px; height:11px; background:url(../img/starOff.gif) no-repeat left top; color:#fff; font-size:1px; line-height:0; display:block; }
 .resourceContent .packageInfo .starPoint li a.on { background-image:url(../img/starOn.gif); }
 .resourceContent .packageInfo .commentArea { width:94%; border:1px solid #ddd; height:60px; padding:5px; font-size:12px; }
 .resourceContent .comments { margin:0 0 20px 0; padding:5px; border-top:1px solid #ddd; list-style:none;}

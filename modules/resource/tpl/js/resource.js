@@ -46,7 +46,11 @@ function doDeleteAttach(package_srl, item_srl) {
 
 function doInsertDependency(item_srl, text) {
     if(!opener) window.close();
-    var o = opener.jQuery('#sel_dependency');
+    opener.doInsertDependencyItem(item_srl, text);
+}
+
+function doInsertDependencyItem(item_srl, text) {
+    var o = jQuery('#sel_dependency');
     var stop = false;
     o.find('option').each( function() {
         if(this.value==item_srl) {
