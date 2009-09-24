@@ -66,6 +66,7 @@
                         $file = $oFileModel->getFile($package->get('item_file_srl'));
                         if($file) $package->add('download_url', getFullUrl().$file->download_url);
                     }
+                    $package->add('allow_comment','Y');
                     Context::set('package', $package);
                     Context::addJsFilter($this->module_path.'tpl/filter', 'insert_comment.xml');
 
