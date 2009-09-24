@@ -17,7 +17,7 @@
 .leftBox { width:180px; float:left; margin-right:30px; padding-bottom:30px; }
 
 .leftBox .categoryBox { background-color:#F8F8F8; padding:10px; width:160px; overflow:hidden; }
-.leftBox .categoryBox h3 { padding:0 0 10px 0; margin:10px 0 10px 0; white-space:nowrap; overflow:hidden; color:#48494E; font-size:11px; font-weight:normal; background:transparent url(../img/hrE1.gif) repeat-x scroll left bottom;}
+.leftBox .categoryBox h3 { padding:0 0 10px 0; margin:0 0 10px 0; white-space:nowrap; overflow:hidden; color:#48494E; font-size:11px; font-weight:normal; background:transparent url(../img/hrE1.gif) repeat-x scroll left bottom;}
 .leftBox .categoryBox h3 a { color:#48494E; font-size:12px; font-weight:bold; text-decoration:none; }
 .leftBox .categoryBox ul.category { margin:10px 0 0 0; padding:0; list-style:none; }
 .leftBox .categoryBox ul.category li { margin:0 0 10px 10px; }
@@ -68,7 +68,7 @@
 .resourceContent .comments li .nullBox { width:1px; height:80px; float:right; }
 
 
-ul.listOrder { margin:0; padding:0 0 10px 0; text-align:right; background:transparent url(../img/hrE1.gif) repeat-x scroll left bottom;}
+ul.listOrder { margin:10px 0 0 0; padding:0 0 10px 0; text-align:right; background:transparent url(../img/hrE1.gif) repeat-x scroll left bottom;}
 ul.listOrder.asc li.arrow { background:url(../img/arrUp.gif) no-repeat right 2px; padding-right:10px; }
 ul.listOrder.desc li.arrow { background:url(../img/arrDown.gif) no-repeat right 2px; padding-right:10px; }
 ul.listOrder li { display:inline; margin-left:10px; }
