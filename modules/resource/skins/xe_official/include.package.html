@@ -23,7 +23,7 @@
             <!--@for($i=0;$i<5;$i++)--><!--@if($i<$package->get('star'))--><img src="./img/starOn.gif" alt="" /><!--@else--><img src="./img/starOff.gif" alt="" /><!--@end--><!--@end-->
             /{number_format($package->get('package_voter'))}
         </td>
-        <td class="right" rowspan="{$rowspan}" class="thumbnail"><img src="{$package->get('item_screenshot_url')}" width="100" height="100" alt="" /></td>
+        <td class="right thumbnail" rowspan="{$rowspan}"><img src="{$package->get('item_screenshot_url')}" width="100" height="100" alt="" /></td>
     </tr>
     <tr>
         <th>{$lang->package_license}</th>

@@ -32,6 +32,7 @@
             $logged_info = Context::get('logged_info');
             $type = Context::get('type');
             $item_srl = Context::get('item_srl');
+            $page = Context::get('page');
 
             if($document_srl && !$package_srl) {
                 $args->document_srl = $document_srl;
@@ -88,7 +89,7 @@
 
                 $search_keyword = Context::get('search_keyword');
 
-                $output = $oResourceModel->getLatestItemList($this->module_srl, $category_srl, $childs, null, $search_keyword, $order_target, $order_type);
+                $output = $oResourceModel->getLatestItemList($this->module_srl, $category_srl, $childs, null, $search_keyword, $order_target, $order_type, $page);
                 Context::set('item_list', $output->data);
                 Context::set('total_count', $output->total_count);
                 Context::set('total_page', $output->total_page);
@@ -146,7 +147,7 @@
             $oResourceModel = &getModel('resource');
 
             $logged_info = Context::get('logged_info');
-            $output = $oResourceModel->getPackageList($this->module_srl, null, null, $logged_info->member_srl);
+            $output = $oResourceModel->getPackageList($this->module_srl, null, Context::get('category_srl'), $logged_info->member_srl, Context::get('page'));
             Context::set('package_list', $output->data);
             Context::set('total_count', $output->total_count);
             Context::set('total_page', $output->total_page);

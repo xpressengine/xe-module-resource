@@ -40,7 +40,8 @@
 .resourceContent .packageInfo p.description { color:#444; background-color:#f8f8f8; margin:10px 0; padding:10px; }
 .resourceContent .packageInfo table.packageView { width:100%; margin-bottom:20px; border-collapse:collapse;  border-top:1px dotted #bbb; border-bottom:1px dotted #bbb;  table-layout:fixed;}
 .resourceContent .packageInfo table.packageView.noTopLine { border-top:none; }
-.resourceContent .packageInfo table.packageView tr td.thumbnail { vertical-align:top; text-align:left; }
+.resourceContent .packageInfo table.packageView tr td.thumbnail { vertical-align:top; text-align:right; }
+.resourceContent .packageInfo table.packageView tr td.thumbnail img { border:1px solid #ccc !important; padding:2px; }
 .resourceContent .packageInfo table.packageView tr th,
 .resourceContent .packageInfo table.packageView tr td { padding:5px 0;color:#777; vertical-align:top; }
 .resourceContent .packageInfo table.packageView tr td a { text-decoration:none; color:#777; }
@@ -106,10 +107,12 @@ table.view_type1 caption {display:none;}
 table.view_type1 th {padding:8px 0 5px 20px; border-top:1px solid #DDDEE2; background:#F1F1F3; color:#666; font-weight:bold; text-align:left; vertical-align:top;}
 table.view_type1 td {padding:5px; border-top:1px solid #DDDEE2; line-height:16px; vertical-align:top;}
 table.view_type1 td a {text-decoration:none; color:#4C4C4C; }
+table.view_type1 td a:hover { text-decoration:underline; }
 table.list_type1 {width:100%; border-bottom:2px solid #DCDCDC; border-collapse:collapse;  margin-bottom:10px;}
 table.list_type1 th {padding:7px 0 4px 0; background-color:#F5F7F9; border-top:2px solid #DCDCDC; color:#666666; text-align:center; }
-table.list_type1 td {padding:6px 5px 4px 5px; border-top:1px solid #E5E5E5; color:#4C4C4C; text-align:left;}
+table.list_type1 td {padding:6px 5px 4px 5px; border-top:1px solid #E5E5E5; color:#4C4C4C; text-align:left; white-space:nowrap; overflow:hidden;}
 table.list_type1 td a {text-decoration:none; color:#4C4C4C;}
+table.list_type1 td a:hover {text-decoration:underline !important; }
 table tr.selected { background-color:#f0f0f0; }
 table tr.selected td.title a {text-decoration:none; font-weight:bold; }
 table th.center,
@@ -126,6 +129,7 @@ table td.date  {color:#aaa; font-size:10px; font-family:tahoma;}
 table.packageList {width:100%; height:100px; background:transparent url(../img/hrE1.gif) repeat-x scroll left bottom; padding:10px 0; table-layout:fixed; }
 table td { vertical-align:top; }
 table td.thumbnail { text-align:center; }
+table td.thumbnail img { border:1px solid #ccc; padding:2px; overflow:hidden; *zoom:1; }
 table td.title { height:18px; }
 table td.title h3 { padding:0; margin:0; }
 table td.title a {text-decoration:none; color:#000; }
