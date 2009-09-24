@@ -226,8 +226,9 @@
 
             $category_srl = Context::get('category_srl');
             $search_keyword = Context::get('search_keyword');
+            $page = Context::get('page');
 
-            $output = $oResourceModel->getLatestItemList($this->module_srl, $category_srl, null, null, $search_keyword);
+            $output = $oResourceModel->getLatestItemList($this->module_srl, $category_srl, null, null, $search_keyword, null, null, $page);
             Context::set('item_list', $output->data);
             Context::set('total_count', $output->total_count);
             Context::set('total_page', $output->total_page);
