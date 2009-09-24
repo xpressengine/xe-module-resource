@@ -12,7 +12,7 @@
 
     <table cellspacing="0" class="crossTable">
     <tr>
-        <th>
+        <th style="white-space:nowrap">
             <form action="./" method="get">
             <select name="category_srl" id="category_srl">
                 <option value="">{$lang->package_category}</option>
@@ -34,8 +34,7 @@
                 {@ $_curDepth = $val->depth}
             <!--@end-->
             <!--@for($i=0;$i<$_curDepth;$i++)--></optgroup><!--@end-->
-            </select>
-            <a href="#" onclick="location.href=location.href.setQuery('category_srl',jQuery('#category_srl option:selected').val());return false;" class="button small"><span>GO</span></a>
+            </select><a href="#" onclick="location.href=location.href.setQuery('category_srl',jQuery('#category_srl option:selected').val());return false;" class="button small"><span>GO</span></a>
             </form>
         </th>
         <th><div>{$lang->package_title}</div></th>
