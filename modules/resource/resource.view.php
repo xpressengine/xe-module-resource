@@ -60,7 +60,7 @@
                     else $package->add('star',0);
                     if($package->get('item_voter')>0) $package->add('item_star', (int)($package->get('item_voted')/$package->get('item_voter')));
                     else $package->add('item_star',0);
-                    $package->add('depencies', $oResourceModel->getDependency($this->module_srl, $package_item_srl));
+                    $package->add('depencies', $oResourceModel->getDependency($this->module_srl, $package->get('item_srl')));
 
                     if($package->get('item_file_srl')) {
                         $file = $oFileModel->getFile($package->get('item_file_srl'));
