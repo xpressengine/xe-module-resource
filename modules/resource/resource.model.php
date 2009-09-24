@@ -87,11 +87,8 @@
             $args->order_type = $order_type;
             if($order_target == 'latest') $args->sort_index = 'package.last_update';
             elseif($order_target == 'popular') $args->sort_index = 'package.voted';
-            else {
-                $args->sort_index = 'package.list_order';
-                if($args->order_type=='desc') $args->order_type = 'asc';
-                else $args->order_type = 'desc';
-            }
+            else $args->sort_index = 'package.list_order';
+
             $output = executeQueryArray('resource.getLatestItemList', $args);
             if($output->data) {
                 foreach($output->data as $key => $val) {
