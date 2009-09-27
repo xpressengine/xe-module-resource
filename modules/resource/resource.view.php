@@ -115,6 +115,8 @@
             Context::set('selected_package', $selected_package = $oResourceModel->getPackage($this->module_srl, $package_srl, $logged_info->member_srl));
             if(!$selected_package->package_srl) return new Object(-1,'msg_invalid_request');
 
+            if(!$this->grant->manager && $logged_info->member_srl != $selected_package->member_srl) return new Object(-1,'msg_not_permitted');
+
             Context::set('licenses', $this->licenses);
             Context::addJsFilter($this->module_path.'tpl/filter', 'modify_package.xml');
         }
@@ -127,6 +129,8 @@
             if(!$package_srl) return new Object(-1,'msg_invalid_request');
             Context::set('selected_package', $selected_package = $oResourceModel->getPackage($this->module_srl, $package_srl, $logged_info->member_srl));
 
+            if(!$this->grant->manager && $logged_info->member_srl != $selected_package->member_srl) return new Object(-1,'msg_not_permitted');
+
             Context::addJsFilter($this->module_path.'tpl/filter', 'delete_package.xml');
         }
 
@@ -136,6 +140,8 @@
             $package_srl = Context::get('package_srl');
             if($package_srl) $selected_package = $oResourceModel->getPackage($this->module_srl, $package_srl, $logged_info->member_srl);
             if(!$package_srl || !$selected_package) return new Object('msg_invalid_request');
+
+            if(!$this->grant->manager && $logged_info->member_srl != $selected_package->member_srl) return new Object(-1,'msg_not_permitted');
 
             if($selected_package->voter>0) $selected_package->star = (int)($selected_package->voted/$selected_package->voter);
             else $selected_package->star = 0;
@@ -166,6 +172,8 @@
             Context::set('selected_package', $selected_package = $oResourceModel->getPackage($this->module_srl, $package_srl, $logged_info->member_srl));
             if(!$selected_package) return new Object(-1,'msg_invalid_request');
 
+            if(!$this->grant->manager && $logged_info->member_srl != $selected_package->member_srl) return new Object(-1,'msg_not_permitted');
+
             Context::set('latest_item', $oResourceModel->getLatestItem($package_srl));
 
             Context::set('item_srl', $item_srl = getNextSequence());
@@ -191,7 +199,7 @@
             if(!$item) return new Object(-1,'msg_invalid_request');
 
             Context::set('selected_package', $package = $oResourceModel->getPackage($this->module_srl, $package_srl));
-            if(!$package || $package->member_srl != $logged_info->member_srl ) return new Object(-1,'msg_invalid_request');
+            if(!$package || (!$this->grant->manager && $package->member_srl != $logged_info->member_srl )) return new Object(-1,'msg_invalid_request');
 
             Context::set('editor', $oEditorModel->getModuleEditor('document', $this->module_srl, $item->document_srl, 'document_srl', 'attach_description'));
 

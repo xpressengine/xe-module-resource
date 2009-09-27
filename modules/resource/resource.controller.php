@@ -47,6 +47,8 @@
             $selected_package = $oResourceModel->getPackage($this->module_srl, $args->package_srl, $logged_info->member_srl);
             if(!$selected_package->package_srl) return new Object(-1,'msg_invalid_request');
 
+            if(!$this->grant->manager && $logged_info->member_srl != $selected_package->member_srl) return new Object(-1,'msg_not_permitted');
+
             $output = executeQuery('resource.modifyPackage', $args);
             if(!$output->toBool()) return $output;
 
@@ -66,6 +68,8 @@
             if(!$package_srl) return new Object(-1,'msg_invalid_request');
             $selected_package = $oResourceModel->getPackage($this->module_srl, $package_srl, $logged_info->member_srl);
             if(!$selected_package->package_srl) return new Object(-1,'msg_invalid_request');
+
+            if(!$this->grant->manager && $logged_info->member_srl != $selected_package->member_srl) return new Object(-1,'msg_not_permitted');
 
             $args->package_srl = $package_srl;
             $args->module_srl = $this->module_srl;
@@ -105,6 +109,8 @@
 
             $selected_package = $oResourceModel->getPackage($this->module_srl, $args->package_srl, $logged_info->member_srl);
             if(!$selected_package) return new Object(-1,'msg_invalid_request');
+
+            if(!$this->grant->manager && $logged_info->member_srl != $selected_package->member_srl) return new Object(-1,'msg_not_permitted');
 
             $args->module_srl = $this->module_srl;
             $args->list_order = -1 * $args->item_srl;
@@ -174,6 +180,8 @@
             $package = $oResourceModel->getPackage($this->module_srl, $args->package_srl, $logged_info->member_srl);
             if(!$package) return  new Object(-1,'msg_invalid_request');
 
+            if(!$this->grant->manager && $logged_info->member_srl != $package->member_srl) return new Object(-1,'msg_not_permitted');
+
             $output = executeQuery('resource.getItemByItemSrl', $args);
             $item = $output->data;
             if(!$item) return  new Object(-1,'msg_invalid_request');
@@ -218,6 +226,8 @@
             $package = $oResourceModel->getPackage($this->module_srl, $package_srl);
             if(!$package || $package->member_srl != $logged_info->member_srl ) return new Object(-1,'msg_invalid_request');
 
+            if(!$this->grant->manager && $logged_info->member_srl != $package->member_srl) return new Object(-1,'msg_not_permitted');
+
             $item = $oResourceModel->getItem($this->module_srl, $package_srl, $item_srl);
             if(!$item) return new Object(-1,'msg_invalid_request');
             if($item->document_srl != $document_srl) return new Object(-1,'msg_invalid_request');
@@ -251,6 +261,8 @@
 
             $package = $oResourceModel->getPackage($this->module_srl, $args->package_srl, $logged_info->member_srl);
             if(!$package) return  new Object(-1,'msg_invalid_request');
+
+            if(!$this->grant->manager && $logged_info->member_srl != $package->member_srl) return new Object(-1,'msg_not_permitted');
 
             $item = $oResourceModel->getItem($this->module_srl, $args->package_srl, $args->item_srl);
             if(!$item) return  new Object(-1,'msg_invalid_request');
@@ -303,7 +315,7 @@
             if(!$item) return new Object(-1,'msg_invalid_request');
 
             $package = $oResourceModel->getPackage($this->module_srl, $package_srl);
-            if(!$package || $package->member_srl != $logged_info->member_srl ) return new Object(-1,'msg_invalid_request');
+            if(!$package || (!$this->grant->manager && $package->member_srl != $logged_info->member_srl)) return new Object(-1,'msg_invalid_request');
 
             $args->module_srl = $this->module_srl;
             $args->package_srl = $package_srl;
