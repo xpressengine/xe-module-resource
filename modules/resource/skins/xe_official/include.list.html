@@ -11,7 +11,11 @@
     </colgroup>
     <tr>
         <td rowspan="4" class="thumbnail"><a href="{getUrl('package_srl', $val->package_srl)}"><img src="{$val->item_screenshot_url}" width="100" height="100" alt="" /></a></td>
-        <td class="title"><h3><a href="{getUrl('package_srl', $val->package_srl)}">{htmlspecialchars($val->title)} ver. {htmlspecialchars($val->item_version)}</a></h3></td>
+        <td class="title">
+            <h3>
+                <a href="{getUrl('package_srl', $val->package_srl)}">{htmlspecialchars($val->title)} ver. {htmlspecialchars($val->item_version)}</a>
+            </h3>
+        </td>
     </tr>
     <tr>
         <td class="description">{cut_str(htmlspecialchars($val->package_description),200)}</td>
@@ -24,12 +28,13 @@
                     <!--@for($i=0;$i<5;$i++)--><!--@if($i<$val->package_star)--><img src="./img/starOn.gif" alt="" /><!--@else--><img src="./img/starOff.gif" alt="" /><!--@end--><!--@end-->
                     /{number_format($val->package_voter)}
                 </li>
-                <li class="downloaded">{number_format($val->package_downloaded)}</li>
                 <li class="author"><a href="#" onclick="return false;" class="member_{$val->member_srl}">{$val->nick_name}</a></li>
-                <li class="date">{zdate($val->item_regdate, "Y-m-d H:i")}</li>
-                <!--@if($grant->manager)-->
-                <li class="delete"><a href="#" onclick="if(confirm('{$lang->confirm_delete}')) doDeleteItem({$val->package_srl},{$val->item_srl}); return false;">[{$lang->cmd_delete}]</a></li>
-                <!--@end-->
+                <li class="date">
+                    {zdate($val->item_regdate, "Y-m-d H:i")}
+                    <!--@if($grant->manager)-->
+                    <a href="#" onclick="if(confirm('{$lang->confirm_delete}')) doDeleteItem({$val->package_srl},{$val->item_srl}); return false;">[{$lang->cmd_delete}]</a>
+                    <!--@end-->
+                </li>
             </ul>
         </td>
     </tr>
