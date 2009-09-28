@@ -97,4 +97,6 @@
     $lang->resource_modify_notify_title = '자료 정보 변경이 있습니다';
     $lang->resource_delete_notify_title = '자료가 삭제되었습니다';
     $lang->resource_attach_notify_title = '자료에 파일 첨부되었습니다';
+    $lang->resource_status_changed = '등록하신 자료의 상태가 변경되었습니다';
+    $lang->resource_status_changed_message = '[title] 자료의 상태가 [status]로 변경되었습니다';
 ?>

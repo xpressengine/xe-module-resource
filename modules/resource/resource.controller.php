@@ -106,6 +106,7 @@
         }
 
         function procResourceChangeStatus() {
+            $oCommunicationController = &getController('communication');
             $oResourceModel = &getModel('resource');
 
             if(!$this->module_srl) return new Object(-1,'msg_invalid_request');
@@ -119,6 +120,11 @@
 
             $output = executeQuery('resource.updatePackageStatus', $args);
             if(!$output->toBool()) return $output;
+
+            $logged_info = Context::get('logged_info');
+
+            $content = str_replace(array('[title]','[status]'), array($selected_package->title, Context::getLang('package_'.$args->status)), Context::getLang('resource_status_changed_message'));
+            $oCommunicationController->sendMessage($logged_info->member_srl, $selected_package->member_srl, Context::getLang('resource_status_changed'), $content, false);
         }
 
         function procResourceAttach() {
