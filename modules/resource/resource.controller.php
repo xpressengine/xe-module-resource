@@ -453,22 +453,27 @@
             $output = $oCommentController->deleteComment($oComment->comment_srl);
             if(!$output->toBool()) return $output;
 
-            $star_args->module_srl = $this->module_srl;
-            $star_args->package_srl = $args->package_srl;
-            $star_args->voted = $package->voted-$item->voted;
-            if($star_args->voted<0) $star_args->voted = 0;
-            $star_args->voter = $package->voter-1;
-            if($package->voter<1) $star_args->voter = 0;
-            $output = executeQuery('resource.minusPackageStar', $star_args);
+            $p_args->module_srl = $this->module_srl;
+            $p_args->package_srl = $package->package_srl;
+            $output = executeQuery('resource.getPackageSumStars', $p_args);
 
-            $star_args->module_srl = $this->module_srl;
-            $star_args->package_srl = $args->package_srl;
-            $star_args->item_srl = $args->item_srl;
-            $star_args->voted = $item->voted-$item->voted;
-            if($star_args->voted<0) $star_args->voted = 0;
-            $star_args->voter = $package->voter-1;
-            if($item->voter<1) $star_args->voter = 0;
-            $output = executeQuery('resource.minusItemStar', $star_args);
+            $p_star_args->module_srl = $this->module_srl;
+            $p_star_args->package_srl = $args->package_srl;
+            $p_star_args->voted = (int)$output->data->voted;
+            $p_star_args->voter = (int)$output->data->voter;
+            $output = executeQuery('resource.minusPackageStar', $p_star_args);
+
+            $p_args->module_srl = $this->module_srl;
+            $p_args->package_srl = $package->package_srl;
+            $p_args->item_srl = $item->item_srl;
+            $output = executeQuery('resource.getItemSumStars', $p_args);
+
+            $i_star_args->module_srl = $this->module_srl;
+            $i_star_args->package_srl = $args->package_srl;
+            $i_star_args->item_srl = $args->item_srl;
+            $i_star_args->voted = (int)$output->data->voted;
+            $i_star_args->voter = (int)$output->data->voter;
+            $output = executeQuery('resource.minusItemStar', $i_star_args);
 
             $this->setRedirectUrl(getSiteUrl($site_module_info->domain, '', 'mid', Context::get('mid'),'act','','package_srl',Context::get('package_srl')));
         }

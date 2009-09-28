@@ -3,8 +3,8 @@
         <table name="resource_packages" />
     </tables>
     <columns>
-        <column name="voted" var="voted" notnull="notnull" />
-        <column name="voter" ver="vorter" default="minus(1)" notnull="notnull" />
+        <column name="voted" var="voted" notnull="notnull" default="0" />
+        <column name="voter" var="voter" notnull="notnull" default="0" />
     </columns>
     <conditions>
         <condition operation="equal" column="module_srl" var="module_srl" filter="number" notnull="notnull" />
