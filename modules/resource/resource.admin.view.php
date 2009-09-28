@@ -27,6 +27,7 @@
                     Context::set('module_info',$module_info);
                 }
             }
+            Context::set('module_srl', $this->module_info->module_srl);
         }
 
         function dispResourceAdminList() {

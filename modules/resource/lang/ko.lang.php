@@ -7,6 +7,7 @@
     $lang->order_popular = "인기";
     $lang->package_status = '등록 상태';
 
+    $lang->download = '다운로드';
     $lang->package_downloaded_count = '전체 다운로드';
     $lang->downloaded_count = '다운로드';
     $lang->voted_count = '추천';

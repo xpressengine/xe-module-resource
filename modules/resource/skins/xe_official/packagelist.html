@@ -39,6 +39,7 @@
         <col width="*" />
         <!--@if($module_info->resource_use_path=='Y')--><col width="*" /><!--@end-->
         <col width="70" />
+        <col width="70" />
         <col width="60" />
     </colgroup>
     <thead>
@@ -47,6 +48,7 @@
             <th scope="col">{$lang->package_category}</th>
             <th scope="col">{$lang->package_title}</th>
             <!--@if($module_info->resource_use_path=='Y')--><th scope="col">{$lang->package_path}</th><!--@end-->
+            <th scope="col">{$lang->version}</th>
             <th scope="col">{$lang->download}</th>
             <th scope="col">{$lang->regdate}</th>
         </tr>
@@ -67,6 +69,7 @@
             <td class="center">{$categories[$val->category_srl]->title}</td>
             <td class="title"><a href="{getUrl('package_srl', $val->package_srl,'act','dispResourcePackage')}">{$val->title}</a></td>
             <!--@if($module_info->resource_use_path=='Y')--><td>{$val->path}</td><!--@end-->
+            <td class="center date"><!--@if($val->version)-->{$val->version}<!--@else-->&nbsp;<!--@end--></td>
             <td class="center date">{number_format($val->downloaded)}</td>
             <td class="center date">{zdate($val->regdate, "Y.m.d")}</td>
         </tr>
