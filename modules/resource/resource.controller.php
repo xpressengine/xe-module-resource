@@ -33,7 +33,7 @@
             if($this->module_info->resource_notify_mail) {
                 $message = '';
                 foreach($args as $key => $val) $message .= $key." : ".$val."<br/>\r\n";
-                $message. = "URL : ".getFullSiteUrl($site_module_info->domain, '', 'mid', Context::get('mid'), 'act', 'dispResourceManage');
+                $message.= "URL : ".getFullSiteUrl($site_module_info->domain, '', 'mid', Context::get('mid'), 'act', 'dispResourceManage');
                 $this->notify($this->module_info->resource_notify_mail, Context::getLang('resource_new_notify_title'), $message);
             }
 
@@ -64,7 +64,7 @@
             if($this->module_info->resource_notify_mail) {
                 $message = '';
                 foreach($args as $key => $val) $message .= $key." : ".$val."<br/>\r\n";
-                $message. = "URL : ".getFullSiteUrl($site_module_info->domain, '', 'mid', Context::get('mid'), 'package_srl', $args->package_srl);
+                $message.= "URL : ".getFullSiteUrl($site_module_info->domain, '', 'mid', Context::get('mid'), 'package_srl', $args->package_srl);
                 $this->notify($this->module_info->resource_notify_mail, Context::getLang('resource_modify_notify_title'), $message);
             }
 
@@ -96,7 +96,7 @@
             if($this->module_info->resource_notify_mail) {
                 $message = '';
                 foreach($args as $key => $val) $message .= $key." : ".$val."<br/>\r\n";
-                $message. = "URL : ".getFullSiteUrl($site_module_info->domain, '', 'mid', Context::get('mid'), 'package_srl', $args->package_srl);
+                $message.= "URL : ".getFullSiteUrl($site_module_info->domain, '', 'mid', Context::get('mid'), 'package_srl', $args->package_srl);
                 $this->notify($this->module_info->resource_notify_mail, Context::getLang('resource_delete_notify_title'), $message);
             }
 
@@ -161,7 +161,7 @@
             if($this->module_info->resource_notify_mail) {
                 $message = '';
                 foreach($args as $key => $val) $message .= $key." : ".$val."<br/>\r\n";
-                $message. = "URL : ".getFullSiteUrl($site_module_info->domain, '', 'mid', Context::get('mid'), 'package_srl', $args->package_srl);
+                $message.= "URL : ".getFullSiteUrl($site_module_info->domain, '', 'mid', Context::get('mid'), 'package_srl', $args->package_srl);
                 $this->notify($this->module_info->resource_notify_mail, Context::getLang('resource_attach_notify_title'), $message);
             }
 
