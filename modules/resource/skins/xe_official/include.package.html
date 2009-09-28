@@ -4,7 +4,8 @@
 
     <p class="description">{nl2br(htmlspecialchars($package->get('package_description')))}</p>
 
-    {@$rowspan=3}
+    {@$rowspan=2}
+    <!--@if($module_info->resource_use_path=='Y')-->{@$rowspan++}<!--@end-->
     <!--@if($package->get('homepage'))-->{@$rowspan++}<!--@end-->
     <!--@if($package->get('path'))-->{@$rowspan++}<!--@end-->
 
@@ -39,7 +40,7 @@
         <td colspan="4"><a href="{$package->get('homepage')}" onclick="window.open(this.href); return false;">{$package->get('homepage')}</a></td>
     </tr>
     <!--@end-->
-    <!--@if($package->get('path'))-->
+    <!--@if($package->get('path') && $this->module_info->resource_use_path=='Y')-->
     <tr>
         <th>{$lang->package_path}</th>
         <td colspan="4">{$package->get('path')}</td>

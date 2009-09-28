@@ -54,14 +54,19 @@
         <td class="date">{zdate($val->regdate, "Y-m-d H:i")}</td>
     </tr>
     <tr>
+        <!--@if($module_info->resource_use_path=='Y')-->
         <th scope="row">{$lang->package_path}</th>
-        <td colspan="2">{$val->path}</td>
-        <td colspan="3" class="right"><!--@if($val->homepage)--><a href="{$val->homepage}">{$val->homepage}</a><!--@else-->&nbsp;<!--@end--></td>
+        <td colspan="3">{$val->path}</td>
+        <td colspan="2" class="left"><!--@if($val->homepage)--><a href="{$val->homepage}">{$val->homepage}</a><!--@else-->&nbsp;<!--@end--></td>
+        <!--@else-->
+        <th scope="row">{$lang->homepage}</th>
+        <td colspan="5" class="left"><!--@if($val->homepage)--><a href="{$val->homepage}">{$val->homepage}</a><!--@else-->&nbsp;<!--@end--></td>
+        <!--@end-->
     </tr>
     <tr>
         <th scope="row" rowspan="2">{$lang->package_description}</th>
         <td colspan="3" rowspan="2">{nl2br($val->description)}</td>
-        <td colspan="2" class="right"><a href="#" class="member_{$val->member_srl}" onclick="return false;">{$val->nick_name}</a></td>
+        <td colspan="2" class="left"><a href="#" class="member_{$val->member_srl}" onclick="return false;">{$val->nick_name}</a></td>
     </tr>
     <tr>
         <td scope="row" colspan="2" class="center">

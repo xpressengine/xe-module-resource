@@ -40,10 +40,12 @@
         <th scope="row">{$lang->package_license}</th>
         <td>{$selected_package->license}</td>
     </tr>
+    <!--@if($module_info->resource_use_path=='Y')-->
     <tr>
         <th scope="row">{$lang->package_path}</th>
         <td colspan="3">{$selected_package->path}</td>
     </tr>
+    <!--@end-->
     <tr>
         <th scope="row">{$lang->package_homepage}</th>
         <td colspan="3"><!--@if($selected_package->homepage)--><a href="{$selected_package->homepage}">{$selected_package->homepage}</a><!--@else-->&nbsp;<!--@end--></td>

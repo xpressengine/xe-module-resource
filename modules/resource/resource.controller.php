@@ -16,7 +16,8 @@
             $logged_info = Context::get('logged_info');
             $site_module_info = Context::get('site_module_info');
 
-            $args = Context::gets('category_srl','title','path','license','homepage','description');
+            $args = Context::gets('category_srl','title','license','homepage','description');
+            if($this->module_info->resource_use_path=='Y') $args->path = Context::get('path');
             foreach($args as $key => $val) if(!trim($val)) return new Object(-1,'msg_invalid_request');
             if($args->homepage&&!preg_match('/:\/\//',$args->homepage)) $args->homepage = 'http://'.$args->homepage;
 
@@ -49,7 +50,8 @@
             $logged_info = Context::get('logged_info');
             $site_module_info = Context::get('site_module_info');
 
-            $args = Context::gets('package_srl', 'title','license','homepage','description','path');
+            $args = Context::gets('package_srl', 'title','license','homepage','description');
+            if($this->module_info->resource_use_path=='Y') $args->path = Context::get('path');
             foreach($args as $key => $val) if(!trim($val)) return new Object(-1,'msg_invalid_request');
             if($args->homepage&&!preg_match('/:\/\//',$args->homepage)) $args->homepage = 'http://'.$args->homepage;
 

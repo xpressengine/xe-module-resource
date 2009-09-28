@@ -65,6 +65,13 @@
         </td>
     </tr>
     <tr>
+        <th scope="row"><div>{$lang->resource_use_path}</div></th>
+        <td>
+            <input type="checkbox" name="resource_use_path" value="Y" <!--@if($module_info->resource_use_path=='Y')-->checked="checked"<!--@end--> />
+            <p>{$lang->about_resource_use_path}</p>
+        </td>
+    </tr>
+    <tr>
         <th scope="row"><div>{$lang->resource_notify_mail}</div></th>
         <td>
             <input type="text" name="resource_notify_mail" value="{htmlspecialchars($module_info->resource_notify_mail)}"  class="inputTypeText w400" />

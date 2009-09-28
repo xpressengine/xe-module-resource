@@ -48,6 +48,7 @@
                     <p class="description">{$lang->about_package_title}</p>
                 </td>
             </tr>
+            <!--@if($module_info->resource_use_path=='Y')-->
             <tr>
                 <th scope="row"><em>{$lang->package_path}<img src="./img/bu_must.gif" alt="{$required_field}" /></em></th>
                 <td>
@@ -55,6 +56,7 @@
                     <p class="description">{$lang->about_package_path}</p>
                 </td>
             </tr>
+            <!--@end-->
             <tr>
                 <th scope="row"><em>{$lang->package_license}<img src="./img/bu_must.gif" alt="{$required_field}" /></em></th>
                 <td>
