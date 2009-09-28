@@ -5,6 +5,7 @@
     <columns>
         <column name="license" var="license" notnull="notnull" />
         <column name="title" var="title" notnull="notnull" />
+        <column name="path" var="path" notnull="notnull" />
         <column name="homepage" var="homepage" notnull="notnull" />
         <column name="description" var="description" notnull="notnull" />
         <column name="last_update" default="curdate()" notnull="notnull" />

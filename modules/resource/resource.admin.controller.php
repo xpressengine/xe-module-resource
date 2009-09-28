@@ -37,7 +37,8 @@
 
             if(!$output->toBool()) return $output;
 
-            $this->setRedirectUrl(getUrl('','module','admin','act','dispResourceAdminInsert','module_srl',$output->get('module_srl')));
+            if(Context::get('module')=='admin') $this->setRedirectUrl(getUrl('','module','admin','act','dispResourceAdminInsert','module_srl',$output->get('module_srl')));
+            else $this->setRedirectUrl(getUrl('','mid',$args->mid, 'act','dispResourceAdminInsert'));
             $this->setMessage($msg_code);
         }
 

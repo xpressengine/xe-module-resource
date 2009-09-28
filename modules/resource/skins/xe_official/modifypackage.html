@@ -34,6 +34,13 @@
                 </td>
             </tr>
             <tr>
+                <th scope="row"><em>{$lang->package_path}<img src="./img/bu_must.gif" alt="{$required_field}"/></em></th>
+                <td>
+                    <p><input type="text" name="package_path" class="text_field" value="{htmlspecialchars($selected_package->path)}"/></p>
+                    <p class="description">{$lang->about_package_path}</p>
+                </td>
+            </tr>
+            <tr>
                 <th scope="row"><em>{$lang->package_homepage}<img src="./img/bu_must.gif" alt="{$required_field}" /></em></th>
                 <td>
                     <p><input type="text" name="package_homepage" class="text_field"  value="{htmlspecialchars($selected_package->homepage)}" /></p>

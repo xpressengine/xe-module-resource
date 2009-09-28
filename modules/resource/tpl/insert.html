@@ -65,6 +65,13 @@
         </td>
     </tr>
     <tr>
+        <th scope="row"><div>{$lang->resource_notify_mail}</div></th>
+        <td>
+            <input type="text" name="resource_notify_mail" value="{htmlspecialchars($module_info->resource_notify_mail)}"  class="inputTypeText w400" />
+            <p>{$lang->about_resource_notify_mail}</p>
+        </td>
+    </tr>
+    <tr>
         <th scope="row"><div>{$lang->description}</div></th>
         <td>
             <textarea name="description" class="inputTypeTextArea fullWidth">{htmlspecialchars($module_info->description)}</textarea>

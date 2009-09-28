@@ -11,6 +11,7 @@
         <param name="skin" target="skin" />
         <param name="browser_title" target="browser_title" />
         <param name="use_category" target="use_category" />
+        <param name="resource_notify_mail" target="resource_notify_mail" />
         <param name="description" target="description" />
         <param name="header_text" target="header_text" />
         <param name="footer_text" target="footer_text" />

@@ -20,6 +20,8 @@
             foreach($args as $key => $val) if(!trim($val)) return new Object(-1,'msg_invalid_request');
             if($args->homepage&&!preg_match('/:\/\//',$args->homepage)) $args->homepage = 'http://'.$args->homepage;
 
+            if($this->grant->manager) $args->status = 'accepted';
+
             $args->package_srl = getNextSequence();
             $args->module_srl = $this->module_srl;
             $args->member_srl = $logged_info->member_srl;
@@ -27,6 +29,13 @@
 
             $output = executeQuery('resource.insertPackage', $args);
             if(!$output->toBool()) return $output;
+
+            if($this->module_info->resource_notify_mail) {
+                $message = '';
+                foreach($args as $key => $val) $message .= $key." : ".$val."<br/>\r\n";
+                $message. = "URL : ".getFullSiteUrl($site_module_info->domain, '', 'mid', Context::get('mid'), 'act', 'dispResourceManage');
+                $this->notify($this->module_info->resource_notify_mail, Context::getLang('resource_new_notify_title'), $message);
+            }
 
             $this->setMessage('success_registed');
             $this->setRedirectUrl(getSiteUrl($site_module_info->domain, '', 'mid', Context::get('mid'),'act','dispResourcePackageList','package_srl',$args->package_srl));
@@ -40,7 +49,7 @@
             $logged_info = Context::get('logged_info');
             $site_module_info = Context::get('site_module_info');
 
-            $args = Context::gets('package_srl', 'title','license','homepage','description');
+            $args = Context::gets('package_srl', 'title','license','homepage','description','path');
             foreach($args as $key => $val) if(!trim($val)) return new Object(-1,'msg_invalid_request');
             if($args->homepage&&!preg_match('/:\/\//',$args->homepage)) $args->homepage = 'http://'.$args->homepage;
 
@@ -51,6 +60,13 @@
 
             $output = executeQuery('resource.modifyPackage', $args);
             if(!$output->toBool()) return $output;
+
+            if($this->module_info->resource_notify_mail) {
+                $message = '';
+                foreach($args as $key => $val) $message .= $key." : ".$val."<br/>\r\n";
+                $message. = "URL : ".getFullSiteUrl($site_module_info->domain, '', 'mid', Context::get('mid'), 'package_srl', $args->package_srl);
+                $this->notify($this->module_info->resource_notify_mail, Context::getLang('resource_modify_notify_title'), $message);
+            }
 
             $this->setMessage('success_updated');
             $this->setRedirectUrl(getSiteUrl($site_module_info->domain, '', 'mid', Context::get('mid'),'act','dispResourcePackage','package_srl',$args->package_srl));
@@ -76,6 +92,13 @@
             $args->member_srl = $logged_info->member_srl;
             $output = executeQuery('resource.deletePackage', $args);
             if(!$output->toBool()) return $output;
+
+            if($this->module_info->resource_notify_mail) {
+                $message = '';
+                foreach($args as $key => $val) $message .= $key." : ".$val."<br/>\r\n";
+                $message. = "URL : ".getFullSiteUrl($site_module_info->domain, '', 'mid', Context::get('mid'), 'package_srl', $args->package_srl);
+                $this->notify($this->module_info->resource_notify_mail, Context::getLang('resource_delete_notify_title'), $message);
+            }
 
 
             $this->setMessage('success_deleted');
@@ -135,6 +158,12 @@
             $doc_args->allow_comment = 'Y';
             $oDocumentController->insertDocument($doc_args);
 
+            if($this->module_info->resource_notify_mail) {
+                $message = '';
+                foreach($args as $key => $val) $message .= $key." : ".$val."<br/>\r\n";
+                $message. = "URL : ".getFullSiteUrl($site_module_info->domain, '', 'mid', Context::get('mid'), 'package_srl', $args->package_srl);
+                $this->notify($this->module_info->resource_notify_mail, Context::getLang('resource_attach_notify_title'), $message);
+            }
 
             $this->insertDependency($this->module_srl, $args->package_srl, $args->item_srl, trim(Context::get('dependency')));
         }
@@ -446,6 +475,15 @@
 
         function procResourceDeleteItem() {
             return $this->procResourceDeleteAttach();
+        }
+
+        function notify($email_address, $title, $message) {
+            $oMail = new Mail();
+            $oMail->setTitle($title);
+            $oMail->setContent($message);
+            $oMail->setSender('XE Resource Notifier',$email_address);
+            $oMail->setReceiptor( null, $email_address);
+            $oMail->send();
         }
 
     }

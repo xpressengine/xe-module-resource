@@ -32,7 +32,8 @@
                 <li class="date">
                     {zdate($val->item_regdate, "Y-m-d H:i")}
                     <!--@if($grant->manager)-->
-                    <a href="#" onclick="if(confirm('{$lang->confirm_delete}')) doDeleteItem({$val->package_srl},{$val->item_srl}); return false;">[{$lang->cmd_delete}]</a>
+                    [<a href="{getUrl('act','dispResourcePackage','package_srl',$val->package_srl)}">{$lang->cmd_modify}</a> | 
+                    <a href="#" onclick="if(confirm('{$lang->confirm_delete}')) doDeleteItem({$val->package_srl},{$val->item_srl}); return false;">{$lang->cmd_delete}</a>|
                     <!--@end-->
                 </li>
             </ul>

@@ -89,4 +89,12 @@
 
     $lang->package_description = '간단한 소개';
     $lang->about_package_description = '자료에 대한 간단한 소개를 입력해주세요.<br/>자료 목록에서 보여지는 소개입니다.<br/>300자 이내로 입력해주세요.';
+
+    $lang->resource_notify_mail = '메일 통보';
+    $lang->about_resource_notify_mail = '등록된 메일 주소로 자료의 등록/수정등에 대한 알림을 발송합니다';
+
+    $lang->resource_new_notify_title = '자료 등록 요청이 있습니다';
+    $lang->resource_modify_notify_title = '자료 정보 변경이 있습니다';
+    $lang->resource_delete_notify_title = '자료가 삭제되었습니다';
+    $lang->resource_attach_notify_title = '자료에 파일 첨부되었습니다';
 ?>
