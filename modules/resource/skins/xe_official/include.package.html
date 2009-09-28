@@ -40,7 +40,7 @@
         <td colspan="4"><a href="{$package->get('homepage')}" onclick="window.open(this.href); return false;">{$package->get('homepage')}</a></td>
     </tr>
     <!--@end-->
-    <!--@if($package->get('path') && $this->module_info->resource_use_path=='Y')-->
+    <!--@if($package->get('path') && $module_info->resource_use_path=='Y')-->
     <tr>
         <th>{$lang->package_path}</th>
         <td colspan="4">{$package->get('path')}</td>
