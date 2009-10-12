@@ -80,7 +80,7 @@
                 }
             } else {
                 $order_target = Context::get('order_target');
-                if(!in_array($order_target, array('newest', 'latest', 'popular'))) $order_target = 'newest';
+                if(!in_array($order_target, array('newest', 'download', 'popular'))) $order_target = 'newest';
                 Context::set('order_target', $order_target);
 
                 $order_type = Context::get('order_type');

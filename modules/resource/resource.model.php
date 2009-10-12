@@ -89,7 +89,7 @@
             $args->list_count = 20;
             $args->page = $page;
             $args->order_type = $order_type;
-            if($order_target == 'latest') $args->sort_index = 'package.last_update';
+            if($order_target == 'download') $args->sort_index = 'files.download_count';
             elseif($order_target == 'popular') $args->sort_index = 'package.voted';
             else {
                 $args->order_type = $args->order_type=='asc'?'desc':'asc';

@@ -5,6 +5,7 @@
     $lang->order_newest = "신규 등록";
     $lang->order_latest = "최근 업데이트";
     $lang->order_popular = "인기";
+    $lang->order_download = "다운로드";
     $lang->package_status = '등록 상태';
 
     $lang->download = '다운로드';

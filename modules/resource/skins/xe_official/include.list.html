@@ -5,12 +5,12 @@
             {@$_order_type = 'desc'}
         <!--@end-->
         <li <!--@if($order_target=='newest')-->class="arrow"<!--@end-->><a href="{getUrl('order_target','newest','order_type',$_order_type)}">{$lang->order_newest}</a></li>
-        <!--@if($order_target=='latest')-->
+        <!--@if($order_target=='download')-->
             <!--@if($order_type == 'desc')-->{@$_order_type = 'asc'}<!--@else-->{@$_order_type = 'desc'}<!--@end-->
         <!--@else-->
             {@$_order_type = 'desc'}
         <!--@end-->
-        <li <!--@if($order_target=='latest')-->class="arrow"<!--@end-->><a href="{getUrl('order_target','latest','order_type',$_order_type)}">{$lang->order_latest}</a></li>
+        <li <!--@if($order_target=='download')-->class="arrow"<!--@end-->><a href="{getUrl('order_target','download','order_type',$_order_type)}">{$lang->order_download}</a></li>
         <!--@if($order_target=='popular')-->
             <!--@if($order_type == 'desc')-->{@$_order_type = 'asc'}<!--@else-->{@$_order_type = 'desc'}<!--@end-->
         <!--@else-->
