@@ -133,15 +133,15 @@ table td.thumbnail img { border:1px solid #ccc; padding:2px; overflow:hidden; *z
 table td.title { height:18px; padding:10px 0 0 0;}
 table td.title h3 { padding:0; margin:0; }
 table td.title a {text-decoration:none; color:#000; }
-table td.description { padding:5px 0 0 5px; color:#777; height:54px; white-space:normal; overflow:hidden; }
+table td.description { padding:5px 0 0 0; color:#777; height:44px; white-space:normal; overflow:hidden; }
 table td.info { height:18px; }
 table td.info ul { list-style:none; padding:0; margin:0; }
 table td.info ul li { float:left; margin-right:20px; white-space:nowrap; }
 table td.info ul li.category a { text-decoration:none; color:#888; font-weight:bold; }
 table td.info ul li.voted { color:#666; font-family:tahoma; font-size:10px;}
 table td.info ul li.downloaded { background:url(../img/iconFile.gif) no-repeat left 2px; padding-left:16px; color:#666; font-family:tahoma; font-size:10px;}
-table td.info ul li.date { color:#666; font-family:tahoma; font-size:10px;}
-table td.info ul li.date a { text-decoration:none; color:#666; }
+table td.info ul li.info { color:#aaa; font-family:tahoma; font-size:11px;}
+table td.info ul li.info a { text-decoration:none; color:#aaa; }
 table td.info ul li.author  a { text-decoration:none; color:#444; }
 
 .text_field {width:300px; height:15px;padding-top:1px;border:1px solid #b6ad9b; font-size:12px;} 

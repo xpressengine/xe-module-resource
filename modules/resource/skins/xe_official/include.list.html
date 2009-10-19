@@ -33,9 +33,6 @@
         </td>
     </tr>
     <tr>
-        <td class="description">{cut_str(htmlspecialchars($val->package_description),200)}</td>
-    </tr>
-    <tr>
         <td class="info">
             <ul>
                 <!--@if($val->category_srl)--><li class="category"><a href="{getUrl('category_srl', $val->category_srl)}">{$categories[$val->category_srl]->title}</a></li><!--@end-->
@@ -44,8 +41,18 @@
                     /{number_format($val->package_voter)}
                 </li>
                 <li class="author"><a href="#" onclick="return false;" class="member_{$val->member_srl}">{$val->nick_name}</a></li>
-                <li class="date">
-                    {zdate($val->item_regdate, "Y-m-d H:i")}
+            </li>
+        </td>
+    </tr>
+    <tr>
+        <td class="description">{cut_str(htmlspecialchars($val->package_description),200)}</td>
+    </tr>
+    <tr>
+        <td class="info">
+            <ul>
+                <li class="info">
+                    {$lang->package_update} {zdate($val->item_regdate, "Y-m-d H:i")}
+                    / {$lang->package_downloaded_count} : {number_format($val->package_downloaded)}
                     <!--@if($grant->manager)-->
                     [<a href="{getUrl('act','dispResourcePackage','package_srl',$val->package_srl)}">{$lang->cmd_modify}</a> | 
                     <a href="#" onclick="if(confirm('{$lang->confirm_delete}')) doDeleteItem({$val->package_srl},{$val->item_srl}); return false;">{$lang->cmd_delete}</a>|
