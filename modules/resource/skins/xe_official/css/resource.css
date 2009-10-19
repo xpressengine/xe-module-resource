@@ -40,6 +40,7 @@
 .resourceContent .packageInfo p.description { color:#444; background-color:#f8f8f8; margin:10px 0; padding:10px; }
 .resourceContent .packageInfo table.packageView { width:100%; margin-bottom:20px; border-collapse:collapse;  border-top:1px dotted #bbb; border-bottom:1px dotted #bbb;  table-layout:fixed; position:relative;}
 .resourceContent .packageInfo table.packageView.noTopLine { border-top:none; }
+.resourceContent .packageInfo table.packageView tr td.star { font-size:10px; letter-spacing:-1px;}
 .resourceContent .packageInfo table.packageView tr td.thumbnail { vertical-align:top; text-align:right; }
 .resourceContent .packageInfo table.packageView tr td.thumbnail img { border:1px solid #ccc !important; padding:2px; }
 .resourceContent .packageInfo table.packageView tr th,

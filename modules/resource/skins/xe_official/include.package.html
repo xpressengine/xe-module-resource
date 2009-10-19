@@ -20,9 +20,9 @@
     <tr>
         <th>{$lang->package_category}</th>
         <td colspan="2"><a href="{getUrl('package_srl','','category_srl', $package->get('category_srl'))}">{$categories[$package->get('category_srl')]->title}</a></td>
-        <td class="right">
+        <td class="star">
             <!--@for($i=0;$i<5;$i++)--><!--@if($i<$package->get('star'))--><img src="./img/starOn.gif" alt="" /><!--@else--><img src="./img/starOff.gif" alt="" /><!--@end--><!--@end-->
-            /{number_format($package->get('package_voter'))}
+            {sprintf("%0.1f",$package->get('package_voted')/$package->get('package_voter')*2)} /{number_format($package->get('package_voter'))}
         </td>
         <td class="right thumbnail" rowspan="{$rowspan}"><img src="{$package->get('item_screenshot_url')}" width="100" height="100" alt="" /></td>
     </tr>
@@ -92,10 +92,9 @@
     <tr>
         <th>{$lang->package_update}</th>
         <td colspan="2">{zdate($package->get('item_regdate'), "Y-m-d H:i")}</td>
-        <th>{$lang->resource_estimate}</th>
-        <td>
+        <td class="star" colspan="2">
             <!--@for($i=0;$i<5;$i++)--><!--@if($i<$package->get('item_star'))--><img src="./img/starOn.gif" alt="" /><!--@else--><img src="./img/starOff.gif" alt="" /><!--@end--><!--@end-->
-            /{number_format($package->get('item_voter'))}
+            {sprintf("%0.1f",$package->get('item_voted')/$package->get('item_voter')*2)} /{number_format($package->get('item_voter'))}
         </td>
     </tr>
     <tr class="division">

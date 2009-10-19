@@ -38,7 +38,7 @@
                 <!--@if($val->category_srl)--><li class="category"><a href="{getUrl('category_srl', $val->category_srl)}">{$categories[$val->category_srl]->title}</a></li><!--@end-->
                 <li class="voted">
                     <!--@for($i=0;$i<5;$i++)--><!--@if($i<$val->package_star)--><img src="./img/starOn.gif" alt="" /><!--@else--><img src="./img/starOff.gif" alt="" /><!--@end--><!--@end-->
-                    /{number_format($val->package_voter)}
+                    {sprintf("%0.1f",$val->package_voted/$val->package_voter*2)} /{number_format($val->package_voter)}
                 </li>
                 <li class="author"><a href="#" onclick="return false;" class="member_{$val->member_srl}">{$val->nick_name}</a></li>
             </li>
