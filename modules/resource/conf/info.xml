@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module version="0.2">
     <title xml:lang="ko">자료실</title>
+	<title xml:lang="vi">Dữ liệu</title>
     <description xml:lang="ko">자료실 운영을 위한 모듈</description>
+	<description xml:lang="vi">Module chia sẻ dữ liệu</description>
     <version>0.9</version>
     <date>2009-09-14</date>
     <category>service</category>
 
     <author email_address="skklove@gmail.com" link="http://resources.xpressengine.net">
         <name xml:lang="ko">zero</name>
+		<name xml:lang="vi">zero</name>
     </author>
 </module>
