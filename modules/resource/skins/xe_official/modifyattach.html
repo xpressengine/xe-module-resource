@@ -84,7 +84,7 @@
                     <p>
                         <select name="sel_dependency" size="10" class="select_field" id="sel_dependency">
                         <!--@foreach($dependency as $key => $val)-->
-                        <option value="{$val->dependency_item_srl}">[{$categories[$val->category_srl]->title}] {$val->title} (ver. {$val->version})</option>
+                        <option value="{$val->item_srl}">[{$categories[$val->category_srl]->title}] {$val->title} (ver. {$val->version})</option>
                         <!--@end-->
                         </select>
                     </p>
