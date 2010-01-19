@@ -69,7 +69,6 @@
             $oFileController = &getController('file');
 
             $site_module_info = Context::get('site_module_info');
-
             if(!$this->module_srl) return new Object(-1,'msg_invalid_request');
             $package_srl = Context::get('package_srl');
             if(!$package_srl) return new Object(-1,'msg_invalid_request');

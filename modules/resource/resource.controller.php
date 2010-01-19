@@ -231,7 +231,8 @@
             if(!$output || !$output->toBool()) return $output;
             $args->screenshot_url = $output->get('uploaded_filename');
             if($args->screenshot_url) FileHandler::createImageFile($args->screenshot_url, $args->screenshot_url, 100,100,'jpg');
-
+            
+            $args->module_srl = $this->module_srl;
             $output = executeQuery('resource.updateItemFile', $args);
             if(!$output->toBool()) return $output;
 

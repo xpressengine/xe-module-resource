@@ -32,7 +32,7 @@
             $args->module_srl = $module_srl;
             $args->package_srl = $package_srl;
 
-            if(is_null($member_srl)) $args->member_srl = $member_srl;
+            if(!is_null($member_srl)) $args->member_srl = $member_srl;
             $output = executeQuery('resource.getPackage', $args);
             return $output->data;
         }
