@@ -4,7 +4,7 @@
 	<title xml:lang="vi">Dữ liệu</title>
     <description xml:lang="ko">자료실 운영을 위한 모듈</description>
 	<description xml:lang="vi">Module chia sẻ dữ liệu</description>
-    <version>0.9</version>
+    <version>0.9.1</version>
     <date>2009-09-14</date>
     <category>service</category>
 
