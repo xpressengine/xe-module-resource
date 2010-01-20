@@ -39,6 +39,8 @@
             $output = executeQueryArray('resource.getResourceList', $args);
             ModuleModel::syncModuleToSite($output->data);
 
+            Context::addJsFile($this->module_path.'tpl/js/resource_admin.js');
+
             Context::set('total_count', $output->total_count);
             Context::set('total_page', $output->total_page);
             Context::set('page', $output->page);
