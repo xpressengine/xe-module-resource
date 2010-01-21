@@ -133,7 +133,7 @@
         }
 
         function getCategoryPacakgeCount($module_srl) {
-            $count_args->module_srl = $this->module_srl;
+            $count_args->module_srl = $module_srl;
             $output = executeQueryArray('resource.getCategoryPackageCount', $count_args);
             if(!$output->data) return array();
             foreach($output->data as $key => $val) {
