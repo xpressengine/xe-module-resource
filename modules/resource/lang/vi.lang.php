@@ -5,6 +5,7 @@
     $lang->order_newest = "Bài mới gửi";
     $lang->order_latest = "Mới cập nhật";
     $lang->order_popular = "Top";
+	$lang->order_download = "Tải về";
     $lang->package_status = 'Trạng thái';
 
     $lang->download = 'Download';
