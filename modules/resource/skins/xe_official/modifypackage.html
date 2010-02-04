@@ -20,6 +20,36 @@
                     <p class="description">{$lang->about_package_title}</p>
                 </td>
             </tr>
+            <!--@if($grant->manager)-->
+            <tr>
+                <th scope="row"><em>{$lang->package_category}<img src="./img/bu_must.gif" alt="{$required_field}" /></em></th>
+                <td>
+                    <p>
+                        <select name="package_category">
+                        {@ $_curDepth = 0; }
+                        <!--@foreach($categories as $key => $val)-->
+                            <!--@if($val->depth<$_curDepth)-->
+                            </optgroup>
+                            <!--@end-->
+                            <!--@if($val->depth<1)-->
+                            <!--@if($val->child_count>0)-->
+                            <optgroup label="{$val->title}">
+                            <!--@else-->
+                            <option value="{$val->category_srl}" <!--@if($selected_package->category_srl == $val->category_srl)-->selected="selected"<!--@end-->>{$val->title}</option>
+                            <!--@end-->
+                            <!--@end-->
+                            <!--@if($val->depth>0)-->
+                                <option value="{$val->category_srl}" <!--@if($selected_package->category_srl == $val->category_srl)-->selected="selected"<!--@end-->>{$val->title}</option>
+                            <!--@end-->
+                            {@ $_curDepth = $val->depth}
+                        <!--@end-->
+                        <!--@for($i=0;$i<$_curDepth;$i++)--></optgroup><!--@end-->
+                        </select>
+                    </p>
+                    <p class="description">{$lang->about_package_title}</p>
+                </td>
+            </tr>
+            <!--@end-->
             <tr>
                 <th scope="row"><em>{$lang->package_license}<img src="./img/bu_must.gif" alt="{$required_field}"/></em></th>
                 <td>

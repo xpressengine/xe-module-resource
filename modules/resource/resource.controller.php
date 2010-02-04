@@ -55,10 +55,13 @@
             foreach($args as $key => $val) if(!trim($val)) return new Object(-1,'msg_invalid_request');
             if($args->homepage&&!preg_match('/:\/\//',$args->homepage)) $args->homepage = 'http://'.$args->homepage;
 
-            $selected_package = $oResourceModel->getPackage($this->module_srl, $args->package_srl, $logged_info->member_srl);
+            $selected_package = $oResourceModel->getPackage($this->module_srl, $args->package_srl);
             if(!$selected_package->package_srl) return new Object(-1,'msg_invalid_request');
 
             if(!$this->grant->manager && $logged_info->member_srl != $selected_package->member_srl) return new Object(-1,'msg_not_permitted');
+
+            $category_srl = Context::get('package_category');
+            if($category_srl && $this->grant->manager) $args->category_srl = $category_srl;
 
             $output = executeQuery('resource.modifyPackage', $args);
             if(!$output->toBool()) return $output;

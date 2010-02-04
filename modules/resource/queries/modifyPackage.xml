@@ -5,6 +5,7 @@
     <columns>
         <column name="license" var="license" notnull="notnull" />
         <column name="title" var="title" notnull="notnull" />
+        <column name="category_srl" var="category_srl" />
         <column name="path" var="path" notnull="notnull" />
         <column name="homepage" var="homepage" notnull="notnull" />
         <column name="description" var="description" notnull="notnull" />
