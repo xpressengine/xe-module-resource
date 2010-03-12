@@ -87,7 +87,7 @@
 
             $package_srl = Context::get('package_srl');
             if(!$package_srl) return new Object(-1,'msg_invalid_request');
-            $selected_package = $oResourceModel->getPackage($this->module_srl, $package_srl, $logged_info->member_srl);
+            $selected_package = $oResourceModel->getPackage($this->module_srl, $package_srl);
             if(!$selected_package->package_srl) return new Object(-1,'msg_invalid_request');
 
             if(!$this->grant->manager && $logged_info->member_srl != $selected_package->member_srl) return new Object(-1,'msg_not_permitted');
@@ -120,8 +120,12 @@
             foreach($args as $key => $val) if(!trim($val)) return new Object(-1,'msg_invalid_request');
             if(!in_array($args->status, array('accepted','reservation','waiting'))) return new Object(-1,'msg_invalid_request');
 
-            $selected_package = $oResourceModel->getPackage($this->module_srl, $args->package_srl, $logged_info->member_srl);
+            $logged_info = Context::get('logged_info');
+
+            $selected_package = $oResourceModel->getPackage($this->module_srl, $args->package_srl);
             if(!$selected_package->package_srl) return new Object(-1,'msg_invalid_request');
+
+            if(!$this->grant->manager && $logged_info->member_srl != $selected_package->member_srl) return new Object(-1,'msg_not_permitted');
 
             $output = executeQuery('resource.updatePackageStatus', $args);
             if(!$output->toBool()) return $output;
@@ -141,7 +145,7 @@
 
             $logged_info = Context::get('logged_info');
 
-            $selected_package = $oResourceModel->getPackage($this->module_srl, $args->package_srl, $logged_info->member_srl);
+            $selected_package = $oResourceModel->getPackage($this->module_srl, $args->package_srl);
             if(!$selected_package) return new Object(-1,'msg_invalid_request');
 
             if(!$this->grant->manager && $logged_info->member_srl != $selected_package->member_srl) return new Object(-1,'msg_not_permitted');
@@ -217,7 +221,7 @@
 
             $logged_info = Context::get('logged_info');
 
-            $package = $oResourceModel->getPackage($this->module_srl, $args->package_srl, $logged_info->member_srl);
+            $package = $oResourceModel->getPackage($this->module_srl, $args->package_srl);
             if(!$package) return  new Object(-1,'msg_invalid_request');
 
             if(!$this->grant->manager && $logged_info->member_srl != $package->member_srl) return new Object(-1,'msg_not_permitted');
@@ -300,7 +304,7 @@
 
             $logged_info = Context::get('logged_info');
 
-            $package = $oResourceModel->getPackage($this->module_srl, $args->package_srl, $logged_info->member_srl);
+            $package = $oResourceModel->getPackage($this->module_srl, $args->package_srl);
             if(!$package) return  new Object(-1,'msg_invalid_request');
 
             if(!$this->grant->manager && $logged_info->member_srl != $package->member_srl) return new Object(-1,'msg_not_permitted');
