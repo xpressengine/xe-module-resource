@@ -3,10 +3,12 @@
     <grants>
         <grant name="request" default="member">
             <title xml:lang="ko">신청</title>
+            <title xml:lang="zh-TW">請求</title>
 			<title xml:lang="vi">Yêu cầu</title>
         </grant>
         <grant name="write_comment" default="member">
             <title xml:lang="ko">평가</title>
+            <title xml:lang="zh-TW">評價</title>
 			<title xml:lang="vi">Đánh giá</title>
         </grant>
     </grants>
