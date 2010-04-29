@@ -15,5 +15,6 @@
     </conditions>
     <navigation>
         <index var="sort_index" default="list_order" order="asc" />
+		<list_count var="list_count" default="999999" />
     </navigation>
 </query>
