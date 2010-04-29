@@ -74,5 +74,6 @@
         <action name="procResourceAdminInsert" type="controller" standalone="true" />
         <action name="procResourceAdminDelete" type="controller" standalone="true" />
         <action name="procResourceAdminDeletePackage" type="controller" standalone="true" />
+		<action name="getResourceItems" type="api" standalone="true" />
     </actions>
 </module>
