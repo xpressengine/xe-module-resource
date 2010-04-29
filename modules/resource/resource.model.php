@@ -49,15 +49,11 @@
             return $item;
         }
 
-        function getItems($module_srl, $package_srl, $list_count = null) {
+        function getItems($module_srl, $package_srl) {
             $oFileModel = &getModel('file');
 
             $args->module_srl = $module_srl;
             $args->package_srl = $package_srl;
-			if($list_count)
-			{
-				$args->list_count = $list_count;
-			}
 
             $output = executeQueryArray('resource.getItems', $args);
             if(!$output->data) return array();

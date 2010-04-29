@@ -8,8 +8,14 @@ class resourceAPI extends resource {
 		if(!$package_srl || !$module_srl) return;
 
 		$oModel =& getModel('resource');
-		$items = $oModel->getItems($module_srl, $package_srl, $list_count);
-		$this->add('items', $items);
+        $args->module_srl = $module_srl;
+        $args->package_srl = $package_srl;
+        if($list_count)
+        {
+            $args->list_count = $list_count;
+        }
+        $output = executeQueryArray('resource.getItemsWithDocument', $args);
+		$this->add('items', $output->data);
 	}
 }
 ?>
