@@ -38,7 +38,7 @@
                 $args->document_srl = $document_srl;
                 $output = executeQuery('resource.getItemByDocumentSrl',$args);
                 if($output->data) {
-                    $package_srl = $item->package_srl;
+                    $package_srl = $output->data->package_srl;
                     Context::set('document_srl', '', true);
                 }
             }
