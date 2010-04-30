@@ -8,8 +8,8 @@
     <description xml:lang="zh-TW">資源管理模組</description>
 	<description xml:lang="vi">Module chia sẻ dữ liệu</description>
 	<description xml:lang="en">Module for download service</description>
-    <version>0.9.1</version>
-    <date>2009-09-14</date>
+    <version>1.0</version>
+    <date>2010-04-30</date>
     <category>service</category>
 
     <author email_address="developers@xpressengine.com" link="http://resources.xpressengine.net">
