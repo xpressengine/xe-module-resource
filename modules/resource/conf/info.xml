@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="0.2">
+    <title xml:lang="ko">자료실</title>
+    <title xml:lang="zh-TW">資源</title>
+	<title xml:lang="vi">Dữ liệu</title>
+	<title xml:lang="en">Download</title>
+    <description xml:lang="ko">자료실 운영을 위한 모듈</description>
+    <description xml:lang="zh-TW">資源管理模組</description>
+	<description xml:lang="vi">Module chia sẻ dữ liệu</description>
+	<description xml:lang="en">Module for download service</description>
+    <version>1.0</version>
+    <date>2010-04-30</date>
+    <category>service</category>
+
+    <author email_address="developers@xpressengine.com" link="http://resources.xpressengine.net">
+        <name xml:lang="ko">XE</name>
+        <name xml:lang="zh-TW">XE</name>
+		<name xml:lang="vi">XE</name>
+		<name xml:lang="en">XE</name>
+    </author>
+</module>

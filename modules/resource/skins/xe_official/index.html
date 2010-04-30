@@ -1,0 +1,15 @@
+<!--#include("include.header.html")-->
+
+<!--#include("include.leftbox.html")-->
+
+<div class="resourceContent">
+    <!--@if($items)-->
+        <!--#include("include.itemlist.html")-->
+    <!--@elseif(!$package)-->
+        <!--#include("include.list.html")-->
+    <!--@else-->
+        <!--#include("include.package.html")-->
+    <!--@end-->
+</div>
+
+<!--#include("include.footer.html")-->
