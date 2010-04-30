@@ -12,7 +12,7 @@
     </columns>
     <conditions>
         <condition operation="equal" column="items.module_srl" var="module_srl" filter="number" notnull="notnull" />
-        <condition operation="equal" column="items.package_srl" var="package_srl" filter="number" notnull="notnull" pipe="and" />
+        <condition operation="in" column="items.package_srl" var="package_srl" filter="number" notnull="notnull" pipe="and" />
         <condition operation="equal" column="files.file_srl" default="items.file_srl" filter="number" notnull="notnull" pipe="and" />
         <condition operation="equal" column="items.document_srl" default="documents.document_srl" notnull="notnull" pipe="and" />
     </conditions>
