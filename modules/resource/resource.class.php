@@ -35,17 +35,18 @@
         }
 
 		function moduleUninstall() {
+            $oModuleModel = &getModel('module');
+			$oModuleController =& getController('module');
+            if($oModuleModel->getTrigger('file.downloadFile', 'resource', 'controller', 'triggerUpdateDownloadedCount', 'after')) 
+                $oModuleController->deleteTrigger('file.downloadFile', 'resource', 'controller', 'triggerUpdateDownloadedCount', 'after');
 			$output = executeQueryArray("resource.getAllResources");
 			if(!$output->data) return new Object();
+
 			set_time_limit(0);
-			$oModuleController =& getController('module');
 			foreach($output->data as $resource)
 			{
 				$oModuleController->deleteModule($resource->module_srl);
 			}
-            $oModuleModel = &getModel('module');
-            if(!$oModuleModel->getTrigger('file.downloadFile', 'resource', 'controller', 'triggerUpdateDownloadedCount', 'after')) 
-                $oModuleController->deleteTrigger('file.downloadFile', 'resource', 'controller', 'triggerUpdateDownloadedCount', 'after');
 			
 			return new Object();	
 		}
