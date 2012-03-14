@@ -1,7 +1,7 @@
 <?php
     /**
      * @class  resourceView
-     * @author zero (skklove@gmail.com)
+     * @author NHN (developers@xpressengine.com)
      * @brief  resource view class
      **/
 
@@ -18,7 +18,6 @@
             }
             $this->setTemplatePath($template_path);
             $this->setTemplateFile(strtolower(str_replace('dispResource','',$this->act)));
-
             Context::addJsFile($this->module_path.'tpl/js/resource.js');
         }
 
@@ -47,7 +46,8 @@
                 $args->module_srl = $this->module_srl;
                 $args->package_srl = $package_srl;
                 $output = executeQuery('resource.getLatestItem', $args);
-                Context::set('latest_package', $latest_package = $output->data);
+				$latest_package = $output->data;
+                Context::set('latest_package', $latest_package);
             }
 
             if($latest_package) {
@@ -88,11 +88,12 @@
                 Context::set('order_type', $order_type);
 
                 $category_srl = Context::get('category_srl');
+				if(!$category_srl) $category_srl = Context::get('category');
                 $childs = Context::get('childs');
 
                 $search_keyword = Context::get('search_keyword');
 
-                $output = $oResourceModel->getLatestItemList($this->module_srl, $category_srl, $childs, null, $search_keyword, $order_target, $order_type, $page);
+                $output = $oResourceModel->getLatestItemList($this->module_srl, $category_srl, $childs, null, $search_keyword, $order_target, $order_type, $page, $this->module_info->list_count);
                 Context::set('item_list', $output->data);
                 Context::set('total_count', $output->total_count);
                 Context::set('total_page', $output->total_page);
@@ -240,7 +241,7 @@
             $search_keyword = Context::get('search_keyword');
             $page = Context::get('page');
 
-            $output = $oResourceModel->getLatestItemList($this->module_srl, $category_srl, null, null, $search_keyword, null, null, $page);
+            $output = $oResourceModel->getLatestItemList($this->module_srl, $category_srl, null, null, $search_keyword, null, null, $page, $this->module_info->list_count);
             Context::set('item_list', $output->data);
             Context::set('total_count', $output->total_count);
             Context::set('total_page', $output->total_page);

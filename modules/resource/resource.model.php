@@ -1,7 +1,7 @@
 <?php
     /**
      * @class  resourceModel
-     * @author zero (skklove@gmail.com)
+     * @author NHN (developers@xpressengine.com)
      * @brief  resource model class
      **/
 
@@ -66,7 +66,7 @@
             return $output->data;
         }
 
-        function getLatestItemList($module_srl, $category_srl = null, $childs = null, $member_srl = null, $search_keyword = null, $order_target = 'package.update_order', $order_type = 'asc', $page = 1) {
+        function getLatestItemList($module_srl, $category_srl = null, $childs = null, $member_srl = null, $search_keyword = null, $order_target = 'package.update_order', $order_type = 'asc', $page = 1, $list_count = null) {
             $oFileModel = &getModel('file');
 
             $args->module_srl = $module_srl;
@@ -85,9 +85,11 @@
                 if(count($t)) $args->search_keyword = implode('%', $t);
             }
 
-            $args->list_count = 20;
+			if(!$list_count) $list_count = 20;
+            $args->list_count = $list_count;
             $args->page = $page;
             $args->order_type = $order_type;
+            $args->page_count = 10;
             if($order_target == 'download') $args->sort_index = 'package.downloaded';
             elseif($order_target == 'popular') $args->sort_index = 'package.voted';
             else {

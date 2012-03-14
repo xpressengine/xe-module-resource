@@ -1,7 +1,7 @@
 <?php
     /**
      * @class  resourceController
-     * @author zero (skklove@gmail.com)
+     * @author NHN (developers@xpressengine.com)
      * @brief  resource controller class
      **/
 
@@ -21,12 +21,16 @@
             foreach($args as $key => $val) if(!trim($val)) return new Object(-1,'msg_invalid_request');
             if($args->homepage&&!preg_match('/:\/\//',$args->homepage)) $args->homepage = 'http://'.$args->homepage;
 
-            if($this->grant->manager) $args->status = 'accepted';
-
             $args->package_srl = getNextSequence();
             $args->module_srl = $this->module_srl;
             $args->member_srl = $logged_info->member_srl;
             $args->list_order = -1*$args->package_srl;
+
+            if($this->grant->manager) $args->status = 'accepted';
+            else {
+                $output = executeQuery('resource.isAcceptedOnce', $args);
+                if($output->data->count>0) $args->status = 'accepted';
+            }
 
             $output = executeQuery('resource.insertPackage', $args);
             if(!$output->toBool()) return $output;
@@ -140,7 +144,7 @@
             $oResourceModel = &getModel('resource');
             $oDocumentController = &getController('document');
 
-            $args = Context::gets('package_srl','item_srl','file','version','description','screenshot','document_srl');
+            $args = Context::gets('package_srl','item_srl','version','description','document_srl');
             foreach($args as $key => $val) if(!trim($val)) return new Object(-1,'msg_invalid_request');
 
             $logged_info = Context::get('logged_info');
@@ -171,6 +175,7 @@
             $doc_args->list_order = $doc_args->document_srl*-1;
             $doc_args->tags = Context::get('tag');
             $doc_args->allow_comment = 'Y';
+			$doc_args->commentStatus = 'ALLOW';
             $oDocumentController->insertDocument($doc_args);
 
             if($this->module_info->resource_notify_mail) {
@@ -213,9 +218,10 @@
             $oResourceModel = &getModel('resource');
             $oFileController = &getController('file');
 
-            $args = Context::gets('package_srl','item_srl','attach_file','attach_screenshot');
+            $args = Context::gets('package_srl','item_srl','attach_file','attach_screenshot', 'latest_item_srl');
             if(!$this->module_srl) return  new Object(-1,'msg_invalid_request');
             if(!$args->package_srl || !$args->item_srl) return  new Object(-1,'msg_invalid_request');
+
             if(!is_uploaded_file($args->attach_file['tmp_name']))  new Object(-1,'msg_invalid_request');
             if(!is_uploaded_file($args->attach_screenshot['tmp_name']))  new Object(-1,'msg_invalid_request');
 
@@ -231,7 +237,21 @@
             if(!$item) return  new Object(-1,'msg_invalid_request');
 
             $output = $oFileController->insertFile($args->attach_file, $this->module_srl, $args->item_srl);
-            if(!$output || !$output->toBool()) return $output;
+            if(!$output || !$output->toBool()) 
+			{
+				$pargs->module_srl = $this->module_srl;
+				$pargs->package_srl = $args->package_srl;
+				$pargs->update_order = $args->latest_item_srl * -1;
+				$pargs->latest_item_srl = $args->latest_item_srl;
+				$poutput = executeQuery('resource.updatePackage', $pargs);
+
+				$dargs->module_srl = $this->module_srl;
+				$dargs->package_srl = $args->package_srl;
+				$dargs->item_srl = $args->item_srl;
+				$doutput = executeQuery('resource.deleteItems', $dargs);
+
+				return $output;
+			}
             $args->file_srl = $output->get('file_srl');
 
             $output = $oFileController->insertFile($args->attach_screenshot, $this->module_srl, $args->item_srl);
@@ -289,6 +309,7 @@
             $doc_args->content = $args->description;
             $doc_args->tags = Context::get('tag');
             $doc_args->title = sprintf('%s ver. %s', $package->title, $args->version);
+			$doc_args->commentStatus = 'ALLOW';
             $oDocumentController->updateDocument($oDocumentModel->getDocument($item->document_srl), $doc_args);
 
             $this->insertDependency($this->module_srl, $args->package_srl, $args->item_srl, trim(Context::get('dependency')));

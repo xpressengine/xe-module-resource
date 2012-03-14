@@ -131,8 +131,7 @@ table.packageList {width:100%; height:100px; table-layout:fixed; border-bottom:1
 table td { vertical-align:top; }
 table td.thumbnail { text-align:center; padding:10px 0; }
 table td.thumbnail img { border:1px solid #ccc; padding:2px; overflow:hidden; *zoom:1; }
-table td.title { height:18px; padding:10px 0 0 0;}
-table td.title h3 { padding:0; margin:0; }
+table td.title h3 { padding:0; margin:10px 0 0 0; }
 table td.title a {text-decoration:none; color:#000; }
 table td.description { padding:5px 0 0 0; color:#777; height:44px; white-space:normal; overflow:hidden; }
 table td.info { height:18px; }
@@ -169,3 +168,5 @@ form.statusSelect { margin-bottom:10px; text-align:right; }
 .pagination a.nextEnd{ font-weight:normal !important; margin:0 !important; white-space:nowrap; text-decoration:none !important; border:1px solid #e7e7e7; background-image:url(../img/arrowPagination.gif); background-repeat:no-repeat;}
 .pagination a.prevEnd{ padding-left:14px; background-position:left center; }
 .pagination a.nextEnd{ padding-right:14px; background-position:right center; }
+
+.insertPackage { font-weight:bold; }

@@ -89,10 +89,11 @@
     <tr>
         <th scope="row">{$lang->regdate}</th>
         <td class="date">{zdate($val->regdate, "Y-m-d H:i")}</td>
-        <td class="right" colspan="2">
+        <td class="right">
             <a href="{getUrl('act','dispResourceModifyAttach','item_srl',$val->item_srl)}" class="button"><span>{$lang->cmd_modify}</span></a>
             <a href="#" onclick="if(confirm('{$lang->confirm_delete}')) doDeleteAttach({$val->package_srl},{$val->item_srl}); return false;" class="button"><span>{$lang->cmd_delete}</span></a>
         </td>
+		<td><a href="{getUrl('act','dispResourceModifyAttach','item_srl',$val->item_srl)}">{$lang->cmd_modify}</a></td>
     </tr>
     </table>
     <!--@end-->

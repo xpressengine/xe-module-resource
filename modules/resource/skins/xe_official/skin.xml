@@ -8,10 +8,10 @@
 	<description xml:lang="vi">Skin mặc định cho Module Dữ liệu.</description>
     <version>0.1</version>
     <date>2009-09-14</date>
-    <author email_address="skklove@gmail.com" link="http://zero.textyle.kr">
-        <name xml:lang="ko">zero</name>
-        <name xml:lang="zh-TW">zero</name>
-		<name xml:lang="vi">zero</name>
+    <author email_address="developers@xpressengine.com" link="http://xpressengine.com/">
+        <name xml:lang="ko">NHN</name>
+        <name xml:lang="zh-TW">NHN</name>
+		<name xml:lang="vi">NHN</name>
     </author>
     <license>GPL v2 or later</license>
     <colorset>

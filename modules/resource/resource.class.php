@@ -1,7 +1,7 @@
 <?php
     /**
      * @class  resource
-     * @author zero (skklove@gmail.com)
+     * @author NHN (developers@xpressengine.com)
      * @brief  resource high class
      **/
 
