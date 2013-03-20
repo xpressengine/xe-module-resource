@@ -1,0 +1,114 @@
+<!--#include("include.header.html")-->
+
+<div class="list">
+
+    <h3>{$lang->cmd_manage_file}</h3>
+    <p class="information">{$lang->about_manage_file}</p>
+
+    <table width="100%" cellspacing="0" cellpadding="0" class="view_type1">
+    <colgroup>
+    <col width="140" /><col /><col width="120" /><col />
+    </colgroup>
+    <tr>
+        <th scope="row">{$lang->package_title}</th>
+        <td colspan="3">{$selected_package->title}</td>
+    </tr>
+    <tr>
+        <th scope="row">{$lang->status}</th>
+        <td class="status {$selected_package->status}">
+            <!--@if($selected_package->status == 'accepted')-->
+                {$lang->package_accepted}
+            <!--@elseif($selected_package->status == 'reservation')-->
+                {$lang->package_reservation}
+            <!--@else-->
+                {$lang->package_waiting}
+            <!--@end-->
+        </td>
+        <th scope="row">{$lang->regdate}</th>
+        <td class="date">{zdate($selected_package->regdate, "Y-m-d H:i")}</td>
+    </tr>
+    <tr>
+        <th scope="row">{$lang->package_category}</th>
+        <td>{$categories[$selected_package->category_srl]->title}</td>
+        <th scope="row">{$lang->package_license}</th>
+        <td>{$selected_package->license}</td>
+    </tr>
+    <tr>
+        <th scope="row">{$lang->package_path}</th>
+        <td colspan="3">{$selected_package->path}</td>
+    </tr>
+    </table>
+
+    <form action="./" method="post" onsubmit="doCalDependency(this); return procFilter(this, attach);" enctype="multipart/form-data"> 
+    <input type="hidden" name="vid" value="{$vid}" />
+    <input type="hidden" name="mid" value="{$mid}" />
+    <input type="hidden" name="act" value="" />
+    <input type="hidden" name="package_srl" value="{$selected_package->package_srl}" />
+    <input type="hidden" name="item_srl" value="{$item_srl}" />
+    <input type="hidden" name="document_srl" value="{$document_srl}" />
+    <input type="hidden" name="attach_dependency" value="" />
+    <input type="hidden" name="attach_description" value="" />
+    <fieldset>
+            <table class="form">
+            <tr class="first_child">
+                <th scope="row"><em>{$lang->attach_file}<img src="./img/bu_must.gif" alt="{$required_field}" /></em></th>
+                <td>
+                    <p><input type="file" name="attach_file"/></p>
+                    <p class="description">{$lang->about_attach_file}</p>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><em>{$lang->attach_screenshot}<img src="./img/bu_must.gif" alt="{$required_field}" /></em></th>
+                <td>
+                    <p><input type="file" name="attach_screenshot"/></p>
+                    <p class="description">{$lang->about_attach_screenshot}</p>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><em>{$lang->attach_version}<img src="./img/bu_must.gif" alt="{$required_field}" /></em></th>
+                <td>
+                    <p><input type="text" name="attach_version" class="text_field"/></p>
+                    <p class="description">{$lang->about_attach_version}</p>
+                    <!--@if($latest_item)-->
+                    <p class="description bold">{$lang->latest_attach_version} : {$latest_item->item_version}</p>
+                    <!--@end-->
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><em>{$lang->attach_dependency}</em></th>
+                <td>
+                    <p><select name="sel_dependency" size="10" class="select_field" id="sel_dependency"></select></p>
+                    <p>
+                        <a href="#" onclick="doSearchDependency(); return false;" class="button"><span>{$lang->cmd_search}</span></a>
+                        <a href="#" onclick="doDeleteDependency(); return false;" class="button"><span>{$lang->cmd_delete}</span></a>
+                    </p>
+                    <p class="description">{$lang->about_attach_dependency}</p>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><em>{$lang->tag}</em></th>
+                <td>
+                    <p><input type="text" name="tag" class="text_field"/></p>
+                    <p class="description">{$lang->about_tag}</p>
+                </td>
+            </tr>
+            <tr class="last_child">
+                <th scope="row"><em>{$lang->attach_description}<img src="./img/bu_must.gif" alt="{$required_field}" /></em></th>
+                <td>
+                    <div class="editor">{$editor}</div>
+                    <p class="description">{$lang->about_attach_description}</p>
+                </td>
+            </tr>
+            </table>
+        </fieldset>
+
+        <div class="button_box">
+            <span class="button black strong"><input type="submit" value="{$lang->cmd_attach_file}" /></span>
+            <a href="{getUrl('act','dispResourcePackage')}" class="button"><span>{$lang->cmd_back}</span></a>
+        </div>
+    </form>
+
+</div>
+
+
+<!--#include("include.footer.html")-->

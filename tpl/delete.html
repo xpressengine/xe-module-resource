@@ -1,0 +1,25 @@
+<!--%import("filter/delete_resource.xml")-->
+<!--#include("_header.html")-->
+
+<form action="./" method="get" onsubmit="return procFilter(this, delete_resource)">
+<input type="hidden" name="page" value="{$page}" />
+<input type="hidden" name="module_srl" value="{$module_info->module_srl}" />
+
+    <h3 class="h3">{$lang->confirm_delete}</h3>
+	<div class="table">
+		<table width="100%" border="1" cellspacing="0">
+			<tr>
+				<th scope="row"><div>{$lang->module_name}</div></th>
+				<td >{$module_info->mid}</td>
+			</tr>
+			<tr>
+				<th scope="row"><div>{$lang->module}</div></th>
+				<td>{$module_info->module}</td>
+			</tr>
+		</table>
+	</div>
+	<div class="btnArea">
+		<span class="btn"><input type="submit" value="{$lang->cmd_delete}" /></span>
+		<span class="btn"><input type="button" value="{$lang->cmd_back}" onclick="history.back(); return false;" /></span>
+	</div>
+</form>

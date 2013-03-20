@@ -1,0 +1,25 @@
+<h2 class="h2">{$lang->resource_manager} {$lang->cmd_management}</h2>
+<p>{nl2br($lang->about_resource_manager)}</p>
+
+<!--@if($module_info)-->
+<h3 class="h3">
+	{$module_info->mid}	
+	| 
+	<a href="{getSiteUrl($module_info->domain,'','mid',$module_info->mid)}">{$lang->view}</a>
+</h3>
+<div class="cnb">
+	<ul>
+		<!--@if($module=='admin')-->
+		<li <!--@if($act=='dispResourceAdminList')-->class="active"<!--@end-->><a href="{getUrl('act','dispResourceAdminList','module_srl','')}">{$lang->cmd_list}</a></li>
+		<!--@else-->
+		<li><a href="{getUrl('act','')}">{$lang->cmd_back}</a></li>
+		<!--@end-->
+		<li <!--@if($act=='dispResourceAdminInsert')-->class="active"<!--@end-->><a href="{getUrl('act','dispResourceAdminInsert')}">{$lang->cmd_setup}</a></li>
+		<li <!--@if($act=='dispResourceAdminCategory')-->class="active"<!--@end-->><a href="{getUrl('act','dispResourceAdminCategory')}">{$lang->cmd_manage_category}</a></li>
+		<li <!--@if($act=='dispResourceAdminGrant')-->class="active"<!--@end-->><a href="{getUrl('act','dispResourceAdminGrant')}">{$lang->cmd_manage_grant}</a></li>
+		<li <!--@if($act=='dispResourceAdminAdditions')-->class="active"<!--@end-->><a href="{getUrl('act','dispResourceAdminAdditions')}">{$lang->cmd_addition_setup}</a></li>
+		<li <!--@if($act=='dispResourceAdminSkin')-->class="active"<!--@end-->><a href="{getUrl('act','dispResourceAdminSkin')}">{$lang->cmd_manage_skin}</a></li>
+	</ul>
+</div>
+<!--@end-->
+
