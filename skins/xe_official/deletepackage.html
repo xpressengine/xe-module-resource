@@ -1,4 +1,4 @@
-<!--#include("include.header.html")-->
+<include target="include.header.html" />
 
 <div class="form requestPackage">
 
@@ -27,13 +27,13 @@
             </table>
         </fieldset>
 
-        <div class="button_box">
-            <span class="button red strong"><input type="submit" value="{$lang->cmd_delete}" /></span>
-            <a href="{getUrl('act','dispResourcePackage')}" class="button"><span>{$lang->cmd_back}</span></a>
+        <div class="btnArea">
+            <a href="{getUrl('act','dispResourcePackage')}" class="btn" style="float:left">{$lang->cmd_back}</a>
+            <input type="submit" class="btn btn-inverse" value="{$lang->cmd_delete}" />
         </div>
     </form>
 </div>
 
 
 
-<!--#include("include.footer.html")-->
+<include target="include.footer.html" />

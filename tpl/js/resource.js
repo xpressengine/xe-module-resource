@@ -82,13 +82,13 @@ function doDeleteComment(package_srl, item_srl, comment_srl) {
 }
 
 jQuery(window).load( function() {
-    jQuery('ul.starPoint').find('a').click(function() {
+    jQuery('ul.starPoint').find('button').click(function() {
         var o = jQuery(this);
-        jQuery('ul.starPoint').find('a').each( function(i) {
-            if(i<o.attr('rel')) jQuery(this).addClass('on');
+        jQuery('ul.starPoint').find('button').each( function(i) {
+            if(i<o.attr('data-point')) jQuery(this).addClass('on');
             else jQuery(this).removeClass('on');
         });
-        jQuery('input[name=star_point]').val(o.attr('rel'));
+        jQuery('input[name=star_point]').val(o.attr('data-point'));
     });
 });
 

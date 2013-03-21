@@ -4,7 +4,7 @@
 
     <p class="description">{nl2br(htmlspecialchars($package->get('package_description')))}</p>
 
-    {@$rowspan=2}
+    {@$rowspan=3}
     <!--@if($module_info->resource_use_path=='Y')-->{@$rowspan++}<!--@end-->
     <!--@if($package->get('homepage'))-->{@$rowspan++}<!--@end-->
     <!--@if($package->get('path'))-->{@$rowspan++}<!--@end-->
@@ -15,11 +15,10 @@
         <col width="*"/>
         <col width="120"/>
         <col width="*"/>
-        <col width="120" />
     </colgroup>
     <tr>
         <th>{$lang->package_category}</th>
-        <td colspan="2"><a href="{getUrl('package_srl','','category_srl', $package->get('category_srl'))}">{$categories[$package->get('category_srl')]->title}</a></td>
+        <td><a href="{getUrl('package_srl','','category_srl', $package->get('category_srl'))}">{$categories[$package->get('category_srl')]->title}</a></td>
         <td class="star">
             <!--@for($i=0;$i<5;$i++)--><!--@if($i<$package->get('star'))--><img src="./img/starOn.gif" alt="" /><!--@else--><img src="./img/starOff.gif" alt="" /><!--@end--><!--@end-->
 			<!--@if($package->get('package_voter'))-->
@@ -32,46 +31,46 @@
     </tr>
     <tr>
         <th>{$lang->package_license}</th>
-        <td colspan="4">{htmlspecialchars($package->get('license'))}</td>
+        <td colspan="3">{htmlspecialchars($package->get('license'))}</td>
     </tr>
     <tr>
         <th>{$lang->package_author}</th>
-        <td colspan="4"><a href="#" onclick="return false;" class="member_{$package->get('member_srl')}">{$package->get('nick_name')}</a></td>
+        <td colspan="3"><a href="#" onclick="return false;" class="member_{$package->get('member_srl')}">{$package->get('nick_name')}</a></td>
     </tr>
     <!--@if($package->get('homepage'))-->
     <tr>
         <th>{$lang->homepage}</th>
-        <td colspan="4"><a href="{$package->get('homepage')}" onclick="window.open(this.href); return false;">{$package->get('homepage')}</a></td>
+        <td colspan="3"><a href="{$package->get('homepage')}" onclick="window.open(this.href); return false;">{$package->get('homepage')}</a></td>
     </tr>
     <!--@end-->
     <!--@if($package->get('path') && $module_info->resource_use_path=='Y')-->
     <tr>
         <th>{$lang->package_path}</th>
-        <td colspan="4">{$package->get('path')}</td>
+        <td colspan="3">{$package->get('path')}</td>
     </tr>
     <!--@end-->
     <tr>
         <th>{$lang->package_regdate}</th>
-        <td colspan="2">{zdate($package->get('package_regdate'), "Y-m-d H:i")}</td>
+        <td>{zdate($package->get('package_regdate'), "Y-m-d H:i")}</td>
         <th>{$lang->package_downloaded_count}</th>
         <td>{$package->get('package_downloaded')}</td>
     </tr>
     <tr class="division">
         <!--@if($package->get('item_version')!=$latest_package->item_version)-->
         <th>{$lang->selected_version}</th>
-        <td colspan="3">
+        <td colspan="2">
             {$package->get('item_version')}
             ({$lang->latest_version} : <a href="{getUrl('item_srl','','type','')}">{$latest_package->item_version}</a>)
         </td>
         <!--@else-->
         <th>{$lang->latest_version}</th>
-        <td colspan="3">
+        <td colspan="2">
             {$package->get('item_version')}
         </td>
         <!--@end-->
-        <td rowspan="2" class="right">
+        <td class="right">
             <!--@if($package->get('download_url'))-->
-            <a href="{$package->get('download_url')}" class="button strong"><span>{$lang->download}</span></a>
+            <a href="{$package->get('download_url')}" class="btn btn-inverse">{$lang->download}</a>
             <!--@else-->
             &nbsp;
             <!--@end-->
@@ -79,12 +78,12 @@
     </tr>
     <tr>
         <th>{$lang->downloaded_count}</th>
-        <td colspan="3">{$package->get('item_downloaded')}</td>
+        <td colspan="2">{$package->get('item_downloaded')}</td>
     </tr>
     <!--@if(count($package->get('depencies')))-->
     <tr>
         <th>{$lang->attach_dependency}</th>
-        <td colspan="4">
+        <td colspan="3">
             <ul class="dependency">
             <!--@foreach($package->get('depencies') as $val)-->
                 <li><a href="{getSiteUrl($site_module_info->domain, '', 'mid', $mid, 'package_srl', $val->package_srl)}">{$val->title} ver. {$val->version}</a></li>
@@ -95,7 +94,7 @@
     <!--@end-->
     <tr>
         <th>{$lang->package_update}</th>
-        <td colspan="2">{zdate($package->get('item_regdate'), "Y-m-d H:i")}</td>
+        <td>{zdate($package->get('item_regdate'), "Y-m-d H:i")}</td>
         <td class="star" colspan="2">
             <!--@for($i=0;$i<5;$i++)--><!--@if($i<$package->get('item_star'))--><img src="./img/starOn.gif" alt="" /><!--@else--><img src="./img/starOff.gif" alt="" /><!--@end--><!--@end-->
 			<!--@if($package->get('item_voter'))-->
@@ -106,13 +105,13 @@
         </td>
     </tr>
     <tr class="division">
-        <td colspan="5">{$package->getContent()}</td>
+        <td colspan="4">{$package->getContent()}</td>
     </tr>
     </table>
     
-    <div class="button_box">
-            <a href="{getUrl('type','all')}" class="button"><span>{$lang->cmd_view_all_version}</span></a>
-            <a href="{getUrl('package_srl','','type','')}" class="button"><span>{$lang->cmd_back}</span></a>
+    <div class="btnArea">
+		<a href="{getUrl('package_srl','','type','')}" class="btn" style="float:left">{$lang->cmd_back}</a>
+		<a href="{getUrl('type','all')}" class="btn">{$lang->cmd_view_all_version}</a>
     </div>
     <!--@if($package->getCommentCount())-->
 	<ul class="comments">
@@ -120,15 +119,13 @@
 		<!--@foreach($_comment_list as $key => $comment)-->
         <li id="comment_{$comment->get('comment_srl')}">
             <div class="authorBox">
-                <a href="#" onclick="return false;" class="member_{$comment->get('member_srl')}">{$comment->getNickName()}</a>
+                <a href="#popup_menu_area" onclick="return false;" class="member_{$comment->get('member_srl')}">{$comment->getNickName()}</a>
                 <span class="estimate">
                     <!--@for($i=0;$i<5;$i++)--><!--@if($i<$comment->get('voted_count'))--><img src="./img/starOn.gif" alt="" /><!--@else--><img src="./img/starOff.gif" alt="" /><!--@end--><!--@end-->
                 </span>
                 <span class="date">{$comment->getRegdate("Y-m-d H:i")}</span>
                 <div class="btnBox">
-                    <!--@if($comment->isGranted())-->
-                    <a href="#" onclick="if(confirm('{$lang->confirm_delete}')) doDeleteComment({$package->get('package_srl')}, {$package->get('item_srl')}, {$comment->get('comment_srl')});return false;" class="deleteBtn button small"><span>{$lang->cmd_delete}</span></a>
-                    <!--@end-->
+                    <button cond="$comment->isGranted()" type="button" onclick="if(confirm('{$lang->confirm_delete}')) doDeleteComment({$package->get('package_srl')}, {$package->get('item_srl')}, {$comment->get('comment_srl')});return false;" style="border:0;background:none;margin:0;padding:0;cursor:pointer">{$lang->cmd_delete}</button>
                 </div>
             </div>
             <div class="contentBox">
@@ -157,11 +154,11 @@
         <th>{$lang->star_point}</th>
         <td>
             <ul class="starPoint">
-                <li><a href="#" onclick="return false;" rel="1">1</a></li>
-                <li><a href="#" onclick="return false;" rel="2">2</a></li>
-                <li><a href="#" onclick="return false;" rel="3">3</a></li>
-                <li><a href="#" onclick="return false;" rel="4">4</a></li>
-                <li><a href="#" onclick="return false;" rel="5">5</a></li>
+                <li><button type="button" data-point="1">1</button></li>
+                <li><button type="button" data-point="2">2</button></li>
+                <li><button type="button" data-point="3">3</button></li>
+                <li><button type="button" data-point="4">4</button></li>
+                <li><button type="button" data-point="5">5</button></li>
             </ul>
         </td>
     </tr>
@@ -169,13 +166,10 @@
         <th>{$lang->resource_estimate}</th>
         <td><textarea name="content" class="commentArea"></textarea></td>
     </tr>
-    <tr>
-        <td class="center" colspan="2">
-            <span class="button strong"><input type="submit" value="{$lang->cmd_estimate}" accesskey="s" /></span>
-        </td>
-    </tr>
     </table>
-
+	<div class="btnArea">
+		<input type="submit" value="{$lang->cmd_estimate}" class="btn btn-inverse" />
+	</div>
     </form>
     <!--@end-->
 </div>

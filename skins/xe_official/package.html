@@ -1,4 +1,4 @@
-<!--#include("include.header.html")-->
+<include target="include.header.html" />
 
 <div class="list">
 
@@ -55,13 +55,13 @@
         <td colspan="3">{nl2br($selected_package->description)}</td>
     </tr>
     </table>
-    <div class="button_box">
-        <!--@if($selected_package->status == 'accepted')-->
-        <a href="{getUrl('act','dispResourceAttach')}" class="button strong black"><span>{$lang->cmd_attach_file}</span></a>
-        <!--@end-->
-        <a href="{getUrl('act','dispResourceModifyPackage')}" class="button"><span>{$lang->cmd_modify}</span></a>
-        <a href="{getUrl('act','dispResourceDeletePackage')}" class="button red"><span>{$lang->cmd_delete}</span></a>
-        <a href="{getUrl('act','dispResourcePackageList')}" class="button"><span>{$lang->cmd_back}</span></a>
+    <div class="btnArea">
+        <a href="{getUrl('act','dispResourcePackageList')}" class="btn" style="float:left">{$lang->cmd_back}</a>
+		<span class="btn-group">
+			<a cond="$selected_package->status == 'accepted'" href="{getUrl('act','dispResourceAttach')}" class="btn btn-inverse">{$lang->cmd_attach_file}</a>
+			<a href="{getUrl('act','dispResourceModifyPackage')}" class="btn">{$lang->cmd_modify}</a>
+			<a href="{getUrl('act','dispResourceDeletePackage')}" class="btn">{$lang->cmd_delete}</a>
+		</span>
     </div>
     <!--@end-->
 
@@ -89,11 +89,12 @@
     <tr>
         <th scope="row">{$lang->regdate}</th>
         <td class="date">{zdate($val->regdate, "Y-m-d H:i")}</td>
-        <td class="right">
-            <a href="{getUrl('act','dispResourceModifyAttach','item_srl',$val->item_srl)}" class="button"><span>{$lang->cmd_modify}</span></a>
-            <a href="#" onclick="if(confirm('{$lang->confirm_delete}')) doDeleteAttach({$val->package_srl},{$val->item_srl}); return false;" class="button"><span>{$lang->cmd_delete}</span></a>
+        <td class="right" colspan="2">
+			<span class="btn-group">
+				<a href="{getUrl('act','dispResourceModifyAttach','item_srl',$val->item_srl)}" class="btn">{$lang->cmd_modify}</a>
+				<button type="button" onclick="if(confirm('{$lang->confirm_delete}')) doDeleteAttach({$val->package_srl},{$val->item_srl})" class="btn">{$lang->cmd_delete}</button>
+			</span>
         </td>
-		<td><a href="{getUrl('act','dispResourceModifyAttach','item_srl',$val->item_srl)}">{$lang->cmd_modify}</a></td>
     </tr>
     </table>
     <!--@end-->
@@ -101,4 +102,4 @@
 
 </div>
 
-<!--#include("include.footer.html")-->
+<include target="include.footer.html" />

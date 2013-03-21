@@ -1,4 +1,4 @@
-<!--#include("include.header.html")-->
+<include target="include.header.html" />
 
 <div class="list">
 
@@ -79,8 +79,8 @@
                 <td>
                     <p><select name="sel_dependency" size="10" class="select_field" id="sel_dependency"></select></p>
                     <p>
-                        <a href="#" onclick="doSearchDependency(); return false;" class="button"><span>{$lang->cmd_search}</span></a>
-                        <a href="#" onclick="doDeleteDependency(); return false;" class="button"><span>{$lang->cmd_delete}</span></a>
+                        <button type="button" onclick="doSearchDependency();" class="btn">{$lang->cmd_search}</button>
+                        <button type="button" onclick="doDeleteDependency();" class="btn">{$lang->cmd_delete}</button>
                     </p>
                     <p class="description">{$lang->about_attach_dependency}</p>
                 </td>
@@ -102,13 +102,13 @@
             </table>
         </fieldset>
 
-        <div class="button_box">
-            <span class="button black strong"><input type="submit" value="{$lang->cmd_attach_file}" /></span>
-            <a href="{getUrl('act','dispResourcePackage')}" class="button"><span>{$lang->cmd_back}</span></a>
+        <div class="btnArea">
+            <a href="{getUrl('act','dispResourcePackage')}" class="btn" style="float:left">{$lang->cmd_back}</a>
+            <input class="btn btn-inverse" type="submit" value="{$lang->cmd_attach_file}" />
         </div>
     </form>
 
 </div>
 
 
-<!--#include("include.footer.html")-->
+<include target="include.footer.html" />

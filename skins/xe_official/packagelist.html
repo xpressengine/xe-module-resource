@@ -1,4 +1,4 @@
-<!--#include("include.header.html")-->
+<include target="include.header.html" />
 
 <div class="list">
 
@@ -84,9 +84,9 @@
     <!--@end-->
     </table>
 
-    <div class="button_box">
-        <a href="{getSiteUrl($site_module_info->domain, '', 'mid',$module_info->mid,'act','dispResourceInsertPackage')}" class="button"><span>{$lang->cmd_insert_package}</span></a>
-        <a href="{getSiteUrl($site_module_info->domain, '', 'mid',$module_info->mid)}" class="button"><span>{$lang->cmd_back}</span></a>
+    <div class="btnArea">
+		<a href="{getSiteUrl($site_module_info->domain, '', 'mid',$module_info->mid)}" class="btn" style="float:left">{$lang->cmd_back}</a>
+		<a href="{getSiteUrl($site_module_info->domain, '', 'mid',$module_info->mid,'act','dispResourceInsertPackage')}" class="btn btn-inverse">{$lang->cmd_insert_package}</a>
     </div>
 
     <div class="pagination">
@@ -103,4 +103,4 @@
 
 </div>
 
-<!--#include("include.footer.html")-->
+<include target="include.footer.html" />

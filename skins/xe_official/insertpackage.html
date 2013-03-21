@@ -1,4 +1,4 @@
-<!--#include("include.header.html")-->
+<include target="include.header.html" />
 
 <div class="form requestPackage">
     <h3>{$lang->cmd_insert_package}</h3>
@@ -87,13 +87,13 @@
             </table>
         </fieldset>
 
-        <div class="button_box">
-            <span class="button black strong"><input type="submit" value="{$lang->cmd_registration}" /></span>
-            <a href="{getSiteUrl($site_module_info->domain, '', 'mid',$module_info->mid)}" class="button"><span>{$lang->cmd_back}</span></a>
+        <div class="btnArea">
+            <a href="{getSiteUrl($site_module_info->domain, '', 'mid',$module_info->mid)}" class="btn" style="float:left">{$lang->cmd_back}</a>
+            <input class="btn btn-inverse" type="submit" value="{$lang->cmd_registration}" />
         </div>
     </form>
 </div>
 
 
 
-<!--#include("include.footer.html")-->
+<include target="include.footer.html" />
