@@ -7,6 +7,7 @@
 		<span class="x_input-append">
 			<input type="search" required name="search_keyword" id="search_keyword" value="{htmlspecialchars($search_keyword)}"/>
 			<input type="submit" value="{$lang->cmd_search}" class="x_btn x_btn-inverse" />
+			<a cond="$search_keyword" href="{getUrl('search_keyword', '')}" class="x_btn">{$lang->cmd_cancel}</a>
 		</span>
 	</form>
 	<table class="x_table x_table-striped x_table-hover">
