@@ -238,7 +238,7 @@
 
             $category_srl = Context::get('category_srl');
 
-            $output = $oResourceModel->getPackageList($this->module_srl, $status, $category_srl);
+            $output = $oResourceModel->getPackageList($this->module_srl, $status, $category_srl, NULL, Context::get('page'));
             Context::set('package_list', $output->data);
             Context::set('total_count', $output->total_count);
             Context::set('total_page', $output->total_page);
