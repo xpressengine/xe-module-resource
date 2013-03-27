@@ -30,7 +30,7 @@
 	<div class="x_control-group">
 		<label class="x_control-label" for="lang_browser_title">{$lang->browser_title}</label>
 		<div class="x_controls">
-			<input type="text" name="browser_title" id="browser_title" class="lang_code" value="{htmlspecialchars($module_info->browser_title)}" />
+			<input type="text" name="browser_title" id="browser_title" class="lang_code" value="<!--@if(strpos($module_info->browser_title, '$user_lang->') === false)-->{$module_info->browser_title}<!--@else-->{htmlspecialchars($module_info->browser_title)}<!--@end-->" />
 			<a href="#about_browser_title" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
 			<p class="x_help-block" id="about_browser_title" hidden>{$lang->about_browser_title}</p>
 		</div>
@@ -122,7 +122,7 @@
 	<div class="x_control-group">
 		<label class="x_control-label" for="lang_header_text">{$lang->header_text}</label>
 		<div class="x_controls">
-			<textarea name="header_text" id="header_text" rows="4" cols="42" class="lang_code">{htmlspecialchars($module_info->header_text)}</textarea>
+			<textarea name="header_text" id="header_text" rows="4" cols="42" class="lang_code"><!--@if(strpos($module_info->header_text, '$user_lang->') === false)-->{$module_info->header_text}<!--@else-->{htmlspecialchars($module_info->header_text)}<!--@end--></textarea>
 			<a href="#about_header_text" class="x_icon-question-sign" data-toggle style="vertical-align:top;margin-top:5px">{$lang->help}</a>
 			<p class="x_help-block" id="about_header_text" hidden>{$lang->about_header_text}</p>
 		</div>
@@ -130,7 +130,7 @@
 	<div class="x_control-group">
 		<label class="x_control-label" for="lang_footer_text">{$lang->footer_text}</label>
 		<div class="x_controls">
-			<textarea name="footer_text" id="footer_text" rows="4" cols="42" class="lang_code">{htmlspecialchars($module_info->footer_text)}</textarea>
+			<textarea name="footer_text" id="footer_text" rows="4" cols="42" class="lang_code"><!--@if(strpos($module_info->footer_text, '$user_lang->') === false)-->{$module_info->footer_text}<!--@else-->{htmlspecialchars($module_info->footer_text)}<!--@end--></textarea>
 			<a href="#about_footer_text" class="x_icon-question-sign" data-toggle style="vertical-align:top;margin-top:5px">{$lang->help}</a>
 			<p class="x_help-block" id="about_footer_text" hidden>{$lang->about_footer_text}</p>
 		</div>
