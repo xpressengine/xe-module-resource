@@ -19,7 +19,7 @@
         <input type="hidden" name="mid" value="{$mid}" />
         <input type="hidden" name="page" value="{$page}" />
         <input type="hidden" name="act" value="{$act}" />
-        <select name="category_srl" onchange="location.href=location.href.setQuery('category_srl',this.options[this.selectedIndex].value);return false;">
+        <select name="category_srl" onchange="location.href=location.href.setQuery('category_srl',this.options[this.selectedIndex].value).setQuery('page', '');return false;">
             <option value="">{$lang->package_category}</option>
         {@ $_curDepth = 0; }
         <!--@foreach($categories as $key => $val)-->
