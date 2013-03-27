@@ -7,7 +7,7 @@
 <div cond="$XE_VALIDATOR_MESSAGE && isset($avail_validator_id[$XE_VALIDATOR_ID])" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
 	<p>{$XE_VALIDATOR_MESSAGE}</p>
 </div>
-<form action="./" method="get" onsubmit="return doChangeCategory(this);" id="fo_list">
+<form action="./" method="get" onsubmit="return doChangeCategory(this);" id="fo_list" no-error-return-url="true">
 	<input type="hidden" name="module" value="{$module}" />
 	<input type="hidden" name="act" value="{$act}" />
 	<table class="x_table x_table-striped x_table-hover">
@@ -25,7 +25,7 @@
 						<option value="">&hellip;</option>
 						<option value="-1">{$lang->cmd_management}</option>
 					</select>
-					<input type="submit" name="go_button" id="go_button" value="GO" class="x_btn" />
+					<input type="submit" id="go_button" value="GO" class="x_btn" />
 				</th>
 				<th scope="col">{$lang->mid}</th>
 				<th scope="col">{$lang->browser_title}</th>

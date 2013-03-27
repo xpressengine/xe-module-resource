@@ -10,3 +10,12 @@ function doCartSetup(url) {
     url += "&module_srls="+module_srl.join(',');
     popopen(url,'modulesSetup');
 }
+
+function doChangeCategory(fo_obj) {
+    var module_category_srl = fo_obj.module_category_srl.options[fo_obj.module_category_srl.selectedIndex].value;
+    if(module_category_srl==-1) {
+        location.href = current_url.setQuery('act','dispModuleAdminCategory');
+        return false;
+    }
+    return true;
+}
