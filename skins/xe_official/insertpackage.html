@@ -1,14 +1,21 @@
-<!--#include("include.header.html")-->
+<include target="include.header.html" />
 
 <div class="form requestPackage">
     <h3>{$lang->cmd_insert_package}</h3>
     <p class="information">{$lang->about_insert_package}</p>
     <p class="reference">(<em><img src="./img/bu_must.gif" alt="{$required_field}" /></em>) {$lang->about_required_field}</p>
 
-    <form action="./" method="post" onsubmit="return procFilter(this, insert_package);">
+	<div cond="$XE_VALIDATOR_MESSAGE && $XE_VALIDATOR_ID == 'modules/resource/skins/xe_official/insertpackage/1'" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
+		<p>{$XE_VALIDATOR_MESSAGE}</p>
+	</div>
+	
+    <form action="./" method="post" ruleset="insertPackage">
+    <input type="hidden" name="act" value="procResourceInsertPackage" />
     <input type="hidden" name="vid" value="{$vid}" />
     <input type="hidden" name="mid" value="{$mid}" />
     <input type="hidden" name="package_srl" value="{$selected_package->package_srl}" />
+    <input type="hidden" name="xe_validator_id" value="modules/resource/skins/xe_official/insertpackage/1" />
+    <input type="hidden" name="success_return_url" value="{getRequestUriByServerEnviroment()}" />
     <fieldset>
         <legend>{$lang->cmd_insert_package}</legend>
 
@@ -17,7 +24,7 @@
                 <th scope="row"><em>{$lang->package_category}<img src="./img/bu_must.gif" alt="{$required_field}" /></em></th>
                 <td>
                     <p>
-                        <select name="package_category">
+                        <select name="category_srl">
                         {@ $_curDepth = 0; }
                         <!--@foreach($categories as $key => $val)-->
                             <!--@if($val->depth<$_curDepth)-->
@@ -44,7 +51,7 @@
             <tr>
                 <th scope="row"><em>{$lang->package_title}<img src="./img/bu_must.gif" alt="{$required_field}" /></em></th>
                 <td>
-                    <p><input type="text" name="package_title" class="text_field" /></p>
+                    <p><input type="text" name="title" class="text_field" /></p>
                     <p class="description">{$lang->about_package_title}</p>
                 </td>
             </tr>
@@ -52,7 +59,7 @@
             <tr>
                 <th scope="row"><em>{$lang->package_path}<img src="./img/bu_must.gif" alt="{$required_field}" /></em></th>
                 <td>
-                    <p><input type="text" name="package_path" class="text_field" /></p>
+                    <p><input type="text" name="path" class="text_field" /></p>
                     <p class="description">{$lang->about_package_path}</p>
                 </td>
             </tr>
@@ -61,7 +68,7 @@
                 <th scope="row"><em>{$lang->package_license}<img src="./img/bu_must.gif" alt="{$required_field}" /></em></th>
                 <td>
                     <p>
-                        <select name="package_license">
+                        <select name="license">
                             <!--@foreach($licenses as $key => $val)-->
                             <option value="{$val}">{$val}</option>
                             <!--@end-->
@@ -73,27 +80,27 @@
             <tr>
                 <th scope="row"><em>{$lang->package_homepage}<img src="./img/bu_must.gif" alt="{$required_field}" /></em></th>
                 <td>
-                    <p><input type="text" name="package_homepage" class="text_field" /></p>
+                    <p><input type="text" name="homepage" class="text_field" /></p>
                     <p class="description">{$lang->about_package_homepage}</p>
                 </td>
             </tr>
             <tr class="last_child">
                 <th scope="row"><em>{$lang->package_description}<img src="./img/bu_must.gif" alt="{$required_field}" /></em></th>
                 <td>
-                    <p><textarea name="package_description" class="text_area"></textarea></p>
+                    <p><textarea name="description" class="text_area"></textarea></p>
                     <p class="description">{$lang->about_package_description}</p>
                 </td>
             </tr>
             </table>
         </fieldset>
 
-        <div class="button_box">
-            <span class="button black strong"><input type="submit" value="{$lang->cmd_registration}" /></span>
-            <a href="{getSiteUrl($site_module_info->domain, '', 'mid',$module_info->mid)}" class="button"><span>{$lang->cmd_back}</span></a>
+        <div class="btnArea">
+            <a href="{$back_url}" class="btn" style="float:left">{$lang->cmd_back}</a>
+            <input class="btn btn-inverse" type="submit" value="{$lang->cmd_registration}" />
         </div>
     </form>
 </div>
 
 
 
-<!--#include("include.footer.html")-->
+<include target="include.footer.html" />

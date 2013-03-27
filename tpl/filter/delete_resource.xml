@@ -1,5 +1,0 @@
-<filter name="delete_resource" module="resource" act="procResourceAdminDelete">
-    <form>
-        <node target="module_srl" required="true" />
-    </form>
-</filter>

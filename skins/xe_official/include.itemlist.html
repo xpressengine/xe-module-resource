@@ -4,10 +4,9 @@
 
     <p class="description">{nl2br(htmlspecialchars($package->get('package_description')))}</p>
 
-    {@$rowspan=2}
-    <!--@if($module_info->resource_use_path=='Y')-->{@$rowspan++}<!--@end-->
+    {@$rowspan=3}
+    <!--@if($package->get('path') && $module_info->resource_use_path=='Y')-->{@$rowspan++}<!--@end-->
     <!--@if($package->get('homepage'))-->{@$rowspan++}<!--@end-->
-    <!--@if($package->get('path'))-->{@$rowspan++}<!--@end-->
 
     <table class="packageView">
     <colgroup>
@@ -28,22 +27,22 @@
     </tr>
     <tr>
         <th>{$lang->package_license}</th>
-        <td colspan="4">{htmlspecialchars($package->get('license'))}</td>
+        <td colspan="3">{htmlspecialchars($package->get('license'))}</td>
     </tr>
     <tr>
         <th>{$lang->package_author}</th>
-        <td colspan="4"><a href="#" onclick="return false;" class="member_{$member_srl}">{$package->get('nick_name')}</a></td>
+        <td colspan="3"><a href="#" onclick="return false;" class="member_{$member_srl}">{$package->get('nick_name')}</a></td>
     </tr>
     <!--@if($package->get('homepage'))-->
     <tr>
         <th>{$lang->homepage}</th>
-        <td colspan="4"><a href="{$package->get('homepage')}" onclick="window.open(this.href); return false;">{$package->get('homepage')}</a></td>
+        <td colspan="3"><a href="{$package->get('homepage')}" onclick="window.open(this.href); return false;">{$package->get('homepage')}</a></td>
     </tr>
     <!--@end-->
     <!--@if($package->get('path')&&$module_info->resource_use_path=='Y')-->
     <tr>
         <th>{$lang->package_path}</th>
-        <td colspan="4">{$package->get('path')}</td>
+        <td colspan="3">{$package->get('path')}</td>
     </tr>
     <!--@end-->
     <tr>
@@ -57,8 +56,8 @@
         <td colspan="4"><a href="{getUrl('type','')}">{$package->get('item_version')}</a></td>
     </tr>
     </table>
-    <div class="button_box">
-        <a href="{getUrl('type','')}" class="button"><span>{$lang->cmd_back}</span></a>
+    <div class="btnArea">
+        <a href="{getUrl('type','')}" class="btn" style="float:left">{$lang->cmd_back}</a>
     </div>
 
     <h3>{$lang->version_history}</h3>
@@ -70,9 +69,9 @@
     </colgroup>
     <!--@foreach($items as $key => $val)-->
     <tr>
-        <td rowspan="4" class="center"><a href="{getUrl('type','','item_srl',$val->item_srl)}"><img src="{$val->screenshot_url}" width="100" height="100" alt="" /></a></td>
+        <td rowspan="4" class="center"><a href="{getUrl('type','','item_srl',$val->item_srl, 'from', 'all')}"><img src="{$val->screenshot_url}" width="100" height="100" alt="" /></a></td>
         <th scope="row">{$lang->attach_version}</th>
-        <td><a href="{getUrl('type','','item_srl',$val->item_srl)}">{$val->version}</a></td>
+        <td><a href="{getUrl('type','','item_srl',$val->item_srl, 'from', 'all')}">{$val->version}</a></td>
     </tr>
     <tr>
         <th scope="row">{$lang->downloaded_count}</th>

@@ -1,4 +1,4 @@
-<!--#include("include.header.html")-->
+<include target="include.header.html" />
 
 <div class="list">
 
@@ -39,15 +39,23 @@
     </tr>
     </table>
 
-    <form action="./" method="post" onsubmit="doCalDependency(this); return procFilter(this, attach);" enctype="multipart/form-data"> 
+	<div cond="$XE_VALIDATOR_MESSAGE && $XE_VALIDATOR_ID == 'modules/resource/skins/xe_official/attach/1'" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
+		<p>{$XE_VALIDATOR_MESSAGE}</p>
+	</div>
+	
+    <form action="./" method="post" enctype="multipart/form-data" ruleset="attachOneTime"> 
     <input type="hidden" name="vid" value="{$vid}" />
     <input type="hidden" name="mid" value="{$mid}" />
-    <input type="hidden" name="act" value="" />
+    <input type="hidden" name="act" value="procResourceAttachOneTime" />
     <input type="hidden" name="package_srl" value="{$selected_package->package_srl}" />
     <input type="hidden" name="item_srl" value="{$item_srl}" />
     <input type="hidden" name="document_srl" value="{$document_srl}" />
-    <input type="hidden" name="attach_dependency" value="" />
+    <input type="hidden" name="dependency" value="" />
+    <!--// for backward compatibility, remain a 'attach_description'. 
+    		copy a value of 'attach_description' to 'description' when submit by 'BeforeValidateStub' -->
     <input type="hidden" name="attach_description" value="" />
+    <input type="hidden" name="description" value="" />
+    <input type="hidden" name="xe_validator_id" value="modules/resource/skins/xe_official/attach/1" />
     <fieldset>
             <table class="form">
             <tr class="first_child">
@@ -67,7 +75,7 @@
             <tr>
                 <th scope="row"><em>{$lang->attach_version}<img src="./img/bu_must.gif" alt="{$required_field}" /></em></th>
                 <td>
-                    <p><input type="text" name="attach_version" class="text_field"/></p>
+                    <p><input type="text" name="version" class="text_field"/></p>
                     <p class="description">{$lang->about_attach_version}</p>
                     <!--@if($latest_item)-->
                     <p class="description bold">{$lang->latest_attach_version} : {$latest_item->item_version}</p>
@@ -79,8 +87,8 @@
                 <td>
                     <p><select name="sel_dependency" size="10" class="select_field" id="sel_dependency"></select></p>
                     <p>
-                        <a href="#" onclick="doSearchDependency(); return false;" class="button"><span>{$lang->cmd_search}</span></a>
-                        <a href="#" onclick="doDeleteDependency(); return false;" class="button"><span>{$lang->cmd_delete}</span></a>
+                        <button type="button" onclick="doSearchDependency();" class="btn">{$lang->cmd_search}</button>
+                        <button type="button" onclick="doDeleteDependency();" class="btn">{$lang->cmd_delete}</button>
                     </p>
                     <p class="description">{$lang->about_attach_dependency}</p>
                 </td>
@@ -95,20 +103,26 @@
             <tr class="last_child">
                 <th scope="row"><em>{$lang->attach_description}<img src="./img/bu_must.gif" alt="{$required_field}" /></em></th>
                 <td>
-                    <div class="editor">{$editor}</div>
+                    <div class="editor">
+                    	{$editor}
+                    	<!--// if the page is back by error, delete autosave data  -->
+                    	<script cond="$XE_VALIDATOR_MESSAGE && $XE_VALIDATOR_ID == 'modules/resource/skins/xe_official/attach/1'">
+                    		jQuery('input[name="_saved_doc_title"], input[name="_saved_doc_content"]').val('');
+                    	</script>
+                    </div>
                     <p class="description">{$lang->about_attach_description}</p>
                 </td>
             </tr>
             </table>
         </fieldset>
 
-        <div class="button_box">
-            <span class="button black strong"><input type="submit" value="{$lang->cmd_attach_file}" /></span>
-            <a href="{getUrl('act','dispResourcePackage')}" class="button"><span>{$lang->cmd_back}</span></a>
+        <div class="btnArea">
+            <a href="{getUrl('act','dispResourcePackage')}" class="btn" style="float:left">{$lang->cmd_back}</a>
+            <input class="btn btn-inverse" type="submit" value="{$lang->cmd_attach_file}" />
         </div>
     </form>
 
 </div>
 
 
-<!--#include("include.footer.html")-->
+<include target="include.footer.html" />

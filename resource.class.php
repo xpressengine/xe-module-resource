@@ -14,6 +14,7 @@
             $oModuleController = &getController('module');
 
             $oModuleController->insertTrigger('file.downloadFile', 'resource', 'controller', 'triggerUpdateDownloadedCount', 'after');
+            $oModuleController->insertTrigger('menu.getModuleListInSitemap', 'resource', 'model', 'triggerModuleListInSitemap', 'after');
             return new Object();
         }
 
@@ -21,6 +22,8 @@
             $oModuleModel = &getModel('module');
 
             if(!$oModuleModel->getTrigger('file.downloadFile', 'resource', 'controller', 'triggerUpdateDownloadedCount', 'after')) return true;
+			// 2012. 09. 11 when add new menu in sitemap, custom menu add
+			if(!$oModuleModel->getTrigger('menu.getModuleListInSitemap', 'resource', 'model', 'triggerModuleListInSitemap', 'after')) return true;
             return false;
         }
 
@@ -30,6 +33,9 @@
 
             if(!$oModuleModel->getTrigger('file.downloadFile', 'resource', 'controller', 'triggerUpdateDownloadedCount', 'after')) 
                 $oModuleController->insertTrigger('file.downloadFile', 'resource', 'controller', 'triggerUpdateDownloadedCount', 'after');
+			// 2012. 09. 11 when add new menu in sitemap, custom menu add
+			if(!$oModuleModel->getTrigger('menu.getModuleListInSitemap', 'resource', 'model', 'triggerModuleListInSitemap', 'after'))
+				$oModuleController->insertTrigger('menu.getModuleListInSitemap', 'resource', 'model', 'triggerModuleListInSitemap', 'after');
 
             return new Object(0, 'success_updated');
         }

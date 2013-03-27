@@ -94,6 +94,14 @@
 			$security->encodeHTML('module_info.');
         }
 
+        function dispResourceAdminMobileSkin() {
+        	$oModuleAdminModel = &getAdminModel('module');
+        	Context::set('skin_content', $oModuleAdminModel->getModuleMobileSkinHTML($this->module_info->module_srl));
+
+        	$security = new Security();
+        	$security->encodeHTML('module_info.');
+        }
+
 
         function dispResourceAdminDelete() {
             $oDocumentModel = &getModel('document');

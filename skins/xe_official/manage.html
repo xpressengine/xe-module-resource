@@ -1,4 +1,4 @@
-<!--#include("include.header.html")-->
+<include target="include.header.html" />
 
 <div class="list">
 
@@ -64,32 +64,32 @@
         <!--@end-->
     </tr>
     <tr>
-        <th scope="row" rowspan="2">{$lang->package_description}</th>
-        <td colspan="3" rowspan="2">{nl2br($val->description)}</td>
+        <th scope="row">{$lang->package_description}</th>
+        <td colspan="3">{nl2br($val->description)}</td>
         <td colspan="2" class="left"><a href="#" class="member_{$val->member_srl}" onclick="return false;">{$val->nick_name}</a></td>
     </tr>
     <tr>
-        <td scope="row" colspan="2" class="center">
-            <form action="./" method="get" onsubmit="return procFilter(this,change_status);">
+        <td scope="row" colspan="6">
+            <form action="./" method="get" onsubmit="return procFilter(this,change_status);" style="text-align:right">
                 <input type="hidden" name="vid" value="{$vid}" />
                 <input type="hidden" name="mid" value="{$mid}" />
                 <input type="hidden" name="page" value="{$page}" />
                 <input type="hidden" name="package_srl" value="{$val->package_srl}" />
-                <select name="status">
+                <select name="status" style="height:26px">
                     <option value="waiting" <!--@if($val->status=='waiting')-->selected="selected"<!--@end-->>{$lang->package_waiting}</option>
                     <option value="accepted" <!--@if($val->status=='accepted')-->selected="selected"<!--@end-->>{$lang->package_accepted}</option>
                     <option value="reservation" <!--@if($val->status=='reservation')-->selected="selected"<!--@end-->>{$lang->package_reservation}</option>
                 </select>
-                <span class="button black"><input type="submit" value="{$lang->cmd_apply}" /></span>
-                <span class="button red"><input type="button" onclick="if(confirm('{$lang->confirm_delete}')) doDeletePackage({$val->package_srl}); return false;" value="{$lang->cmd_delete}" /></span>
+                <input type="submit" value="{$lang->cmd_apply}" class="btn btn-inverse" />
+                <input type="button" onclick="if(confirm('{$lang->confirm_delete}')) doDeletePackage({$val->package_srl})" value="{$lang->cmd_delete}" class="btn" />
             </form>
         </th>
     </table>
 
     <!--@end-->
 
-    <div class="button_box">
-        <a href="{getSiteUrl($site_module_info->domain, '', 'mid',$module_info->mid)}" class="button"><span>{$lang->cmd_back}</span></a>
+    <div class="btnArea">
+        <a href="{getSiteUrl($site_module_info->domain, '', 'mid',$module_info->mid)}" class="btn" style="float:left">{$lang->cmd_back}</a>
     </div>
 
 
@@ -107,4 +107,4 @@
 
 </div>
 
-<!--#include("include.footer.html")-->
+<include target="include.footer.html" />

@@ -43,7 +43,7 @@
             }
 
             $this->setMessage('success_registed');
-            $this->setRedirectUrl(getSiteUrl($site_module_info->domain, '', 'mid', Context::get('mid'),'act','dispResourcePackageList','package_srl',$args->package_srl));
+            $this->setRedirectUrl(getNotEncodedSiteUrl($site_module_info->domain, '', 'mid', Context::get('mid'),'act','dispResourcePackage','package_srl',$args->package_srl));
         }
 
         function procResourceModifyPackage() {
@@ -78,7 +78,7 @@
             }
 
             $this->setMessage('success_updated');
-            $this->setRedirectUrl(getSiteUrl($site_module_info->domain, '', 'mid', Context::get('mid'),'act','dispResourcePackage','package_srl',$args->package_srl));
+            $this->setRedirectUrl(getNotEncodedSiteUrl($site_module_info->domain, '', 'mid', Context::get('mid'),'act','dispResourcePackage','package_srl',$args->package_srl));
         }
 
         function procResourceDeletePackage() {
@@ -111,7 +111,7 @@
 
 
             $this->setMessage('success_deleted');
-            $this->setRedirectUrl(getSiteUrl($site_module_info->domain, '', 'mid', Context::get('mid'),'act','dispResourcePackageList'));
+            $this->setRedirectUrl(getNotEncodedSiteUrl($site_module_info->domain, '', 'mid', Context::get('mid'),'act','dispResourcePackageList'));
         }
 
         function procResourceChangeStatus() {
@@ -140,11 +140,39 @@
             $oCommunicationController->sendMessage($logged_info->member_srl, $selected_package->member_srl, Context::getLang('resource_status_changed'), $content, false);
         }
 
-        function procResourceAttach() {
-            $oResourceModel = &getModel('resource');
-            $oDocumentController = &getController('document');
+		public function procResourceAttachOneTime()
+		{
+			$oDB = DB::getInstance();
+			$oDB->begin();
 
-            $args = Context::gets('package_srl','item_srl','version','description','document_srl');
+			$output = $this->procResourceAttach(FALSE);
+			if(!$output->toBool())
+			{
+				$oDB->rollback();
+				return $output;
+			}
+
+			$item_srl = $output->get('item_srl');
+			Context::set('item_srl', $output->get('item_srl'), TRUE);
+			Context::set('document_srl', $output->get('document_srl'), TRUE);
+
+			$output = $this->procResourceAttachFile(FALSE);
+			if(!$output->toBool())
+			{
+				$oFileController = getController('file'); /* @var $oFileController fileController */
+				$oFileController->deleteFiles($item_srl);
+				$oDB->rollback();
+				return $output;
+			}
+
+			$oDB->commit();
+		}
+
+        function procResourceAttach($proc = TRUE) {
+            $oResourceModel = getModel('resource');
+            $oDocumentController = getController('document');
+
+            $args = Context::gets('package_srl','version','description');
             foreach($args as $key => $val) if(!trim($val)) return new Object(-1,'msg_invalid_request');
 
             $logged_info = Context::get('logged_info');
@@ -154,20 +182,14 @@
 
             if(!$this->grant->manager && $logged_info->member_srl != $selected_package->member_srl) return new Object(-1,'msg_not_permitted');
 
-            $args->module_srl = $this->module_srl;
-            $args->list_order = -1 * $args->item_srl;
+            if($proc)
+            {
+				$oDB = DB::getInstance();
+				$oDB->begin();
+            }
 
-            $pargs->module_srl = $this->module_srl;
-            $pargs->package_srl = $args->package_srl;
-            $pargs->update_order = $args->list_order;
-            $pargs->latest_item_srl = $args->item_srl;
-            $output = executeQuery('resource.updatePackage', $pargs);
-            if(!$output->toBool()) return $output;
-
-            $output = executeQuery('resource.insertItem', $args);
-            if(!$output->toBool()) return $output;
-
-            $doc_args->document_srl = $args->document_srl;
+            $doc_args = new stdClass();
+            $doc_args->document_srl = Context::get('document_srl') ? Context::get('document_srl') : getNextSequence();
             $doc_args->category_srl = $selected_package->category_srl;
             $doc_args->module_srl = $this->module_srl;
             $doc_args->content = $args->description;
@@ -175,8 +197,45 @@
             $doc_args->list_order = $doc_args->document_srl*-1;
             $doc_args->tags = Context::get('tag');
             $doc_args->allow_comment = 'Y';
-			$doc_args->commentStatus = 'ALLOW';
-            $oDocumentController->insertDocument($doc_args);
+            $doc_args->commentStatus = 'ALLOW';
+            $output = $oDocumentController->insertDocument($doc_args);
+            if(!$output->toBool())
+            {
+            	if($proc)
+            	{
+            		$oDB->rollback();
+            	}
+            	return $output;
+            }
+
+            $args->item_srl = getNextSequence();
+            $args->document_srl = $doc_args->document_srl;
+            $args->module_srl = $this->module_srl;
+            $args->list_order = -1 * $args->item_srl;
+            $output = executeQuery('resource.insertItem', $args);
+            if(!$output->toBool())
+            {
+            	if($proc)
+            	{
+            		$oDB->rollback();
+            	}
+            	return $output;
+            }
+
+            $pargs = new stdClass();
+            $pargs->module_srl = $this->module_srl;
+            $pargs->package_srl = $args->package_srl;
+            $pargs->update_order = $args->list_order;
+            $pargs->latest_item_srl = $args->item_srl;
+            $output = executeQuery('resource.updatePackage', $pargs);
+            if(!$output->toBool())
+			{
+				if($proc)
+				{
+					$oDB->rollback();
+				}
+				return $output;
+			}
 
             if($this->module_info->resource_notify_mail) {
                 $message = '';
@@ -186,6 +245,17 @@
             }
 
             $this->insertDependency($this->module_srl, $args->package_srl, $args->item_srl, trim(Context::get('dependency')));
+
+            if($proc)
+            {
+				$oDB->commit();
+            }
+
+            // for backward compatibility
+            $this->add('document_srl', $args->document_srl);
+            $this->add('item_srl', $args->item_srl);
+
+            return $this;
         }
 
         function insertDependency($module_srl, $package_srl, $item_srl, $targets) {
@@ -214,9 +284,9 @@
             }
         }
 
-        function procResourceAttachFile() {
-            $oResourceModel = &getModel('resource');
-            $oFileController = &getController('file');
+        function procResourceAttachFile($proc = TRUE) {
+            $oResourceModel = getModel('resource');
+            $oFileController = getController('file');
 
             $args = Context::gets('package_srl','item_srl','attach_file','attach_screenshot', 'latest_item_srl');
             if(!$this->module_srl) return  new Object(-1,'msg_invalid_request');
@@ -237,18 +307,21 @@
             if(!$item) return  new Object(-1,'msg_invalid_request');
 
             $output = $oFileController->insertFile($args->attach_file, $this->module_srl, $args->item_srl);
-            if(!$output || !$output->toBool()) 
+            if(!$output || !$output->toBool())
 			{
-				$pargs->module_srl = $this->module_srl;
-				$pargs->package_srl = $args->package_srl;
-				$pargs->update_order = $args->latest_item_srl * -1;
-				$pargs->latest_item_srl = $args->latest_item_srl;
-				$poutput = executeQuery('resource.updatePackage', $pargs);
+				if($proc)
+				{
+					$pargs->module_srl = $this->module_srl;
+					$pargs->package_srl = $args->package_srl;
+					$pargs->update_order = $args->latest_item_srl * -1;
+					$pargs->latest_item_srl = $args->latest_item_srl;
+					$poutput = executeQuery('resource.updatePackage', $pargs);
 
-				$dargs->module_srl = $this->module_srl;
-				$dargs->package_srl = $args->package_srl;
-				$dargs->item_srl = $args->item_srl;
-				$doutput = executeQuery('resource.deleteItems', $dargs);
+					$dargs->module_srl = $this->module_srl;
+					$dargs->package_srl = $args->package_srl;
+					$dargs->item_srl = $args->item_srl;
+					$doutput = executeQuery('resource.deleteItems', $dargs);
+				}
 
 				return $output;
 			}
@@ -258,28 +331,48 @@
             if(!$output || !$output->toBool()) return $output;
             $args->screenshot_url = $output->get('uploaded_filename');
             if($args->screenshot_url) FileHandler::createImageFile($args->screenshot_url, $args->screenshot_url, 100,100,'jpg');
-            
+
             $args->module_srl = $this->module_srl;
             $output = executeQuery('resource.updateItemFile', $args);
             if(!$output->toBool()) return $output;
 
-            $site_module_info = Context::get('site_module_info');
-
-            $this->setMessage('success_registed');
-            Context::set('url', getNotEncodedSiteUrl($site_module_info->domain, '', 'mid', Context::get('mid'),'act','dispResourcePackage','package_srl',$args->package_srl));
-
             $oFileController->setFilesValid($args->item_srl);
 
-            Context::set('layout','none');
-            $this->setTemplatePath($this->module_path.'tpl');
-            $this->setTemplateFile('redirect');
+            $this->setMessage('success_registed');
+            $site_module_info = Context::get('site_module_info');
+            $this->setRedirectUrl(getNotEncodedSiteUrl($site_module_info->domain, '', 'mid', Context::get('mid'),'act','dispResourcePackage','package_srl',$args->package_srl));
+
+            return $this;
+        }
+
+        public function procResourceModifyAttachOneTime()
+        {
+        	//return new Object(-1, 'test');
+        	$oDB = DB::getInstance();
+        	$oDB->begin();
+
+        	$output = $this->procResourceModifyAttach();
+        	if(!$output->toBool())
+        	{
+        		$oDB->rollback();
+        		return $output;
+        	}
+
+        	$output = $this->procResourceModifyAttachFile();
+        	if(!$output->toBool())
+        	{
+        		$oDB->rollback();
+        		return $output;
+        	}
+
+        	$oDB->commit();
         }
 
         function procResourceModifyAttach() {
-            $oResourceModel = &getModel('resource');
-            $oFileController = &getController('file');
-            $oDocumentController = &getController('document');
-            $oDocumentModel = &getModel('document');
+            $oResourceModel = getModel('resource');
+            $oFileController = getController('file');
+            $oDocumentController = getController('document');
+            $oDocumentModel = getModel('document');
 
             $package_srl = Context::get('package_srl');
             $item_srl = Context::get('item_srl');
@@ -289,7 +382,7 @@
             $logged_info = Context::get('logged_info');
 
             $package = $oResourceModel->getPackage($this->module_srl, $package_srl);
-            if(!$package || $package->member_srl != $logged_info->member_srl ) return new Object(-1,'msg_invalid_request');
+            if(!$package) return new Object(-1,'msg_invalid_request');
 
             if(!$this->grant->manager && $logged_info->member_srl != $package->member_srl) return new Object(-1,'msg_not_permitted');
 
@@ -297,6 +390,7 @@
             if(!$item) return new Object(-1,'msg_invalid_request');
             if($item->document_srl != $document_srl) return new Object(-1,'msg_invalid_request');
 
+            $args = new stdClass();
             $args->module_srl = $this->module_srl;
             $args->package_srl = $package_srl;
             $args->item_srl = $item_srl;
@@ -313,11 +407,13 @@
             $oDocumentController->updateDocument($oDocumentModel->getDocument($item->document_srl), $doc_args);
 
             $this->insertDependency($this->module_srl, $args->package_srl, $args->item_srl, trim(Context::get('dependency')));
+
+            return $this;
         }
 
         function procResourceModifyAttachFile() {
-            $oResourceModel = &getModel('resource');
-            $oFileController = &getController('file');
+            $oResourceModel = getModel('resource');
+            $oFileController = getController('file');
 
             $args = Context::gets('package_srl','item_srl','attach_file','attach_screenshot');
             if(!$this->module_srl) return  new Object(-1,'msg_invalid_request');
@@ -356,14 +452,13 @@
 
             $site_module_info = Context::get('site_module_info');
 
-            $this->setMessage('success_registed');
-            Context::set('url', getNotEncodedSiteUrl($site_module_info->domain, '', 'mid', Context::get('mid'),'act','dispResourcePackage','package_srl',$args->package_srl));
-
             $oFileController->setFilesValid($args->item_srl);
 
-            Context::set('layout','none');
-            $this->setTemplatePath($this->module_path.'tpl');
-            $this->setTemplateFile('redirect');
+
+            $this->setMessage('success_registed');
+            $this->setRedirectUrl(getNotEncodedSiteUrl($site_module_info->domain, '', 'mid', Context::get('mid'),'act','dispResourcePackage','package_srl',$args->package_srl));
+
+            return $this;
         }
 
         function procResourceDeleteAttach() {
@@ -463,7 +558,15 @@
             $output = executeQuery('resource.plusItemStar', $star_args);
 
             $this->setMessage('success_registed');
-            $this->setRedirectUrl(getSiteUrl($site_module_info->domain, '', 'mid', Context::get('mid'),'act','','package_srl',$item->package_srl));
+
+            if(Context::get('success_return_url'))
+            {
+            	$this->setRedirectUrl(Context::get('success_return_url') . '#comment_' . $args->comment_srl);
+            }
+            else
+            {
+            	$this->setRedirectUrl(getNotEncodedSiteUrl($site_module_info->domain, '', 'mid', Context::get('mid'),'act','','package_srl',$item->package_srl) . '#comment_' . $args->comment_srl);
+            }
         }
 
         function procResourceDeleteComment() {

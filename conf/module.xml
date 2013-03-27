@@ -52,18 +52,19 @@
 
         <action name="dispResourceSearchDependency" type="view" />
 
-        <action name="procResourceInsertPackage" type="controller" />
-        <action name="procResourceModifyPackage" type="controller" />
-        <action name="procResourceDeletePackage" type="controller" />
-        <action name="procResourceAttach" type="controller" />
-        <action name="procResourceModifyAttach" type="controller" />
-        <action name="procResourceAttachFile" type="controller" />
-        <action name="procResourceModifyAttachFile" type="controller" />
-        <action name="procResourceDeleteAttach" type="controller" />
-        <action name="procResourceInsertComment" type="controller" />
-        <action name="procResourceDeleteComment" type="controller" />
-        <action name="procResourceChangeStatus" type="controller" />
-        <action name="procResourceDeleteItem" type="controller" />
+        <action name="procResourceInsertPackage" type="controller" ruleset="insertPackage" />
+        <action name="procResourceModifyPackage" type="controller" ruleset="modifyPackage" />
+        <action name="procResourceDeletePackage" type="controller" ruleset="deletePackage" />
+        <action name="procResourceAttachOneTime" type="controller" ruleset="attachOneTime" />
+        <action name="procResourceModifyAttachOneTime" type="controller" ruleset="modifyAttachOneTime" />
+        <action name="procResourceAttach" type="controller" ruleset="attach" />
+        <action name="procResourceModifyAttach" type="controller" ruleset="modifyAttach" />
+        <action name="procResourceAttachFile" type="controller" ruleset="attachFile" />
+        <action name="procResourceModifyAttachFile" type="controller" ruleset="modifyAttachFile" />
+        <action name="procResourceDeleteAttach" type="controller" ruleset="deleteAttach" />
+        <action name="procResourceInsertComment" type="controller" ruleset="insertComment" />
+        <action name="procResourceDeleteComment" type="controller" ruleset="deleteComment" />
+        <action name="procResourceChangeStatus" type="controller" ruleset="changeStatus" />
 
         <action name="dispResourceAdminList" type="view" standalone="true" admin_index="true" />
         <action name="dispResourceAdminInsert" type="view" standalone="true" setup_index="true" />
@@ -71,11 +72,12 @@
         <action name="dispResourceAdminGrant" type="view" standalone="true" />
         <action name="dispResourceAdminAdditions" type="view" standalone="true" />
         <action name="dispResourceAdminSkin" type="view" standalone="true" />
+        <action name="dispResourceAdminMobileSkin" type="view" />
         <action name="dispResourceAdminDelete" type="view" standalone="true" />
 
-        <action name="procResourceAdminInsert" type="controller" standalone="true" />
-        <action name="procResourceAdminDelete" type="controller" standalone="true" />
-        <action name="procResourceAdminDeletePackage" type="controller" standalone="true" />
+        <action name="procResourceAdminInsert" type="controller" standalone="true" rulset="insertResource" />
+        <action name="procResourceAdminDelete" type="controller" standalone="true" rulset="deleteResource" />
+        <action name="procResourceAdminDeletePackage" type="controller" standalone="true" ruleset="deletePackage" />
 		<action name="getResourceItems" type="api" standalone="true" />
 
 		<action name="dispResourceCategory" type="mobile" />
