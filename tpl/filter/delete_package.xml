@@ -8,5 +8,8 @@
         <param name="mid" target="mid" />
         <param name="package_srl" target="package_srl" />
     </parameter>
-    <response />
+    <response callback_func="completeDeletePackage">
+        <tag name="error" />
+        <tag name="message" />
+    </response>
 </filter>

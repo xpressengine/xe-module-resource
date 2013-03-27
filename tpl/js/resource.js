@@ -31,6 +31,10 @@ function completeModifyAttach(ret_obj, response_tags, callback_func_args, fo_obj
     fo_obj.submit();
 }
 
+function completeDeletePackage(ret_obj) {
+	location.href = current_url.setQuery('act', 'dispResourcePackageList').setQuery('package_srl', '');
+}
+
 function doDeletePackage(package_srl) {
     var params = new Array();
     params['package_srl'] = package_srl;
