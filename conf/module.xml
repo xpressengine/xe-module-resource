@@ -72,6 +72,7 @@
         <action name="dispResourceAdminGrant" type="view" standalone="true" />
         <action name="dispResourceAdminAdditions" type="view" standalone="true" />
         <action name="dispResourceAdminSkin" type="view" standalone="true" />
+        <action name="dispResourceAdminMobileSkin" type="view" />
         <action name="dispResourceAdminDelete" type="view" standalone="true" />
 
         <action name="procResourceAdminInsert" type="controller" standalone="true" rulset="insertResource" />
