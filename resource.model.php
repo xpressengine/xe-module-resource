@@ -45,7 +45,7 @@
             $output = executeQuery('resource.getItem', $args);
             if(!$output->toBool() || !$output->data) return null;
             $item = $output->data;
-            $item->download_url = getFullUrl().$oFileModel->getDownloadUrl($val->file_srl, $val->sid);
+            $item->download_url = getFullUrl().$oFileModel->getDownloadUrl($item->file_srl, $item->sid);
             return $item;
         }
 
@@ -143,7 +143,7 @@
             }
             return $result;
         }
-        /** 
+        /**
          * @brief return module name in sitemap
          **/
 		function triggerModuleListInSitemap(&$obj)

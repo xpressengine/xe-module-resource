@@ -2,8 +2,6 @@
     <form>
         <node target="mid" required="true" />
         <node target="package_srl" required="true" />
-        <node target="item_srl" required="true" />
-        <node target="document_srl" required="true" />
         <node target="attach_file" required="true" />
         <node target="attach_screenshot" required="true" />
         <node target="attach_version" required="true" />
@@ -25,5 +23,7 @@
     <response callback_func="completeAttach">
         <tag name="error" />
         <tag name="message" />
+        <tag name="document_srl" />
+        <tag name="item_srl" />
     </response>
 </filter>

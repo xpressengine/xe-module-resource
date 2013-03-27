@@ -5,9 +5,8 @@
     <p class="description">{nl2br(htmlspecialchars($package->get('package_description')))}</p>
 
     {@$rowspan=3}
-    <!--@if($module_info->resource_use_path=='Y')-->{@$rowspan++}<!--@end-->
+    <!--@if($package->get('path') && $module_info->resource_use_path=='Y')-->{@$rowspan++}<!--@end-->
     <!--@if($package->get('homepage'))-->{@$rowspan++}<!--@end-->
-    <!--@if($package->get('path'))-->{@$rowspan++}<!--@end-->
 
     <table class="packageView">
     <colgroup>
@@ -31,22 +30,22 @@
     </tr>
     <tr>
         <th>{$lang->package_license}</th>
-        <td colspan="3">{htmlspecialchars($package->get('license'))}</td>
+        <td colspan="2">{htmlspecialchars($package->get('license'))}</td>
     </tr>
     <tr>
         <th>{$lang->package_author}</th>
-        <td colspan="3"><a href="#" onclick="return false;" class="member_{$package->get('member_srl')}">{$package->get('nick_name')}</a></td>
+        <td colspan="2"><a href="#" onclick="return false;" class="member_{$package->get('member_srl')}">{$package->get('nick_name')}</a></td>
     </tr>
     <!--@if($package->get('homepage'))-->
     <tr>
         <th>{$lang->homepage}</th>
-        <td colspan="3"><a href="{$package->get('homepage')}" onclick="window.open(this.href); return false;">{$package->get('homepage')}</a></td>
+        <td colspan="2"><a href="{$package->get('homepage')}" onclick="window.open(this.href); return false;">{$package->get('homepage')}</a></td>
     </tr>
     <!--@end-->
     <!--@if($package->get('path') && $module_info->resource_use_path=='Y')-->
     <tr>
         <th>{$lang->package_path}</th>
-        <td colspan="3">{$package->get('path')}</td>
+        <td colspan="2">{$package->get('path')}</td>
     </tr>
     <!--@end-->
     <tr>
@@ -78,7 +77,7 @@
     </tr>
     <tr>
         <th>{$lang->downloaded_count}</th>
-        <td colspan="2">{$package->get('item_downloaded')}</td>
+        <td colspan="3">{$package->get('item_downloaded')}</td>
     </tr>
     <!--@if(count($package->get('depencies')))-->
     <tr>
@@ -110,7 +109,8 @@
     </table>
     
     <div class="btnArea">
-		<a href="{getUrl('package_srl','','type','')}" class="btn" style="float:left">{$lang->cmd_back}</a>
+    	<a cond="$from" href="{getUrl('item_srl','','type', $from, 'from', '')}" class="btn" style="float:left">{$lang->cmd_back}</a>
+		<a cond="!$from" href="{getUrl('package_srl','','type', '', 'item_srl', '', 'from', '')}" class="btn" style="float:left">{$lang->cmd_back}</a>
 		<a href="{getUrl('type','all')}" class="btn">{$lang->cmd_view_all_version}</a>
     </div>
     <!--@if($package->getCommentCount())-->
@@ -139,12 +139,20 @@
 
 
     <!--@if(!$voted && $is_logged)-->
-    <form action="./" method="post" onsubmit="return procFilter(this, insert_comment)" class="commentForm" >
+    <div cond="$XE_VALIDATOR_MESSAGE && $XE_VALIDATOR_ID == 'modules/resource/skins/xe_official/include.package/1'" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
+		<p>{$XE_VALIDATOR_MESSAGE}</p>
+	</div>
+	
+    <form action="./" method="post" id="commentForm" class="commentForm" ruleset="insertComment">
     <input type="hidden" name="vid" value="{$vid}" />
     <input type="hidden" name="mid" value="{$mid}" />
+    <input type="hidden" name="act" value="procResourceInsertComment" />
     <input type="hidden" name="package_srl" value="{$package->get('package_srl')}" />
     <input type="hidden" name="item_srl" value="{$package->get('item_srl')}" />
     <input type="hidden" name="star_point" value="" />
+    <input type="hidden" name="xe_validator_id" value="modules/resource/skins/xe_official/include.package/1" />
+    <input type="hidden" name="error_return_url" value="{getRequestUriByServerEnviroment()}#commentForm" />
+    <input type="hidden" name="success_return_url" value="{getRequestUriByServerEnviroment()}" />
 
     <table width="100%" cellspacing="0" cellpadding="0" class="view_type1">
     <colgroup>

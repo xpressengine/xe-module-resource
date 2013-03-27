@@ -39,15 +39,23 @@
     </tr>
     </table>
 
-    <form action="./" method="post" onsubmit="doCalDependency(this); return procFilter(this, modify_attach);" enctype="multipart/form-data"> 
+	<div cond="$XE_VALIDATOR_MESSAGE && $XE_VALIDATOR_ID == 'modules/resource/skins/xe_official/modifyattach/1'" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
+		<p>{$XE_VALIDATOR_MESSAGE}</p>
+	</div>
+	
+    <form action="./" method="post" enctype="multipart/form-data"> 
     <input type="hidden" name="vid" value="{$vid}" />
     <input type="hidden" name="mid" value="{$mid}" />
-    <input type="hidden" name="act" value="" />
+    <input type="hidden" name="act" value="procResourceModifyAttachOneTime" />
     <input type="hidden" name="package_srl" value="{$selected_package->package_srl}" />
     <input type="hidden" name="item_srl" value="{$item->item_srl}" />
     <input type="hidden" name="document_srl" value="{$item->document_srl}" />
-    <input type="hidden" name="attach_dependency" value="" />
+    <input type="hidden" name="dependency" value="" />
+    <!--// for backward compatibility, remain a 'attach_description'. 
+    		copy a value of 'attach_description' to 'description' when submit by 'BeforeValidateStub' -->
+    <input type="hidden" name="description" value="{$item_document->getContentText()}" />
     <input type="hidden" name="attach_description" value="{$item_document->getContentText()}" />
+    <input type="hidden" name="xe_validator_id" value="modules/resource/skins/xe_official/modifyattach/1" />
     <fieldset>
             <table class="form">
             <tr class="first_child">
@@ -71,7 +79,7 @@
             <tr>
                 <th scope="row"><em>{$lang->attach_version}<img src="./img/bu_must.gif" alt="{$required_field}" /></em></th>
                 <td>
-                    <p><input type="text" name="attach_version" class="text_field" value="{htmlspecialchars($item->version)}"/></p>
+                    <p><input type="text" name="version" class="text_field" value="{htmlspecialchars($item->version)}"/></p>
                     <p class="description">{$lang->about_attach_version}</p>
                     <!--@if($latest_item)-->
                     <p class="description bold">{$lang->latest_attach_version} : {$latest_item->item_version}</p>

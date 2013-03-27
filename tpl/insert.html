@@ -1,13 +1,17 @@
-<load target="filter/insert_resource.xml" />
 <include target="_header.html" />
-<form action="./" method="post" onsubmit="return procFilter(this, insert_resource)" enctype="multipart/form-data" class="x_form-horizontal">
-	<input type="hidden" name="page" value="{$page}" />
+<div cond="$XE_VALIDATOR_MESSAGE && $XE_VALIDATOR_ID == 'modules/resource/tpl/insert/1'" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
+	<p>{$XE_VALIDATOR_MESSAGE}</p>
+</div>
+<form action="./" method="post" class="x_form-horizontal" ruleset="insertResource">
+	<input type="hidden" name="module" value="resource" />
+	<input type="hidden" name="act" value="procResourceAdminInsert" />
 	<input type="hidden" name="module_srl" value="{$module_info->module_srl}" />
-	<input cond="$logged_info->is_admin!='Y'" type="hidden" name="mid" value="{$module_info->mid}" />
+	<input type="hidden" name="xe_validator_id" value="modules/resource/tpl/insert/1" />
+	<input cond="$mid || $module_srl" type="hidden" name="success_return_url" value="{getRequestUriByServerEnviroment()}" />
 	<div class="x_control-group" cond="$logged_info->is_admin=='Y'">
 		<label class="x_control-label" for="mid">{$lang->mid}</label>
 		<div class="x_controls">
-			<input type="text" name="mid" id="mid" value="{$module_info->mid}" />
+			<input type="text" name="resource_name" id="mid" value="{$module_info->mid}" />
 			<a href="#about_mid" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
 			<p class="x_help-block" id="about_mid" hidden>{$lang->about_mid}</p>
 		</div>
@@ -132,7 +136,7 @@
 		</div>
 	</div>
 	<div class="btnArea">
-		<input class="x_btn x_pull-left" type="submit" value="{$lang->cmd_registration}" />
-		<span><button class="x_btn x_btn-primary" type="button" onclick="history.back()" />{$lang->cmd_back}</button></span>
+		<span><button class="x_btn x_pull-left" type="button" onclick="history.back()" />{$lang->cmd_back}</button></span>
+		<input class="x_btn  x_btn-primary" type="submit" value="{$lang->cmd_registration}" />
 	</div>
 </form>

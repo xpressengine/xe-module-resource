@@ -106,6 +106,15 @@
 
         function dispResourceInsertPackage() {
             Context::set('licenses', $this->licenses);
+
+			$from = Context::get('from');
+			$backUrl = array(
+				'' => getUrl('act', '', 'from', ''),
+				'packageList' => getUrl('act', 'dispResourcePackageList', 'from', ''),
+			);
+			Context::set('back_url', $backUrl[$from]);
+
+            // for backward compatibility
             Context::addJsFilter($this->module_path.'tpl/filter', 'insert_package.xml');
         }
 
@@ -121,6 +130,8 @@
             if(!$this->grant->manager && $logged_info->member_srl != $selected_package->member_srl) return new Object(-1,'msg_not_permitted');
 
             Context::set('licenses', $this->licenses);
+
+            // for backward compatibility
             Context::addJsFilter($this->module_path.'tpl/filter', 'modify_package.xml');
         }
 
@@ -134,6 +145,7 @@
 
             if(!$this->grant->manager && $logged_info->member_srl != $selected_package->member_srl) return new Object(-1,'msg_not_permitted');
 
+            // for backward compatibility
             Context::addJsFilter($this->module_path.'tpl/filter', 'delete_package.xml');
         }
 
@@ -180,9 +192,10 @@
 
             Context::set('latest_item', $oResourceModel->getLatestItem($package_srl));
 
-            Context::set('item_srl', $item_srl = getNextSequence());
-            Context::set('document_srl', $document_srl = getNextSequence());
-            Context::set('editor', $oEditorModel->getModuleEditor('document', $this->module_srl, $document_srl, 'document_srl', 'attach_description'));
+            // Context::set('item_srl', $item_srl = getNextSequence());
+            // Context::set('document_srl', $document_srl = getNextSequence());
+            $inputError = Context::get('INPUT_ERROR');
+            Context::set('editor', $oEditorModel->getModuleEditor('document', $this->module_srl, $inputError['document_srl'], 'document_srl', 'attach_description'));
 
             Context::addJsFilter($this->module_path.'tpl/filter', 'attach.xml');
         }
@@ -211,6 +224,7 @@
 
             Context::set('item_document', $oDocumentModel->getDocument($item->document_srl));
 
+            // for backward compatibility
             Context::addJsFilter($this->module_path.'tpl/filter', 'modify_attach.xml');
         }
 

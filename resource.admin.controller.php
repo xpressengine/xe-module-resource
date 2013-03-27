@@ -37,8 +37,15 @@
 
             if(!$output->toBool()) return $output;
 
-            if(Context::get('module')=='admin') $this->setRedirectUrl(getUrl('','module','admin','act','dispResourceAdminInsert','module_srl',$output->get('module_srl')));
-            else $this->setRedirectUrl(getUrl('','mid',$args->mid, 'act','dispResourceAdminInsert'));
+            if(Context::get('success_return_url'))
+            {
+            	changeValueInUrl('mid', $args->mid, $module_info->mid);
+            	$this->setRedirectUrl(Context::get('success_return_url'));
+            }
+            else
+            {
+            	$this->setRedirectUrl(getNotEncodedUrl('','module','admin','act','dispResourceAdminInsert','module_srl',$output->get('module_srl')));
+            }
             $this->setMessage($msg_code);
         }
 
@@ -59,7 +66,14 @@
             $output = $oModuleController->deleteModule($module_srl);
             if(!$output->toBool()) return $output;
 
-            $this->setRedirectUrl(getUrl('','module','admin','act','dispResourceAdminList'));
+            if(Context::get('success_return_url'))
+            {
+            	$this->setRedirectUrl(Context::get('success_return_url'));
+            }
+            else
+            {
+            	$this->setRedirectUrl(getNotEncodedUrl('','module','admin','act','dispResourceAdminList'));
+            }
             $this->setMessage('success_deleted');
         }
 
