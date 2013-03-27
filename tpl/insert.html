@@ -136,7 +136,8 @@
 		</div>
 	</div>
 	<div class="btnArea">
-		<span><button class="x_btn x_pull-left" type="button" onclick="history.back()" />{$lang->cmd_back}</button></span>
+		<a cond="$module == 'admin'" class="x_btn x_pull-left" href="{getUrl('act', 'dispResourceAdminList', 'module_srl', '')}">{$lang->cmd_back}</a>
+		<a cond="!$module" class="x_btn x_pull-left" href="{getUrl('act', '')}">{$lang->cmd_back}</a>
 		<input class="x_btn  x_btn-primary" type="submit" value="{$lang->cmd_registration}" />
 	</div>
 </form>
