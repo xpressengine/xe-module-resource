@@ -1,0 +1,6 @@
+<table name="resourceapi_reported">
+	<column name="item_srl" type="number" size="11" notnull="notnull" default="0" index="idx_item_srl" />
+	<column name="package_srl" type="number" size="11" default="0" index="idx_package_srl" />
+	<column name="reporteddate" type="date" index="idx_regdate " />
+	<column name="error" type="text" />
+</table>
