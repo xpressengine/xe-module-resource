@@ -35,6 +35,7 @@ class resourceView extends resource
 		$type = Context::get('type');
 		$item_srl = Context::get('item_srl');
 		$page = Context::get('page');
+		$args = new stdClass;
 
 		if($document_srl && !$package_srl)
 		{
@@ -157,11 +158,13 @@ class resourceView extends resource
 
 		$logged_info = Context::get('logged_info');
 		$package_srl = Context::get('package_srl');
+
 		if(!$package_srl)
 		{
 			return new Object(-1,'msg_invalid_request');
 		}
 		Context::set('selected_package', $selected_package = $oResourceModel->getPackage($this->module_srl, $package_srl));
+
 		if(!$selected_package->package_srl)
 		{
 			return new Object(-1,'msg_invalid_request');
@@ -184,10 +187,12 @@ class resourceView extends resource
 
 		$logged_info = Context::get('logged_info');
 		$package_srl = Context::get('package_srl');
+
 		if(!$package_srl)
 		{
 			return new Object(-1,'msg_invalid_request');
 		}
+
 		Context::set('selected_package', $selected_package = $oResourceModel->getPackage($this->module_srl, $package_srl));
 
 		if(!$this->grant->manager && $logged_info->member_srl != $selected_package->member_srl)
@@ -204,7 +209,12 @@ class resourceView extends resource
 		$oResourceModel = &getModel('resource');
 		$logged_info = Context::get('logged_info');
 		$package_srl = Context::get('package_srl');
-		if($package_srl) $selected_package = $oResourceModel->getPackage($this->module_srl, $package_srl);
+
+		if($package_srl)
+		{
+			$selected_package = $oResourceModel->getPackage($this->module_srl, $package_srl);
+		}
+
 		if(!$package_srl || !$selected_package)
 		{
 			return new Object('msg_invalid_request');
@@ -215,8 +225,14 @@ class resourceView extends resource
 			return new Object(-1,'msg_not_permitted');
 		}
 
-		if($selected_package->voter>0) $selected_package->star = (int)($selected_package->voted/$selected_package->voter);
-		else $selected_package->star = 0;
+		if($selected_package->voter>0)
+		{
+			$selected_package->star = (int)($selected_package->voted/$selected_package->voter);
+		}
+		else
+		{
+			$selected_package->star = 0;
+		}
 		Context::set('selected_package', $selected_package);
 
 		Context::set('attach_items', $oResourceModel->getItems($this->module_srl, $selected_package->package_srl));
@@ -263,7 +279,8 @@ class resourceView extends resource
 		// Context::set('item_srl', $item_srl = getNextSequence());
 		// Context::set('document_srl', $document_srl = getNextSequence());
 		$inputError = Context::get('INPUT_ERROR');
-		Context::set('editor', $oEditorModel->getModuleEditor('document', $this->module_srl, $inputError['document_srl'], 'document_srl', 'attach_description'));
+		$document_srl = ($inputError && $inputError['document_srl']) ? $inputError['document_srl'] : null;
+		Context::set('editor', $oEditorModel->getModuleEditor('document', $this->module_srl, $document_srl, 'document_srl', 'attach_description'));
 
 		Context::addJsFilter($this->module_path.'tpl/filter', 'attach.xml');
 	}

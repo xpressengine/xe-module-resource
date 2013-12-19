@@ -14,6 +14,7 @@ class resourceModel extends resource
 
 	function getPackageList($module_srl, $status = null, $category_srl = null, $member_srl = null, $page = 1)
 	{
+		$args = new stdClass;
 		$args->module_srl = $module_srl;
 
 		if(!is_null($status) && in_array($status, array('accepted','reservation','waiting')))
@@ -45,6 +46,7 @@ class resourceModel extends resource
 
 	function getPackage($module_srl, $package_srl, $member_srl = null)
 	{
+		$args = new stdClass;
 		$args->module_srl = $module_srl;
 		$args->package_srl = $package_srl;
 		if(!is_null($member_srl)) $args->member_srl = $member_srl;
@@ -55,6 +57,8 @@ class resourceModel extends resource
 	function getItem($module_srl, $package_srl, $item_srl)
 	{
 		$oFileModel = &getModel('file');
+
+		$args = new stdClass;
 		$args->module_srl = $module_srl;
 		$args->package_srl = $package_srl;
 		$args->item_srl = $item_srl;
@@ -73,6 +77,7 @@ class resourceModel extends resource
 	{
 		$oFileModel = &getModel('file');
 
+		$args = new stdClass;
 		$args->module_srl = $module_srl;
 		$args->package_srl = $package_srl;
 
@@ -97,6 +102,7 @@ class resourceModel extends resource
 	{
 		$oFileModel = &getModel('file');
 
+		$args = new stdClass;
 		$args->module_srl = $module_srl;
 
 		if(!is_null($childs) && preg_match('/^([0-9])([0-9,]+)([0-9])$/', $childs))
@@ -142,8 +148,14 @@ class resourceModel extends resource
 		{
 			foreach($output->data as $key => $val)
 			{
-				if($val->package_voter>0) $output->data[$key]->package_star = (int)($val->package_voted/$val->package_voter);
-				else $output->data[$key]->package_star = 0;
+				if($val->package_voter>0)
+				{
+					$output->data[$key]->package_star = (int)($val->package_voted/$val->package_voter);
+				}
+				else
+				{
+					$output->data[$key]->package_star = 0;
+				}
 				$output->data[$key]->download_url = getFullUrl().$oFileModel->getDownloadUrl($val->item_file_srl, $val->sid);
 			}
 		}
@@ -153,6 +165,7 @@ class resourceModel extends resource
 
 	function getLatestItem($package_srl)
 	{
+		$args = new stdClass;
 		$args->package_srl = $package_srl;
 		$output = executeQuery('resource.getLatestItem', $args);
 		return $output->data;
@@ -161,6 +174,7 @@ class resourceModel extends resource
 
 	function getDependency($module_srl, $item_srl)
 	{
+		$args = new stdClass;
 		$args->module_srl = $module_srl;
 		$args->item_srl = $item_srl;
 		$output = executeQueryArray('resource.getDependency', $args);
@@ -169,6 +183,7 @@ class resourceModel extends resource
 
 	function hasVoted($module_srl, $package_srl, $item_srl, $member_srl)
 	{
+		$args = new stdClass;
 		$args->module_srl = $module_srl;
 		$args->package_srl = $package_srl;
 		$args->item_srl = $item_srl;
@@ -180,6 +195,7 @@ class resourceModel extends resource
 
 	function getCategoryPacakgeCount($module_srl)
 	{
+		$count_args = new stdClass;
 		$count_args->module_srl = $module_srl;
 		$output = executeQueryArray('resource.getCategoryPackageCount', $count_args);
 		if(!$output->data)
@@ -187,6 +203,7 @@ class resourceModel extends resource
 			return array();
 		}
 
+		$result = array(0 => new stdClass);
 		foreach($output->data as $key => $val)
 		{
 			$result[0]->count += $val->count;

@@ -62,6 +62,7 @@ class resourceAdminController extends resource
 	{
 		$oModuleController = &getController('module');
 
+		$args = new stdClass;
 		$args->module_srl = $module_srl = Context::get('module_srl');
 
 		$output = executeQuery('resource.deleteDependency', $args);
@@ -121,6 +122,7 @@ class resourceAdminController extends resource
 			return new Object(-1,'msg_invalid_request');
 		}
 
+		$args = new stdClass;
 		$args->package_srl = $package_srl;
 		$args->module_srl = $this->module_srl;
 		$output = executeQuery('resource.deletePackage', $args);
@@ -134,6 +136,7 @@ class resourceAdminController extends resource
 		{
 			return $output;
 		}
+
 		if($output->data)
 		{
 			foreach($output->data as $key => $val)

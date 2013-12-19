@@ -22,6 +22,8 @@ class resourceAPI extends resource
 		if(!$module_srl) return;
 
 		$oModel = &getModel('resource');
+
+		$args = new stdClass;
 		$args->module_srl = $module_srl;
 		$args->package_srl = $package_srl;
 		if($list_count) $args->list_count = $list_count;

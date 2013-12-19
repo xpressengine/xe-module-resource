@@ -153,6 +153,7 @@ class resourceController extends resource
 			return new Object(-1,'msg_not_permitted');
 		}
 
+		$args = new stdClass;
 		$args->package_srl = $package_srl;
 		$args->module_srl = $this->module_srl;
 		$args->member_srl = $logged_info->member_srl;
@@ -196,6 +197,7 @@ class resourceController extends resource
 				return new Object(-1,'msg_invalid_request');
 			}
 		}
+
 		if(!in_array($args->status, array('accepted','reservation','waiting')))
 		{
 			return new Object(-1,'msg_invalid_request');
@@ -360,6 +362,7 @@ class resourceController extends resource
 
 	function insertDependency($module_srl, $package_srl, $item_srl, $targets)
 	{
+		$args = new stdClass;
 		$args->module_srl = $module_srl;
 		$args->item_srl = $item_srl;
 		executeQuery('resource.deleteDependency', $args);
@@ -375,6 +378,7 @@ class resourceController extends resource
 			return;
 		}
 
+		$dargs = new stdClass;
 		$dargs->item_srl = implode(',',$arr_dependency);
 		$output = executeQueryArray('resource.getItemByItemSrl', $dargs);
 		if(!$output->data)
@@ -388,7 +392,8 @@ class resourceController extends resource
 			{
 				continue;
 			}
-			unset($args);
+
+			$args = new stdClass;
 			$args->module_srl = $module_srl;
 			$args->item_srl = $item_srl;
 			$args->dependency_item_srl = $val->item_srl;
@@ -445,12 +450,14 @@ class resourceController extends resource
 		{
 			if($proc)
 			{
+				$pargs = new stdClass;
 				$pargs->module_srl = $this->module_srl;
 				$pargs->package_srl = $args->package_srl;
 				$pargs->update_order = $args->latest_item_srl * -1;
 				$pargs->latest_item_srl = $args->latest_item_srl;
 				$poutput = executeQuery('resource.updatePackage', $pargs);
 
+				$dargs = new stdClass;
 				$dargs->module_srl = $this->module_srl;
 				$dargs->package_srl = $args->package_srl;
 				$dargs->item_srl = $args->item_srl;
@@ -558,6 +565,7 @@ class resourceController extends resource
 			return $output;
 		}
 
+		$doc_args = new stdClass;
 		$doc_args->document_srl = $item->document_srl;
 		$doc_args->content = $args->description;
 		$doc_args->tags = Context::get('tag');
@@ -675,6 +683,7 @@ class resourceController extends resource
 			return new Object(-1,'msg_invalid_request');
 		}
 
+		$args = new stdClass;
 		$args->module_srl = $this->module_srl;
 		$args->package_srl = $package_srl;
 		$args->item_srl = $item_srl;
@@ -697,6 +706,7 @@ class resourceController extends resource
 		}
 		$latest_item_srl = (int)$output->data->item_srl;
 
+		$largs = new stdClass;
 		$largs->module_srl = $this->module_srl;
 		$largs->package_srl = $package_srl;
 		$largs->latest_item_srl = $latest_item_srl;
@@ -717,6 +727,7 @@ class resourceController extends resource
 	{
 		$oResourceModel = &getModel('resource');
 
+		$args = new stdClass;
 		$args->item_srl = $obj->upload_target_srl;
 		$output = executeQuery('resource.getItemByItemSrl', $args);
 		if(!$output->data)
@@ -784,11 +795,13 @@ class resourceController extends resource
 			return $output;
 		}
 
+		$star_args = new stdClass;
 		$star_args->module_srl = $this->module_srl;
 		$star_args->package_srl = $args->package_srl;
 		$star_args->voted = $package->voted+$args->star_point;
 		$output = executeQuery('resource.plusPackageStar', $star_args);
 
+		$star_args = new stdClass;
 		$star_args->module_srl = $this->module_srl;
 		$star_args->package_srl = $args->package_srl;
 		$star_args->item_srl = $args->item_srl;
@@ -850,21 +863,25 @@ class resourceController extends resource
 			return $output;
 		}
 
+		$p_args = new stdClass;
 		$p_args->module_srl = $this->module_srl;
 		$p_args->package_srl = $package->package_srl;
 		$output = executeQuery('resource.getPackageSumStars', $p_args);
 
+		$p_star_args = new stdClass;
 		$p_star_args->module_srl = $this->module_srl;
 		$p_star_args->package_srl = $args->package_srl;
 		$p_star_args->voted = (int)$output->data->voted;
 		$p_star_args->voter = (int)$output->data->voter;
 		$output = executeQuery('resource.minusPackageStar', $p_star_args);
 
+		$p_args = new stdClass;
 		$p_args->module_srl = $this->module_srl;
 		$p_args->package_srl = $package->package_srl;
 		$p_args->item_srl = $item->item_srl;
 		$output = executeQuery('resource.getItemSumStars', $p_args);
 
+		$i_star_args = new stdClass;
 		$i_star_args->module_srl = $this->module_srl;
 		$i_star_args->package_srl = $args->package_srl;
 		$i_star_args->item_srl = $args->item_srl;
