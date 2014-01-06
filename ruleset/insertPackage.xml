@@ -4,7 +4,7 @@
 		<field name="mid" required="true" />
 		<field name="category_srl" required="true" rule="number" />
 		<field name="title" required="true" />
-		<field name="path" required="true" />
+		<field name="path" required="true"|cond="$module_info->resource_use_path=='Y'" />
 		<field name="license" required="true" />
 		<field name="homepage" required="true" rule="url" />
 		<field name="description" required="true" />
