@@ -56,7 +56,7 @@ class resourceModel extends resource
 
 	function getItem($module_srl, $package_srl, $item_srl)
 	{
-		$oFileModel = &getModel('file');
+		$oFileModel = getModel('file');
 
 		$args = new stdClass;
 		$args->module_srl = $module_srl;
@@ -75,7 +75,7 @@ class resourceModel extends resource
 
 	function getItems($module_srl, $package_srl)
 	{
-		$oFileModel = &getModel('file');
+		$oFileModel = getModel('file');
 
 		$args = new stdClass;
 		$args->module_srl = $module_srl;
@@ -100,7 +100,7 @@ class resourceModel extends resource
 
 	function getLatestItemList($module_srl, $category_srl = null, $childs = null, $member_srl = null, $search_keyword = null, $order_target = 'package.update_order', $order_type = 'asc', $page = 1, $list_count = null)
 	{
-		$oFileModel = &getModel('file');
+		$oFileModel = getModel('file');
 
 		$args = new stdClass;
 		$args->module_srl = $module_srl;

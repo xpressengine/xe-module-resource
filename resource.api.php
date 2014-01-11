@@ -14,14 +14,14 @@ class resourceAPI extends resource
 		if(!$site_srl) $site_srl = 0;
 		if(!$module_srl && $mid)
 		{
-			$oModuleModel = &getModel('module');
+			$oModuleModel = getModel('module');
 			$module_info = $oModuleModel->getModuleInfoByMid($mid, $site_srl);
 			$module_srl = $module_info->module_srl;
 		}
 
 		if(!$module_srl) return;
 
-		$oModel = &getModel('resource');
+		$oModel = getModel('resource');
 
 		$args = new stdClass;
 		$args->module_srl = $module_srl;

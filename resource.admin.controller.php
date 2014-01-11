@@ -13,8 +13,8 @@ class resourceAdminController extends resource
 
 	function procResourceAdminInsert()
 	{
-		$oModuleController = &getController('module');
-		$oModuleModel = &getModel('module');
+		$oModuleController = getController('module');
+		$oModuleModel = getModel('module');
 
 		$args = Context::getRequestVars();
 		$args->module = 'resource';
@@ -60,7 +60,7 @@ class resourceAdminController extends resource
 
 	function procResourceAdminDelete()
 	{
-		$oModuleController = &getController('module');
+		$oModuleController = getController('module');
 
 		$args = new stdClass;
 		$args->module_srl = $module_srl = Context::get('module_srl');
@@ -102,9 +102,9 @@ class resourceAdminController extends resource
 
 	function procResourceAdminDeletePackage()
 	{
-		$oResourceModel = &getModel('resource');
-		$oDocumentController = &getController('document');
-		$oFileController = &getController('file');
+		$oResourceModel = getModel('resource');
+		$oDocumentController = getController('document');
+		$oFileController = getController('file');
 
 		$site_module_info = Context::get('site_module_info');
 		if(!$this->module_srl)

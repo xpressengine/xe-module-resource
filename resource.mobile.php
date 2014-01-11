@@ -1,12 +1,12 @@
 <?php
 /* Copyright (C) NAVER <http://www.navercorp.com> */
-$oResourceView = &getView('resource');
+$oResourceView = getView('resource');
 
 class resourceMobile extends resourceView
 {
 	function init()
 	{
-		$oDocumentModel = &getModel('document');
+		$oDocumentModel = getModel('document');
 		Context::set('categories', $oDocumentModel->getCategoryList($this->module_srl));
 
 		$template_path = sprintf("%sm.skins/%s/",$this->module_path, $this->module_info->mskin);
@@ -29,7 +29,7 @@ class resourceMobile extends resourceView
 
 	function dispResourceCategory()
 	{
-		$oDocumentModel = &getModel('document');
+		$oDocumentModel = getModel('document');
 		Context::set('category_list', $oDocumentModel->getCategoryList($this->module_srl));
 		$this->setTemplateFile('category.html');
 	}

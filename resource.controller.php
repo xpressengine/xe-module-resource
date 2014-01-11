@@ -68,7 +68,7 @@ class resourceController extends resource
 
 	function procResourceModifyPackage()
 	{
-		$oResourceModel = &getModel('resource');
+		$oResourceModel = getModel('resource');
 
 		if(!$this->module_srl)
 		{
@@ -127,7 +127,7 @@ class resourceController extends resource
 
 	function procResourceDeletePackage()
 	{
-		$oResourceModel = &getModel('resource');
+		$oResourceModel = getModel('resource');
 
 		if(!$this->module_srl)
 		{
@@ -181,8 +181,8 @@ class resourceController extends resource
 
 	function procResourceChangeStatus()
 	{
-		$oCommunicationController = &getController('communication');
-		$oResourceModel = &getModel('resource');
+		$oCommunicationController = getController('communication');
+		$oResourceModel = getModel('resource');
 
 		if(!$this->module_srl)
 		{
@@ -658,9 +658,9 @@ class resourceController extends resource
 
 	function procResourceDeleteAttach()
 	{
-		$oResourceModel = &getModel('resource');
-		$oFileController = &getController('file');
-		$oDocumentController = &getController('document');
+		$oResourceModel = getModel('resource');
+		$oFileController = getController('file');
+		$oDocumentController = getController('document');
 
 		$package_srl = Context::get('package_srl');
 		$item_srl = Context::get('item_srl');
@@ -725,7 +725,7 @@ class resourceController extends resource
 
 	function triggerUpdateDownloadedCount($obj)
 	{
-		$oResourceModel = &getModel('resource');
+		$oResourceModel = getModel('resource');
 
 		$args = new stdClass;
 		$args->item_srl = $obj->upload_target_srl;
@@ -747,9 +747,8 @@ class resourceController extends resource
 
 	function procResourceInsertComment()
 	{
-		$oCommentController = &getController('comment');
-		$oResourceModel = &getModel('resource');
-
+		$oCommentController = getController('comment');
+		$oResourceModel = getModel('resource');
 		if(!$this->grant->write_comment)
 		{
 			return new Object(-1, 'msg_not_permitted');
@@ -822,9 +821,9 @@ class resourceController extends resource
 
 	function procResourceDeleteComment()
 	{
-		$oCommentModel = &getModel('comment');
-		$oCommentController = &getController('comment');
-		$oResourceModel = &getModel('resource');
+		$oCommentModel = getModel('comment');
+		$oCommentController = getController('comment');
+		$oResourceModel = getModel('resource');
 
 		if(!$this->grant->write_comment)
 		{

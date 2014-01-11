@@ -9,7 +9,7 @@ class resourceView extends resource
 {
 	function init()
 	{
-		$oDocumentModel = &getModel('document');
+		$oDocumentModel = getModel('document');
 		Context::set('categories', $oDocumentModel->getCategoryList($this->module_srl));
 
 		$template_path = sprintf("%sskins/%s/",$this->module_path, $this->module_info->skin);
@@ -25,9 +25,9 @@ class resourceView extends resource
 
 	function dispResourceIndex()
 	{
-		$oResourceModel = &getModel('resource');
-		$oDocumentModel = &getModel('document');
-		$oFileModel = &getModel('file');
+		$oResourceModel = getModel('resource');
+		$oDocumentModel = getModel('document');
+		$oFileModel = getModel('file');
 
 		$document_srl = Context::get('document_srl');
 		$package_srl = Context::get('package_srl');
@@ -154,7 +154,7 @@ class resourceView extends resource
 
 	function dispResourceModifyPackage()
 	{
-		$oResourceModel = &getModel('resource');
+		$oResourceModel = getModel('resource');
 
 		$logged_info = Context::get('logged_info');
 		$package_srl = Context::get('package_srl');
@@ -183,7 +183,7 @@ class resourceView extends resource
 
 	function dispResourceDeletePackage()
 	{
-		$oResourceModel = &getModel('resource');
+		$oResourceModel = getModel('resource');
 
 		$logged_info = Context::get('logged_info');
 		$package_srl = Context::get('package_srl');
@@ -206,7 +206,7 @@ class resourceView extends resource
 
 	function dispResourcePackage()
 	{
-		$oResourceModel = &getModel('resource');
+		$oResourceModel = getModel('resource');
 		$logged_info = Context::get('logged_info');
 		$package_srl = Context::get('package_srl');
 
@@ -240,7 +240,7 @@ class resourceView extends resource
 
 	function dispResourcePackageList()
 	{
-		$oResourceModel = &getModel('resource');
+		$oResourceModel = getModel('resource');
 
 		$logged_info = Context::get('logged_info');
 		$output = $oResourceModel->getPackageList($this->module_srl, null, Context::get('category_srl'), $logged_info->member_srl, Context::get('page'));
@@ -253,8 +253,8 @@ class resourceView extends resource
 
 	function dispResourceAttach()
 	{
-		$oResourceModel = &getModel('resource');
-		$oEditorModel = &getModel('editor');
+		$oResourceModel = getModel('resource');
+		$oEditorModel = getModel('editor');
 
 		$logged_info = Context::get('logged_info');
 		$package_srl = Context::get('package_srl');
@@ -287,10 +287,10 @@ class resourceView extends resource
 
 	function dispResourceModifyAttach()
 	{
-		$oResourceModel = &getModel('resource');
-		$oFileController = &getController('file');
-		$oEditorModel = &getModel('editor');
-		$oDocumentModel = &getModel('document');
+		$oResourceModel = getModel('resource');
+		$oFileController = getController('file');
+		$oEditorModel = getModel('editor');
+		$oDocumentModel = getModel('document');
 
 		$package_srl = Context::get('package_srl');
 		$item_srl = Context::get('item_srl');
@@ -325,7 +325,7 @@ class resourceView extends resource
 
 	function dispResourceManage()
 	{
-		$oResourceModel = &getModel('resource');
+		$oResourceModel = getModel('resource');
 
 		if(!$this->grant->manager)
 		{
@@ -349,7 +349,7 @@ class resourceView extends resource
 
 	function dispResourceSearchDependency()
 	{
-		$oResourceModel = &getModel('resource');
+		$oResourceModel = getModel('resource');
 
 		$category_srl = Context::get('category_srl');
 		$search_keyword = Context::get('search_keyword');

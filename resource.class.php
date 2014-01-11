@@ -12,7 +12,7 @@ class resource extends ModuleObject
 
 	function moduleInstall()
 	{
-		$oModuleController = &getController('module');
+		$oModuleController = getController('module');
 
 		$oModuleController->insertTrigger('file.downloadFile', 'resource', 'controller', 'triggerUpdateDownloadedCount', 'after');
 		$oModuleController->insertTrigger('menu.getModuleListInSitemap', 'resource', 'model', 'triggerModuleListInSitemap', 'after');
@@ -21,7 +21,7 @@ class resource extends ModuleObject
 
 	function checkUpdate()
 	{
-		$oModuleModel = &getModel('module');
+		$oModuleModel = getModel('module');
 
 		if(!$oModuleModel->getTrigger('file.downloadFile', 'resource', 'controller', 'triggerUpdateDownloadedCount', 'after'))
 		{
@@ -37,8 +37,8 @@ class resource extends ModuleObject
 
 	function moduleUpdate()
 	{
-		$oModuleController = &getController('module');
-		$oModuleModel = &getModel('module');
+		$oModuleController = getController('module');
+		$oModuleModel = getModel('module');
 
 		if(!$oModuleModel->getTrigger('file.downloadFile', 'resource', 'controller', 'triggerUpdateDownloadedCount', 'after'))
 		{
@@ -55,7 +55,7 @@ class resource extends ModuleObject
 
 	function moduleUninstall()
 	{
-		$oModuleModel = &getModel('module');
+		$oModuleModel = getModel('module');
 		$oModuleController =& getController('module');
 		if($oModuleModel->getTrigger('file.downloadFile', 'resource', 'controller', 'triggerUpdateDownloadedCount', 'after'))
 		{
