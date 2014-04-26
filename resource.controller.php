@@ -445,7 +445,7 @@ class resourceController extends resource
 			return new Object(-1,'msg_invalid_request');
 		}
 
-		$output = $oFileController->insertFile($args->attach_file, $this->module_srl, $args->item_srl);
+		$output = $oFileController->insertFile($args->attach_file, $this->module_srl, $args->package_srl);
 		if(!$output || !$output->toBool())
 		{
 			if($proc)
@@ -468,7 +468,7 @@ class resourceController extends resource
 		}
 		$args->file_srl = $output->get('file_srl');
 
-		$output = $oFileController->insertFile($args->attach_screenshot, $this->module_srl, $args->item_srl);
+		$output = $oFileController->insertFile($args->attach_screenshot, $this->module_srl, $args->package_srl);
 		if(!$output || !$output->toBool())
 		{
 			return $output;
