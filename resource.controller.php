@@ -616,7 +616,7 @@ class resourceController extends resource
 		{
 			if(!is_uploaded_file($args->attach_file['tmp_name']))  new Object(-1,'msg_invalid_request');
 			$oFileController->deleteFile($item->file_srl);
-			$output = $oFileController->insertFile($args->attach_file, $this->module_srl, $args->item_srl);
+			$output = $oFileController->insertFile($args->attach_file, $this->module_srl, $args->package_srl);
 			if(!$output || !$output->toBool())
 			{
 				return $output;
@@ -627,7 +627,7 @@ class resourceController extends resource
 		if($args->attach_screenshot['tmp_name'])
 		{
 			if(!is_uploaded_file($args->attach_screenshot['tmp_name']))  new Object(-1,'msg_invalid_request');
-			$output = $oFileController->insertFile($args->attach_screenshot, $this->module_srl, $args->item_srl);
+			$output = $oFileController->insertFile($args->attach_screenshot, $this->module_srl, $args->package_srl);
 			if(!$output || !$output->toBool())
 			{
 				return $output;
