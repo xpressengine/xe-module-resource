@@ -105,10 +105,7 @@ class resourceView extends resource
 				}
 			}
 
-			if($type == 'all')
-			{
-				Context::set('items', $oResourceModel->getItems($this->module_srl, $package_srl));
-			}
+			Context::set('items', $oResourceModel->getItems($this->module_srl, $package_srl));
 		}
 		else
 		{
