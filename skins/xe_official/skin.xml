@@ -47,5 +47,15 @@
 			<description xml:lang="zh-TW">請輸入詳細說明。</description>
 			<description xml:lang="vi">Mô tả này sẽ hiển thị phía dưới tiêu đề.</description>
 		</var>
+		<var name="resource_use_path" type="radio">
+			<title xml:lang="ko">경로 정보 사용여부</title>
+			<description xml:lang="ko">기본 값은 사용입니다. 경로 정보를 사용할지에 대한 여부입니다.</description>
+			<options value="Y">
+				<title xml:lang="ko">사용</title>
+			</options>
+			<options value="N">
+				<title xml:lang="ko">사용 안함</title>
+			</options>
+		</var>
 	</extra_vars>
 </skin>
